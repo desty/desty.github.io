@@ -23,8 +23,10 @@ _includes/analytics.html
 _includes/head.html
 {% highlight html %}
 ...
+{% raw  %}
   {% if jekyll.environment == 'production' %}
   {% include analytics.html %}
   {% endif %}
+{% endraw %}
 </head>
 {% endhighlight %}
