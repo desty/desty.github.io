@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "jekyll 세팅"
 date:   2016-06-23 11:36:38 +0900
 categories: jekyll setting github

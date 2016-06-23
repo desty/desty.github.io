@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "jekyll 세팅 - 구글 검색 (webmaster)"
 date:   2016-06-23 11:57:38 +0900
 categories: jekyll setting google search webmaster ga
