@@ -16,6 +16,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://desty.github.io" # the base hostname & protocol for your site
 twitter_username: leejimyung
 github_username:  desty
+linkedin_username:  desty
 
 # Build settings
 markdown: kramdown
