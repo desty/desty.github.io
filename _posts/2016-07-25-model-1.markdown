@@ -1,0 +1,17 @@
+---
+layout: post
+comments: true
+title:  "Model 1"
+date:   2016-07-25 10:02:38 +0900
+categories: model1 jsp mvc
+---
+모든 요청(요청 처리, 데이터 검증, 비지니스 로직, 응답 처리)을 JSP 또는 servlet에서 처리
+
+# 장점
+쉽고 빠르게 구현할 수 있다  
+
+# 단점
+한곳에서 처리하기 때문에 복잡하다  
+업무 분담이 어렵다  
+
+[https://en.wikipedia.org/wiki/JSP_model_1_architecture][JSP model 1 architecture]
