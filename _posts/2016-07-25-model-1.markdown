@@ -1,17 +1,35 @@
 ---
 layout: post
 comments: true
-title:  "Model 1"
-date:   2016-07-25 10:02:38 +0900
-categories: model1 jsp mvc
+title:  "IntelliJ IDEA 단축키"
+date:   2016-07-27 15:40:38 +0900
+categories: intellij idea keymap
 ---
-모든 요청(요청 처리, 데이터 검증, 비지니스 로직, 응답 처리)을 JSP 또는 servlet에서 처리
+Keymaps: Mac OS X 10.5+ 기준
 
-# 장점
-쉽고 빠르게 구현할 수 있다  
+Double Shift : 검색  
+option + command + o : 심볼 검색  
+shift + command + o : 파일 열기  
+command + e : 최근 파일  
 
-# 단점
-한곳에서 처리하기 때문에 복잡하다  
-업무 분담이 어렵다  
+command + 1 : Project View  
+command + 4 : Run View  
+command + 6 : TODO View  
+command + 7 : Structure View  
+command + 9 : Version Control  
 
-[https://en.wikipedia.org/wiki/JSP_model_1_architecture][JSP model 1 architecture]
+command + , : Preferences  
+command + ; : Project Structure  
+
+control + r : 실행  
+control + d : 디버그 실행  
+command + f2 : 중지  
+
+control + option + o : import 정리  
+option + command + l : 코딩 컨벤션 정리  
+
+option + command + u : 클래스 다이어그램  
+
+command + t : update  
+command + k : commit  
+option + command + z : revert  
