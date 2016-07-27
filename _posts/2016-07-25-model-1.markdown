@@ -19,7 +19,11 @@ command + 7 : Structure View
 command + 9 : Version Control  
 
 command + , : Preferences  
-command + ; : Project Structure  
+command + ; : Project Structure
+
+option + f7 : 사용 찾기 (찾기 창에서)  
+option + command + f7 : 사용 찾기 (편집 창에서)  
+shift + option + command + f7 : 사용 찾기 옵션  
 
 control + r : 실행  
 control + d : 디버그 실행  
