@@ -29,8 +29,12 @@ control + r : 실행
 control + d : 디버그 실행  
 command + f2 : 중지  
 
+command + n : Generate (생성)  
+
 control + option + o : import 정리  
 option + command + l : 코딩 컨벤션 정리  
+
+shift + command + <down> : 라인 번경  
 
 option + command + u : 클래스 다이어그램  
 
