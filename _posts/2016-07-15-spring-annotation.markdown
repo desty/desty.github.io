@@ -23,7 +23,7 @@ categories: spring annotation
 ## @Autowired
 사용 범위 : 생성자, 필드, 메소드  
 의존하는 객체를 자동으로 삽입시켜 준다.  
-타입을 이용한 프로퍼티 자동설정기능을 제공  
+타입을 이용한 프로퍼티 자동설정기능을 제공 (타입에 의한 자동 와이어링-Type-driven)  
 Type 기반 Bean 주입  
 
 ## @Resource

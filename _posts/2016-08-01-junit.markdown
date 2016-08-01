@@ -1,0 +1,36 @@
+---
+layout: post
+comments: true
+title:  "JUnit"
+date:   2016-08-01 11:35:38 +0900
+categories: junit spring
+---
+
+성공하는 테스트만 골라서 만들지 말자. (부정적인 케이스를 먼저 만드는게 좋다.)  
+그전에 테스트를 만들기라도 하자.
+
+JUnit
+
+
+# Annotation
+## @Test
+### @Test(expected=)
+## @Before
+## @BeforeClass
+클래스 전체에 딱 한번 실행
+## @RunWith
+## @ContextConfiguration
+## @DirtiesContext
+
+## @After
+예외상황에 대한 테스트
+# Function
+## assertThat
+org.junit.Assert.assertThat
+## is
+org.hamcrest.CoreMatchers.is
+## not
+org.hamcrest.CoreMatchers.not
+## sameInstance
+org.hamcrest.CoreMatchers.sameInstance
+## JUnitCore.main

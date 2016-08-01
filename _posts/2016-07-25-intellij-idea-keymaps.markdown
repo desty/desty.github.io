@@ -25,6 +25,8 @@ option + f7 : 사용 찾기 (찾기 창에서)
 option + command + f7 : 사용 찾기 (편집 창에서)  
 shift + option + command + f7 : 사용 찾기 옵션  
 
+shift + F6 : Rename
+
 control + r : 실행  
 control + d : 디버그 실행  
 command + f2 : 중지  
