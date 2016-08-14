@@ -1,0 +1,13 @@
+---
+layout: post
+comments: true
+title:  "JAVA - For"
+date:   2016-06-24 14:54:38 +0900
+categories: java for
+---
+[https://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html#jls-14.14][javase-specs-for]
+
+[https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html][javase-tutorial-for]
+
+[javase-specs-for]: https://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html#jls-14.14
+[javase-tutorial-for]: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html

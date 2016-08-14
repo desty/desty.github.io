@@ -7,15 +7,26 @@
 
 # Site settings
 title: Destynation
+<<<<<<< HEAD
 email: leejimyung@gmail.com
+=======
+email: lee.ji.myung@gmail.com
+>>>>>>> e1ae42226c53a2850abb922c079ad1735b0a115f
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
+<<<<<<< HEAD
 url: "http://leejimyung.com" # the base hostname & protocol for your site
 twitter_username: leejimyung
 github_username:  desty
+=======
+url: "https://desty.github.io" # the base hostname & protocol for your site
+twitter_username: leejimyung
+github_username:  desty
+linkedin_username:  desty
+>>>>>>> e1ae42226c53a2850abb922c079ad1735b0a115f
 
 # Build settings
 markdown: kramdown
