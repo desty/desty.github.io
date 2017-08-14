@@ -1,0 +1,9 @@
+---
+layout: post
+comments: true
+title:  "DAO(Data Access Object)"
+date:   2017-08-14 09:21:38 +0900
+categories: dao
+---
+DAO - Data Access Obejct  
+DB를 사용해 데이터를 조회하거나 조작하는 기능을 전담하도록 만든 오브젝트

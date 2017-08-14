@@ -1,0 +1,10 @@
+---
+layout: post
+comments: true
+title:  "VO(Value Object)"
+date:   2017-08-14 09:21:38 +0900
+categories: vo
+---
+VO - Value Obejct  
+Read-Only, 불변(immutable)로 사용해야한다.  
+새로운 값이 필요하면 새로 만들라는 이야기다.
