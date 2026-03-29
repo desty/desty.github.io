@@ -3,32 +3,32 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "desty.dev",
-  DESCRIPTION: "Developer blog & portfolio by desty.",
+  DESCRIPTION: "개발자 desty의 블로그 & 포트폴리오.",
   AUTHOR: "desty",
 }
 
 // Work Page
 export const WORK: Page = {
   TITLE: "Work",
-  DESCRIPTION: "Places I have worked.",
+  DESCRIPTION: "경력 사항입니다.",
 }
 
 // Blog Page
 export const BLOG: Page = {
   TITLE: "Blog",
-  DESCRIPTION: "Writing on topics I am passionate about.",
+  DESCRIPTION: "개발과 기술에 대한 글을 씁니다.",
 }
 
 // Projects Page 
 export const PROJECTS: Page = {
   TITLE: "Projects",
-  DESCRIPTION: "Recent projects I have worked on.",
+  DESCRIPTION: "최근 진행한 프로젝트입니다.",
 }
 
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
-  DESCRIPTION: "Search all posts and projects by keyword.",
+  DESCRIPTION: "키워드로 글과 프로젝트를 검색합니다.",
 }
 
 // Links

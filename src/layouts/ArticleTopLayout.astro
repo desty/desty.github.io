@@ -21,7 +21,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
       <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
     </svg>
     <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
-      Back to {collection}
+      {collection === "blog" ? "글 목록으로" : "프로젝트 목록으로"}
     </div>
   </a>
   <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
@@ -52,7 +52,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
           <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
         </svg>
         <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          See Demo
+          데모 보기
         </span>
       </a>
     }
@@ -62,7 +62,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
           <use href="/ui.svg#link" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
         </svg>
         <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          See Repository
+          저장소 보기
         </span>
       </a>
     }
