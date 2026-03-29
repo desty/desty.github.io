@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   var codeBlocks = document.querySelectorAll('pre[data-language="mermaid"]');
   if (codeBlocks.length === 0) return;
 
@@ -14,11 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
     codeBlocks.forEach(function (pre, i) {
       var code = pre.querySelector("code");
       if (!code) return;
-      var text = code.textContent;
+      // Extract text line by line from span.line elements
+      var lines = code.querySelectorAll(".line");
+      var text = "";
+      if (lines.length > 0) {
+        lines.forEach(function (line) {
+          text += line.textContent + "\n";
+        });
+      } else {
+        text = code.textContent;
+      }
       var div = document.createElement("div");
       div.className = "mermaid";
-      div.id = "mermaid-" + i;
-      div.textContent = text;
+      div.textContent = text.trim();
       pre.replaceWith(div);
     });
 
