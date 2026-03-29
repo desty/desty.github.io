@@ -1,7 +1,7 @@
 ---
 title: "Scrin"
 summary: "macOS 네이티브 회의록 앱. 온디바이스 STT & LLM으로 실시간 녹음, 자동 전사, AI 요약까지 로컬에서 처리."
-date: "2026-03-29"
+date: "2026-03-29T21:00:00"
 tags:
   - swift
   - swiftui

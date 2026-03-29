@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
 summary: "첫 번째 포스트. 코드 블럭, Mermaid 다이어그램, 테이블 테스트."
-date: "2026-03-29"
+date: "2026-03-29T00:00:00"
 tags:
   - blog
   - test

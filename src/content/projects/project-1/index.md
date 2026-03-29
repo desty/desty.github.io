@@ -1,7 +1,7 @@
 ---
 title: "desty.github.io"
 summary: "Astro Sphere 기반 개발자 블로그 & 포트폴리오. 다크모드, 유성 애니메이션, Mermaid 다이어그램, 코드 하이라이팅 지원."
-date: "2026-03-29"
+date: "2026-03-29T00:00:00"
 tags:
   - astro
   - tailwindcss

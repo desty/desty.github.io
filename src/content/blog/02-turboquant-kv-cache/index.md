@@ -1,7 +1,7 @@
 ---
 title: "TurboQuant — KV 캐시 3비트 압축으로 LLM 추론의 병목을 깨다"
 summary: "구글이 ICLR 2026에서 발표한 TurboQuant. 메모리 6배 절감, 속도 8배 향상, 정확도 손실 0. 압축은 타협이라는 상식이 깨졌다."
-date: "2026-03-29"
+date: "2026-03-29T21:00:00"
 tags:
   - llm
   - quantization
