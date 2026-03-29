@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content"
+import Mermaid from "@components/Mermaid.astro"
 
 type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">
@@ -23,6 +24,7 @@ const next = items[(index + 1) % items.length]
   <article>
     <Content/>
   </article>
+  <Mermaid />
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <a href={`/${prev.collection}/${prev.slug}`} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 blend">
       <div class="order-2 w-full h-full group-hover:text-black group-hover:dark:text-white blend">
