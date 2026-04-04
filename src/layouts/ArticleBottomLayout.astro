@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content"
 import Mermaid from "@components/Mermaid.astro"
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">
+  entry: CollectionEntry<"blog"> | CollectionEntry<"projects"> | CollectionEntry<"guides">
 }
 
 // Get the requested entry

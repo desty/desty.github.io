@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content"
 import { formatDate, readingTime } from "@lib/utils"
 
 type Props = {
-  entry: CollectionEntry<"projects"> | CollectionEntry<"blog">
+  entry: CollectionEntry<"projects"> | CollectionEntry<"blog"> | CollectionEntry<"guides">
 }
 
 const { entry } = Astro.props
@@ -11,7 +11,8 @@ const { collection, data, body } = entry
 const { title, summary, date } = data
 
 const demoUrl = collection === "projects" ? data.demoUrl : null
-const repoUrl = collection === "projects" ? data.repoUrl : null
+const repoUrl = collection === "projects" || collection === "guides" ? data.repoUrl : null
+const guideUrl = collection === "guides" ? data.guideUrl : null
 ---
 
 <div>
@@ -21,7 +22,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
       <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
     </svg>
     <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
-      {collection === "blog" ? "글 목록으로" : "프로젝트 목록으로"}
+      {collection === "blog" ? "글 목록으로" : collection === "guides" ? "가이드 목록으로" : "프로젝트 목록으로"}
     </div>
   </a>
   <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
@@ -44,9 +45,19 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
   <div class="mt-1">
     {summary}
   </div>
-  {(demoUrl || repoUrl) && 
+  {(demoUrl || repoUrl || guideUrl) &&
   <div class="mt-4 flex flex-wrap gap-2">
-    {demoUrl && 
+    {guideUrl &&
+      <a href={guideUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
+        <svg class="size-4">
+          <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
+        </svg>
+        <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+          가이드 보기
+        </span>
+      </a>
+    }
+    {demoUrl &&
       <a href={demoUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
         <svg class="size-4">
           <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
@@ -56,7 +67,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
         </span>
       </a>
     }
-    {repoUrl && 
+    {repoUrl &&
       <a href={repoUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
         <svg class="size-4">
           <use href="/ui.svg#link" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
@@ -66,6 +77,6 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
         </span>
       </a>
     }
-  </div> 
+  </div>
   }
 </div>

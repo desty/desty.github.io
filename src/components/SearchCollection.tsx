@@ -8,7 +8,7 @@ import SearchBar from "@components/SearchBar"
 type Props = {
   entry_name: string
   tags: string[]
-  data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[]
+  data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[] | CollectionEntry<'guides'>[]
 }
 
 export default function SearchCollection({ entry_name, data, tags }: Props) {
@@ -17,7 +17,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [query, setQuery] = createSignal("");
   const [filter, setFilter] = createSignal(new Set<string>())
   const [collection, setCollection] = createSignal<CollectionEntry<'blog'>[]>([])
-  const [descending, setDescending] = createSignal(false);
+  const [descending, setDescending] = createSignal(true);
 
   const fuse = new Fuse(coerced, {
     keys: ["slug", "data.title", "data.summary", "data.tags"],
@@ -37,7 +37,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
         )
       )
     );
-    setCollection(descending() ? filtered.toReversed() : filtered)
+    setCollection(descending() ? filtered : filtered.toReversed())
   })
 
   function toggleDescending() {

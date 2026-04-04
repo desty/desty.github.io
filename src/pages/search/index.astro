@@ -12,7 +12,11 @@ const projects = (await getCollection("projects")).filter(
   (post) => !post.data.draft,
 );
 
-const data = [...posts, ...projects] as CollectionEntry<"blog">[];
+const guides = (await getCollection("guides")).filter(
+  (guide) => !guide.data.draft,
+);
+
+const data = [...posts, ...projects, ...guides] as CollectionEntry<"blog">[];
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>

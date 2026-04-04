@@ -25,6 +25,12 @@ export const PROJECTS: Page = {
   DESCRIPTION: "최근 진행한 프로젝트입니다.",
 }
 
+// Guides Page
+export const GUIDES: Page = {
+  TITLE: "Guides",
+  DESCRIPTION: "직접 작성한 기술 가이드입니다.",
+}
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -45,9 +51,13 @@ export const LINKS: Links = [
     TEXT: "Blog", 
     HREF: "/blog", 
   },
-  { 
-    TEXT: "Projects", 
-    HREF: "/projects", 
+  {
+    TEXT: "Projects",
+    HREF: "/projects",
+  },
+  {
+    TEXT: "Guides",
+    HREF: "/guides",
   },
 ]
 
