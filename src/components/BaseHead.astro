@@ -50,6 +50,15 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <!-- RSS Feed -->
 <link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
 
+<!-- Google Analytics (GA4) -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-4L031NBC3Z"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4L031NBC3Z');
+</script>
+
 <!-- Global Scripts -->
 <script is:inline src="/js/theme.js"></script>
 <script is:inline src="/js/scroll.js"></script>
