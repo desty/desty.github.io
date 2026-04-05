@@ -196,6 +196,9 @@ const stack = [
           <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
             {SOCIALS.map(social => (
               <div class="col-span-1 flex items-center gap-1">
+                <svg class="size-4 fill-current">
+                  <use href={`/social.svg#${social.ICON}`}></use>
+                </svg>
                 <span class="whitespace-nowrap truncate">
                   {social.NAME}
                 </span>
