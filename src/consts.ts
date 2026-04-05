@@ -2,7 +2,7 @@ import type { Site, Page, Links, Socials } from "@types"
 
 // Global
 export const SITE: Site = {
-  TITLE: "desty.dev",
+  TITLE: "desty",
   DESCRIPTION: "개발자 desty의 블로그 & 포트폴리오.",
   AUTHOR: "desty",
 }
