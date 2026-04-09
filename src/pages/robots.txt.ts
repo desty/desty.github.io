@@ -5,6 +5,7 @@ User-agent: *
 Allow: /
 
 Sitemap: ${new URL("sitemap-index.xml", import.meta.env.SITE).href}
+LLMs: ${new URL("llms.txt", import.meta.env.SITE).href}
 `.trim()
 
 export const GET: APIRoute = () => {
