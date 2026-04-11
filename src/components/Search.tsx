@@ -3,12 +3,14 @@ import { createEffect, createSignal } from "solid-js"
 import Fuse from "fuse.js"
 import ArrowCard from "@components/ArrowCard"
 import SearchBar from "@components/SearchBar"
+import type { Lang } from "@lib/i18n"
 
 type Props = {
   data: CollectionEntry<"blog">[]
+  lang?: Lang
 }
 
-export default function Search({ data }: Props) {
+export default function Search({ data, lang = "ko" }: Props) {
   const [query, setQuery] = createSignal("")
   const [results, setResults] = createSignal<CollectionEntry<"blog">[]>([])
 
@@ -44,7 +46,7 @@ export default function Search({ data }: Props) {
           <ul class="flex flex-col gap-3">
             {results().map(result => (
               <li>
-                <ArrowCard entry={result} pill={true} />
+                <ArrowCard entry={result} pill={true} lang={lang} />
               </li>
             ))}
           </ul>

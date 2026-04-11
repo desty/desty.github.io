@@ -1,0 +1,34 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
+import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { filterByLang, stripLangFromSlug } from "@lib/i18n"
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects")
+	return filterByLang(projects, "en").map((project) => ({
+		params: { slug: stripLangFromSlug(project.slug) },
+		props: project,
+	}))
+}
+
+type Props = CollectionEntry<"projects">
+const project = Astro.props
+const { title, summary } = project.data
+---
+
+<PageLayout title={title} description={summary}>
+  <TopLayout>
+    <div class="animate">
+      <ArticleTopLayout entry={project} />
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <ArticleBottomLayout entry={project} />
+    </div>
+  </BottomLayout>
+</PageLayout>

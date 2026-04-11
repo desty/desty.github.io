@@ -4,30 +4,36 @@ import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import Search from "@components/Search";
-import { SEARCH } from "@consts";
+import { filterByLang } from "@lib/i18n";
+import { t } from "@lib/ui-strings";
 
-const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+const lang = "ko";
 
-const projects = (await getCollection("projects")).filter(
-  (post) => !post.data.draft,
+const posts = filterByLang(
+  (await getCollection("blog")).filter((post) => !post.data.draft),
+  lang
 );
-
-const guides = (await getCollection("guides")).filter(
-  (guide) => !guide.data.draft,
+const projects = filterByLang(
+  (await getCollection("projects")).filter((post) => !post.data.draft),
+  lang
+);
+const guides = filterByLang(
+  (await getCollection("guides")).filter((guide) => !guide.data.draft),
+  lang
 );
 
 const data = [...posts, ...projects, ...guides] as CollectionEntry<"blog">[];
 ---
 
-<PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
+<PageLayout title={t("page.search.title", lang)} description={t("page.search.desc", lang)}>
   <TopLayout>
     <div class="animate page-heading">
-      {SEARCH.TITLE}
+      {t("page.search.title", lang)}
     </div>
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Search client:load data={data} />
+      <Search client:load data={data} lang={lang} />
     </div>
   </BottomLayout>
 </PageLayout>

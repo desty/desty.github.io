@@ -5,19 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("ko-KR", {
+export function formatDate(date: Date, lang: string = "ko") {
+  const locale = lang === "en" ? "en-US" : "ko-KR"
+  return Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "long",
     day: "numeric"
   }).format(date)
 }
 
-export function readingTime(html: string) {
+export function readingTime(html: string, lang: string = "ko") {
   const textOnly = html.replace(/<[^>]+>/g, "")
   const wordCount = textOnly.split(/\s+/).length
   const readingTimeMinutes = ((wordCount / 200) + 1).toFixed()
-  return `${readingTimeMinutes}분 소요`
+  return lang === "en" ? `${readingTimeMinutes} min read` : `${readingTimeMinutes}분 소요`
 }
 
 

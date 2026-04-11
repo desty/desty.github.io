@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import { formatDate } from "@lib/utils"
+import { SITE } from "@consts"
+import { filterByLang, stripLangFromSlug } from "@lib/i18n"
+
+export async function getStaticPaths() {
+	const docs = await getCollection("legal")
+	return filterByLang(docs, "en").map((doc) => ({
+		params: { slug: stripLangFromSlug(doc.slug) },
+		props: doc,
+	}))
+}
+
+type Props = CollectionEntry<"legal">;
+const doc = Astro.props
+const { title, date } = doc.data
+const { Content } = await doc.render();
+---
+
+<PageLayout title={title} description={`${title} for ${SITE.TITLE}`}>
+  <TopLayout>
+    <div class="animate">
+      <div class="page-heading">
+        {title}
+      </div>
+      <p class="font-normal opacity-75">
+        Last updated: {formatDate(date, "en")}
+      </p>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <article class="animate">
+      <Content/>
+    </article>
+  </BottomLayout>
+</PageLayout>

@@ -1,10 +1,11 @@
 import type { APIRoute } from "astro"
 import { getCollection } from "astro:content"
 import { SITE } from "@consts"
+import { filterByLang, stripLangFromSlug } from "@lib/i18n"
 
 export const GET: APIRoute = async () => {
-  const blog = await getCollection("blog")
-  const guides = await getCollection("guides")
+  const blog = filterByLang(await getCollection("blog"), "ko")
+  const guides = filterByLang(await getCollection("guides"), "ko")
 
   blog.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   guides.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
@@ -19,13 +20,13 @@ export const GET: APIRoute = async () => {
     `## Blog`,
     ``,
     ...blog.map(
-      (post) => `- [${post.data.title}](${site}/blog/${post.slug}/): ${post.data.summary}`
+      (post) => `- [${post.data.title}](${site}/blog/${stripLangFromSlug(post.slug)}/): ${post.data.summary}`
     ),
     ``,
     `## Guides`,
     ``,
     ...guides.map(
-      (guide) => `- [${guide.data.title}](${site}/guides/${guide.slug}/): ${guide.data.summary}`
+      (guide) => `- [${guide.data.title}](${site}/guides/${stripLangFromSlug(guide.slug)}/): ${guide.data.summary}`
     ),
     ``,
     `## Optional`,

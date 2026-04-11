@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro"
 import { getCollection } from "astro:content"
 import { SITE } from "@consts"
+import { filterByLang } from "@lib/i18n"
 
 function formatDate(date: Date | string): string {
   const d = new Date(date)
@@ -8,8 +9,8 @@ function formatDate(date: Date | string): string {
 }
 
 export const GET: APIRoute = async () => {
-  const blog = await getCollection("blog")
-  const guides = await getCollection("guides")
+  const blog = filterByLang(await getCollection("blog"), "ko")
+  const guides = filterByLang(await getCollection("guides"), "ko")
 
   blog.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   guides.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())

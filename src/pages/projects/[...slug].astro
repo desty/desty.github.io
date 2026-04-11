@@ -5,17 +5,16 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
 import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { filterByLang, stripLangFromSlug } from "@lib/i18n"
 
-// Create the static projects pages
 export async function getStaticPaths() {
 	const projects = await getCollection("projects")
-	return projects.map((project) => ({
-		params: { slug: project.slug },
+	return filterByLang(projects, "ko").map((project) => ({
+		params: { slug: stripLangFromSlug(project.slug) },
 		props: project,
 	}))
 }
 
-// Get the requested project
 type Props = CollectionEntry<"projects">
 const project = Astro.props
 const { title, summary } = project.data

@@ -4,11 +4,15 @@ import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
-import { BLOG } from "@consts";
+import { filterByLang } from "@lib/i18n";
+import { t } from "@lib/ui-strings";
 
-const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const lang = "ko";
+
+const posts = filterByLang(
+  (await getCollection("blog")).filter((post) => !post.data.draft),
+  lang
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
   (a, b) => a.localeCompare(b),
@@ -18,14 +22,14 @@ const estimated_initial_size =
   28 + posts.length * 158 + (posts.length - 1) * 12;
 ---
 
-<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+<PageLayout title={t("page.blog.title", lang)} description={t("page.blog.desc", lang)}>
   <TopLayout>
     <div class="animate">
       <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
-        {BLOG.TITLE}
+        {t("page.blog.title", lang)}
       </h1>
       <div class="mt-1">
-        {BLOG.DESCRIPTION}
+        {t("page.blog.desc", lang)}
       </div>
     </div>
   </TopLayout>
@@ -40,6 +44,7 @@ const estimated_initial_size =
         entry_name={"posts"}
         tags={tags}
         data={posts}
+        lang={lang}
       />
     </div>
   </BottomLayout>

@@ -1,6 +1,10 @@
 ---
 import { SITE, SOCIALS } from "@consts"
 import Container from "@components/Container.astro"
+import { getLangFromUrl, localizedPath } from "@lib/i18n"
+import { t } from "@lib/ui-strings"
+
+const lang = getLangFromUrl(Astro.url)
 ---
 
 <footer class="relative bg-white dark:bg-black">
@@ -14,18 +18,18 @@ import Container from "@components/Container.astro"
               <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
             </svg>
             <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
-              맨 위로
+              {t("footer.backToTop", lang)}
             </div>
           </button>
         </div>
       </Container>
     </section>
-  
+
     <section class=" py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25">
       <Container size="md">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col items-center sm:items-start">
-            <a href="/" class="flex gap-1 w-fit font-semibold text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+            <a href={localizedPath(lang, "/")} class="flex gap-1 w-fit font-semibold text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
               {SITE.TITLE}
             </a>
           </div>
@@ -34,21 +38,21 @@ import Container from "@components/Container.astro"
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            정상 운영 중
+            {t("footer.status", lang)}
           </div>
         </div>
       </Container>
     </section>
-  
+
     <section class=" py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25">
       <Container size="md">
         <div class="h-full grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="order-2 sm:order-1 flex flex-col items-center justify-center sm:items-start">
             <div class="legal">
-              <a href="/legal/terms" class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+              <a href={localizedPath(lang, "/legal/terms")} class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
                 Terms
               </a> |
-              <a href="/legal/privacy" class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+              <a href={localizedPath(lang, "/legal/privacy")} class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
                 Privacy
               </a>
             </div>
@@ -56,15 +60,15 @@ import Container from "@components/Container.astro"
               &copy; 2026 desty. All rights reserved.
             </div>
           </div>
-  
+
           <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
             <div class="flex flex-wrap gap-1 items-center justify-center">
               {
                 SOCIALS.map((SOCIAL) => (
-                  <a 
-                    href={SOCIAL.HREF} 
-                    target="_blank" 
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`} 
+                  <a
+                    href={SOCIAL.HREF}
+                    target="_blank"
+                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
                     class="group size-10 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
                   >
                     <svg class="size-full fill-current group-hover:fill-black group-hover:dark:fill-white blend">

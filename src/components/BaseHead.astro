@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions"
+import { getLangFromUrl, localizedPath } from "@lib/i18n"
 
 interface Props {
   title: string
@@ -8,6 +9,12 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const lang = getLangFromUrl(Astro.url)
+
+// Build hreflang alternate URLs
+const basePath = lang === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" : Astro.url.pathname
+const koUrl = new URL(basePath, Astro.site)
+const enUrl = new URL(`/en${basePath === "/" ? "" : basePath}`, Astro.site)
 
 const { title, description, image = "/open-graph.jpg" } = Astro.props
 ---
@@ -24,6 +31,11 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Hreflang -->
+<link rel="alternate" hreflang="ko" href={koUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={koUrl} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

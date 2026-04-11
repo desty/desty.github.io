@@ -4,14 +4,16 @@ import Fuse from "fuse.js"
 import ArrowCard from "@components/ArrowCard"
 import { cn } from "@lib/utils"
 import SearchBar from "@components/SearchBar"
+import type { Lang } from "@lib/i18n"
 
 type Props = {
   entry_name: string
   tags: string[]
   data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[] | CollectionEntry<'guides'>[]
+  lang?: Lang
 }
 
-export default function SearchCollection({ entry_name, data, tags }: Props) {
+export default function SearchCollection({ entry_name, data, tags, lang = "ko" }: Props) {
   const coerced = data.map((entry) => entry as CollectionEntry<'blog'>);
 
   const [query, setQuery] = createSignal("");
@@ -154,7 +156,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           <ul class="flex flex-col gap-3">
             {collection().map((entry) => (
               <li>
-                <ArrowCard entry={entry} />
+                <ArrowCard entry={entry} lang={lang} />
               </li>
             ))}
           </ul>

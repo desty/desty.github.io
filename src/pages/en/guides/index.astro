@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import SearchCollection from "@components/SearchCollection";
+import { filterByLang } from "@lib/i18n";
+import { t } from "@lib/ui-strings";
+
+const lang = "en";
+
+const guides = filterByLang(
+  (await getCollection("guides")).filter((guide) => !guide.data.draft),
+  lang
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const tags = [...new Set(guides.flatMap((guide) => guide.data.tags))].sort(
+  (a, b) => a.localeCompare(b),
+);
+
+const estimated_initial_size =
+  28 + guides.length * 158 + (guides.length - 1) * 12;
+---
+
+<PageLayout title={t("page.guides.title", lang)} description={t("page.guides.desc", lang)}>
+  <TopLayout>
+    <div class="animate">
+      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+        {t("page.guides.title", lang)}
+      </h1>
+      <div class="mt-1">
+        {t("page.guides.desc", lang)}
+      </div>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div id="search-collection-wrapper" class="animate" style={{ minHeight: `${estimated_initial_size}px` }}>
+      <SearchCollection client:load entry_name={"guides"} tags={tags} data={guides} lang={lang} />
+    </div>
+  </BottomLayout>
+</PageLayout>
