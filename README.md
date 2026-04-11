@@ -1,89 +1,46 @@
-![Astro Sphere Lighthouse Score](_astrosphere.jpg)
+# desty.github.io
 
-Astro Sphere is a static, minimalist, lightweight, lightning fast portfolio and blog theme based on my personal website.
+개발자 desty의 블로그 & 포트폴리오.
 
-It is primarily Astro, Tailwind and Typescript, with a very small amount of SolidJS for stateful components.
+https://desty.github.io
 
-## 🚀 Deploy your own
+## Blog
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-sphere)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-sphere)
+개발, AI, 팀 운영, 커리어에 대한 글을 씁니다.
 
-## 📋 Features
+- 같이 일하고 싶은 개발자 — 코드보다 먼저 보이는 것
+- AI Native 팀 — 'AI를 쓰는 팀'과 'AI로 설계된 팀'은 다르다
+- GEO — SEO의 다음 단계, AI에게 인용되는 콘텐츠 만들기
+- AI 콘텐츠 생태계 — 블로그, 가이드, llms.txt까지 하나로
+- AI Agent UX — 에이전트 시대의 사용자 경험
+- TurboQuant KV Cache — LLM 추론 최적화
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
-- ✅ Code Blocks - copy to clipboard
+## Guides
 
-## 💯 Lighthouse score
-![Astro Sphere Lighthouse Score](_lighthouse.png)
+직접 작성한 기술 가이드입니다.
 
-## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+- AI Native 팀 운영 가이드
+- Developer Roadmap
+- Vibe Coding Materials
+- RAG 가이드
+- AI Agent 가이드
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+## Tech Stack
 
-## 📄 Configuration
+- [Astro](https://astro.build)
+- [Tailwind CSS](https://tailwindcss.com)
+- [TypeScript](https://typescriptlang.org)
+- [SolidJS](https://solidjs.com) (stateful components)
 
-The blog posts on the demo serve as the documentation and configuration.
+## Commands
 
-## 💻 Commands
+| Command | Action |
+|:--|:--|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build production site to `./dist/` |
+| `npm run preview` | Preview build locally |
 
-All commands are run from the root of the project, from a terminal:
-
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts dev server on local network               |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Starts preview server on local network           |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
-
-## 🗺️ Roadmap
-
-A few features I plan to implement
-- ⬜ Article Pages - Table of Contents
-- ⬜ Article Pages - Share on social media
-
-## ✨ Acknowledgement
-
-Theme inspired by [Paco Coursey](https://paco.me/), [Lee Robinson](https://leerob.io/) and [Hayden Bleasel](https://www.haydenbleasel.com/)
-
-
-## 🏛️ License
+## License
 
 MIT
-
-
-# 1.0.1 Update
-
-Added ability to run dev and preview on local network.
-added npm run dev:network
-added npm run preview:network
-
-Added slightly more particle density in both light and dark mode.
-
-Added subtle dark mode star and meteor animations.
-
-Removed eslint config
-
