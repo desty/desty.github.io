@@ -5,7 +5,7 @@ import { getLangFromUrl, localizedPath } from "@lib/i18n"
 import { t } from "@lib/ui-strings"
 
 type Props = {
-  entry: CollectionEntry<"projects"> | CollectionEntry<"blog"> | CollectionEntry<"guides">
+  entry: CollectionEntry<"projects"> | CollectionEntry<"blog"> | CollectionEntry<"guides"> | CollectionEntry<"study">
 }
 
 const { entry } = Astro.props
@@ -14,10 +14,11 @@ const { title, summary, date } = data
 const lang = getLangFromUrl(Astro.url)
 
 const demoUrl = collection === "projects" ? data.demoUrl : null
-const repoUrl = collection === "projects" || collection === "guides" ? data.repoUrl : null
+const repoUrl = collection === "projects" || collection === "guides" || collection === "study" ? data.repoUrl : null
 const guideUrl = collection === "guides" ? data.guideUrl : null
+const studyUrl = collection === "study" ? data.studyUrl : null
 
-const backLabel = collection === "blog" ? t("article.backBlog", lang) : collection === "guides" ? t("article.backGuides", lang) : t("article.backProjects", lang)
+const backLabel = collection === "blog" ? t("article.backBlog", lang) : collection === "guides" ? t("article.backGuides", lang) : collection === "study" ? t("article.backStudy", lang) : t("article.backProjects", lang)
 ---
 
 <div>
@@ -50,8 +51,18 @@ const backLabel = collection === "blog" ? t("article.backBlog", lang) : collecti
   <div class="mt-1">
     {summary}
   </div>
-  {(demoUrl || repoUrl || guideUrl) &&
+  {(demoUrl || repoUrl || guideUrl || studyUrl) &&
   <div class="mt-4 flex flex-wrap gap-2">
+    {studyUrl &&
+      <a href={studyUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
+        <svg class="size-4">
+          <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
+        </svg>
+        <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+          {t("article.viewStudy", lang)}
+        </span>
+      </a>
+    }
     {guideUrl &&
       <a href={guideUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
         <svg class="size-4">

@@ -31,6 +31,12 @@ export const GUIDES: Page = {
   DESCRIPTION: "직접 작성한 기술 가이드입니다.",
 }
 
+// Study Page
+export const STUDY: Page = {
+  TITLE: "Study",
+  DESCRIPTION: "직접 공부하고 정리한 스터디 노트입니다.",
+}
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -39,17 +45,13 @@ export const SEARCH: Page = {
 
 // Links
 export const LINKS: Links = [
-  { 
-    TEXT: "Home", 
-    HREF: "/", 
+  {
+    TEXT: "Home",
+    HREF: "/",
   },
-  { 
-    TEXT: "Work", 
-    HREF: "/work", 
-  },
-  { 
-    TEXT: "Blog", 
-    HREF: "/blog", 
+  {
+    TEXT: "Blog",
+    HREF: "/blog",
   },
   {
     TEXT: "Projects",
@@ -58,6 +60,10 @@ export const LINKS: Links = [
   {
     TEXT: "Guides",
     HREF: "/guides",
+  },
+  {
+    TEXT: "Study",
+    HREF: "/study",
   },
 ]
 

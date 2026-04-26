@@ -27,8 +27,10 @@ const ui: Record<string, Record<Lang, string>> = {
   // Article
   "article.backBlog": { ko: "글 목록으로", en: "Back to posts" },
   "article.backGuides": { ko: "가이드 목록으로", en: "Back to guides" },
+  "article.backStudy": { ko: "스터디 목록으로", en: "Back to study" },
   "article.backProjects": { ko: "프로젝트 목록으로", en: "Back to projects" },
   "article.viewGuide": { ko: "가이드 보기", en: "View Guide" },
+  "article.viewStudy": { ko: "스터디 보기", en: "View Study" },
   "article.viewDemo": { ko: "데모 보기", en: "View Demo" },
   "article.viewRepo": { ko: "저장소 보기", en: "View Repo" },
   "article.prev": { ko: "이전 글", en: "Previous" },
@@ -44,6 +46,8 @@ const ui: Record<string, Record<Lang, string>> = {
   "page.projects.desc": { ko: "최근 진행한 프로젝트입니다.", en: "Recent projects." },
   "page.guides.title": { ko: "Guides", en: "Guides" },
   "page.guides.desc": { ko: "직접 작성한 기술 가이드입니다.", en: "Technical guides I've written." },
+  "page.study.title": { ko: "Study", en: "Study" },
+  "page.study.desc": { ko: "직접 공부하고 정리한 스터디 노트입니다.", en: "Study notes I've worked through." },
   "page.search.title": { ko: "Search", en: "Search" },
   "page.search.desc": { ko: "키워드로 글과 프로젝트를 검색합니다.", en: "Search posts and projects by keyword." },
 

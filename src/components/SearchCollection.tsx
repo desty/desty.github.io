@@ -9,7 +9,7 @@ import type { Lang } from "@lib/i18n"
 type Props = {
   entry_name: string
   tags: string[]
-  data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[] | CollectionEntry<'guides'>[]
+  data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[] | CollectionEntry<'guides'>[] | CollectionEntry<'study'>[]
   lang?: Lang
 }
 
