@@ -5,7 +5,7 @@ import { getLangFromUrl, localizedPath } from "@lib/i18n"
 import { t } from "@lib/ui-strings"
 
 type Props = {
-  entry: CollectionEntry<"projects"> | CollectionEntry<"blog"> | CollectionEntry<"guides"> | CollectionEntry<"study">
+  entry: CollectionEntry<"projects"> | CollectionEntry<"blog"> | CollectionEntry<"guides"> | CollectionEntry<"study"> | CollectionEntry<"prompts">
 }
 
 const { entry } = Astro.props
@@ -18,7 +18,7 @@ const repoUrl = collection === "projects" || collection === "guides" || collecti
 const guideUrl = collection === "guides" ? data.guideUrl : null
 const studyUrl = collection === "study" ? data.studyUrl : null
 
-const backLabel = collection === "blog" ? t("article.backBlog", lang) : collection === "guides" ? t("article.backGuides", lang) : collection === "study" ? t("article.backStudy", lang) : t("article.backProjects", lang)
+const backLabel = collection === "blog" ? t("article.backBlog", lang) : collection === "guides" ? t("article.backGuides", lang) : collection === "study" ? t("article.backStudy", lang) : collection === "prompts" ? t("article.backPrompts", lang) : t("article.backProjects", lang)
 ---
 
 <div>

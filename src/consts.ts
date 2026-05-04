@@ -37,6 +37,12 @@ export const STUDY: Page = {
   DESCRIPTION: "직접 공부하고 정리한 스터디 노트입니다.",
 }
 
+// Prompts Page
+export const PROMPTS: Page = {
+  TITLE: "Prompts",
+  DESCRIPTION: "바로 쓸 수 있는 AI 프롬프트 모음입니다.",
+}
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -45,10 +51,6 @@ export const SEARCH: Page = {
 
 // Links
 export const LINKS: Links = [
-  {
-    TEXT: "Home",
-    HREF: "/",
-  },
   {
     TEXT: "Blog",
     HREF: "/blog",
@@ -64,6 +66,10 @@ export const LINKS: Links = [
   {
     TEXT: "Study",
     HREF: "/study",
+  },
+  {
+    TEXT: "Prompts",
+    HREF: "/prompts",
   },
 ]
 
