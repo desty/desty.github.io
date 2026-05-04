@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content"
+import { type CollectionEntry, getCollection, render } from "astro:content"
 import Mermaid from "@components/Mermaid.astro"
 import { getLangFromUrl, filterByLang, stripLangFromSlug, localizedPath } from "@lib/i18n"
 import { t } from "@lib/ui-strings"
@@ -11,7 +11,7 @@ type Props = {
 // Get the requested entry
 const { entry } = Astro.props
 const { collection } = entry
-const { Content } = await entry.render()
+const { Content } = await render(entry)
 const lang = getLangFromUrl(Astro.url)
 
 // Get the next and prev entries within the same language
@@ -21,7 +21,7 @@ const items = filterByLang(
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
   lang
 )
-const index = items.findIndex(x => x.slug === entry.slug)
+const index = items.findIndex(x => x.id === entry.id)
 const prev = items[(index - 1 + items.length) % items.length]
 const next = items[(index + 1) % items.length]
 ---
@@ -32,7 +32,7 @@ const next = items[(index + 1) % items.length]
   </article>
   <Mermaid />
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <a href={localizedPath(lang, `/${prev.collection}/${stripLangFromSlug(prev.slug)}`)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 blend">
+    <a href={localizedPath(lang, `/${prev.collection}/${stripLangFromSlug(prev.id)}`)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 blend">
       <div class="order-2 w-full h-full group-hover:text-black group-hover:dark:text-white blend">
         <div class="flex flex-wrap gap-2">
           <div class="text-sm uppercase">
@@ -48,7 +48,7 @@ const next = items[(index + 1) % items.length]
         <polyline points="12 5 19 12 12 19" class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
       </svg>
     </a>
-    <a href={localizedPath(lang, `/${next.collection}/${stripLangFromSlug(next.slug)}`)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
+    <a href={localizedPath(lang, `/${next.collection}/${stripLangFromSlug(next.id)}`)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
       <div class="w-full h-full text-right group-hover:text-black group-hover:dark:text-white blend">
         <div class="text-sm uppercase">
           {t("article.next", lang)}

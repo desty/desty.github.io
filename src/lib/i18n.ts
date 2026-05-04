@@ -23,14 +23,14 @@ export function getAlternateUrl(currentUrl: URL): { lang: Lang; href: string } {
   }
 }
 
-export function filterByLang<T extends { slug: string }>(
+export function filterByLang<T extends { id: string }>(
   entries: T[],
   lang: Lang
 ): T[] {
   const prefix = `${lang}/`
-  return entries.filter((e) => e.slug.startsWith(prefix))
+  return entries.filter((e) => e.id.startsWith(prefix))
 }
 
-export function stripLangFromSlug(slug: string): string {
-  return slug.replace(/^(ko|en)\//, "")
+export function stripLangFromSlug(id: string): string {
+  return id.replace(/^(ko|en)\//, "")
 }

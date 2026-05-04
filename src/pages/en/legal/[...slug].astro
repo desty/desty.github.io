@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content"
+import { type CollectionEntry, getCollection, render } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
@@ -10,7 +10,7 @@ import { filterByLang, stripLangFromSlug } from "@lib/i18n"
 export async function getStaticPaths() {
 	const docs = await getCollection("legal")
 	return filterByLang(docs, "en").map((doc) => ({
-		params: { slug: stripLangFromSlug(doc.slug) },
+		params: { slug: stripLangFromSlug(doc.id) },
 		props: doc,
 	}))
 }
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"legal">;
 const doc = Astro.props
 const { title, date } = doc.data
-const { Content } = await doc.render();
+const { Content } = await render(doc);
 ---
 
 <PageLayout title={title} description={`${title} for ${SITE.TITLE}`}>

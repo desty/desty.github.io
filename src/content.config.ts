@@ -1,7 +1,8 @@
 import { defineCollection, z } from "astro:content"
+import { glob } from "astro/loaders"
 
 const work = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/work" }),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -11,7 +12,7 @@ const work = defineCollection({
 })
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/blog" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -22,7 +23,7 @@ const blog = defineCollection({
 })
 
 const projects = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/projects" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -35,7 +36,7 @@ const projects = defineCollection({
 })
 
 const guides = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/guides" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -48,7 +49,7 @@ const guides = defineCollection({
 })
 
 const study = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/study" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -61,7 +62,7 @@ const study = defineCollection({
 })
 
 const prompts = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/prompts" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -72,7 +73,7 @@ const prompts = defineCollection({
 })
 
 const legal = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/legal" }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),

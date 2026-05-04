@@ -20,13 +20,13 @@ export const GET: APIRoute = async () => {
     `## Blog`,
     ``,
     ...blog.map(
-      (post) => `- [${post.data.title}](${site}/blog/${stripLangFromSlug(post.slug)}/): ${post.data.summary}`
+      (post) => `- [${post.data.title}](${site}/blog/${stripLangFromSlug(post.id)}/): ${post.data.summary}`
     ),
     ``,
     `## Guides`,
     ``,
     ...guides.map(
-      (guide) => `- [${guide.data.title}](${site}/guides/${stripLangFromSlug(guide.slug)}/): ${guide.data.summary}`
+      (guide) => `- [${guide.data.title}](${site}/guides/${stripLangFromSlug(guide.id)}/): ${guide.data.summary}`
     ),
     ``,
     `## Optional`,

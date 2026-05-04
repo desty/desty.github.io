@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default function ArrowCard({ entry, pill, lang = "ko" }: Props) {
-  const slug = stripLangFromSlug(entry.slug)
+  const slug = stripLangFromSlug(entry.id)
   const href = localizedPath(lang, `/${entry.collection}/${slug}`)
 
   return (

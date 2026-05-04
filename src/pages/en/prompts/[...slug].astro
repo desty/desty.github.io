@@ -10,7 +10,7 @@ import { filterByLang, stripLangFromSlug } from "@lib/i18n"
 export async function getStaticPaths() {
 	const prompts = await getCollection("prompts")
 	return filterByLang(prompts, "en").map((p) => ({
-		params: { slug: stripLangFromSlug(p.slug) },
+		params: { slug: stripLangFromSlug(p.id) },
 		props: p,
 	}))
 }
