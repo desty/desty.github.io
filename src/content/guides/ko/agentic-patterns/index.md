@@ -14,3 +14,5 @@ repoUrl: "https://github.com/desty/agentic-patterns-guide"
 ---
 
 언제 어떤 패턴을 써야 할지, 어떻게 조합하는지, 무엇이 실패 모드인지 — Anthropic의 "Building Effective Agents" 프레임워크 기반 실무 의사결정 가이드입니다.
+
+> 기초 개념: [AI Agent 완벽 가이드](/guides/agent) — AI Agent의 개념, 아키텍처, 도구 사용, 메모리 시스템

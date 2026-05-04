@@ -11,6 +11,8 @@ tags:
 
 Ranking #1 on Google's first page used to be the ultimate SEO goal. Getting to the top of those ten blue links.
 
+> This post follows [AI Is Reshaping the Content Ecosystem](/blog/04-ai-content-ecosystem), which covered the structural shifts in search and content. Here, we focus on the **specific response strategy: GEO.**
+
 But now, the way people search is changing. They ask ChatGPT, look things up on Perplexity, and get recommendations from Gemini. These AI answer engines don't show ten links. **They generate a single answer and cite sources within it.**
 
 Whether your content gets cited or not — that's the core problem **GEO (Generative Engine Optimization)** aims to solve.

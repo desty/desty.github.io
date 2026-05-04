@@ -104,6 +104,8 @@ The real shift in AI-DLC is where developer effort goes:
 
 Juniors don't disappear. **What juniors need to do changes.** Reading and evaluating AI-generated code becomes more important than typing speed. That capability is built through training, not years.
 
+> For how this role redistribution translates into team-level principles and structure, see the [AI Native Team Operating Guide](https://desty.github.io/ai-native/).
+
 ---
 
 ## Two Traps to Avoid

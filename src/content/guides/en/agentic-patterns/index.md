@@ -14,3 +14,5 @@ repoUrl: "https://github.com/desty/agentic-patterns-guide"
 ---
 
 When to use which pattern, how to combine them, and what their failure modes are — a production decision guide grounded in Anthropic's "Building Effective Agents" framework.
+
+> Fundamentals: [The Complete Guide to AI Agents](/guides/agent) — core concepts, architecture, tool use, memory systems

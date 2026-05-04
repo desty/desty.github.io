@@ -99,7 +99,7 @@ Synthesizing these three trends reveals a single structure:
 
 This leads to a paradoxical conclusion. The more AI floods the content landscape, **the more valuable writing becomes that's rooted in firsthand experience and original thought**. What AI can't replicate is experience, and the perspective that comes from it.
 
-The data points in this direction. The question is whether individual creators and small publishers can survive the traffic cliff in the meantime. That's a topic for another post.
+The data points in this direction. The question is whether individual creators and small publishers can survive the traffic cliff in the meantime. For a concrete response strategy to these shifts, see [GEO — The Next Step Beyond SEO: Getting Your Content Cited by AI](/blog/05-geo-seo).
 
 ---
 

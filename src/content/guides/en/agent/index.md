@@ -12,3 +12,5 @@ repoUrl: "https://github.com/desty/agent-guide"
 ---
 
 A comprehensive guide covering the core concepts of AI Agents, architecture, tool use, memory systems, and Multi-Agent orchestration.
+
+> Deep dive into patterns: [Agentic AI Patterns Guide](/guides/agentic-patterns) — 8 core patterns, Multi-agent topologies, real-world use cases
