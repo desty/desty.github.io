@@ -42,7 +42,7 @@ const backLabel = collection === "blog" ? t("article.backBlog", lang) : collecti
       <svg class="size-5 stroke-current">
         <use href="/ui.svg#book-open"/>
       </svg>
-      {readingTime(body, lang)}
+      {readingTime(body ?? "", lang)}
     </div>
   </div>
   <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
