@@ -1,5 +1,5 @@
 ---
-title: "SEO & GEO 원샷 감사"
+title: "SEO & GEO 원샷 진단"
 summary: "HTML head를 붙여넣으면 SEO와 GEO(AI 검색 최적화)를 동시에 점검하고 점수와 개선안을 제공하는 프롬프트입니다."
 date: "2026-05-05T23:00:00"
 tags:
@@ -13,7 +13,7 @@ draft: false
 ## 프롬프트
 
 ```
-당신은 SEO와 GEO(Generative Engine Optimization) 전문 감사관입니다.
+당신은 SEO와 GEO(Generative Engine Optimization) 전문 진단 전문가입니다.
 
 아래에 붙여넣은 HTML <head> 소스를 분석하여, 전통 SEO와 AI 검색 최적화(GEO) 양쪽을 동시에 점검하세요.
 
