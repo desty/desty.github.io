@@ -108,6 +108,22 @@ The worse problem hits when token limits are reached. "I'm out of tokens, can't 
 
 5. **Token depletion contingency** — Maintain a workflow that doesn't stop when token limits hit. Being unable to function without AI is itself a form of technical debt.
 
+### The Invisible Overhead: Tokens Charged Before You Even Type
+
+The strategies above address *how* to use tokens wisely. But instrumented session data reveals a more fundamental problem — **tokens consumed before your prompt is even read** often account for over half of total usage. No amount of prompt craft helps when the baseline overhead is already massive.
+
+**1. CLAUDE.md bloat** — A 5,000-token project rules file costs 5,000 tokens every single turn. At 200 turns per week, that's 1 million tokens on project rules alone. Keep only rules that actively matter, split framework-specific rules into project-level files, extract repeated patterns into skills. **Target: combined under 1,500 tokens.**
+
+**2. Conversation history accumulation** — Every follow-up re-tokenizes the entire conversation. Message 30 costs 30× message 1. **Cap conversations at 20 messages.** When you need continuity, use `/compact` to summarize and restart. Editing a previous message (↑ → edit → resend) replaces a bad exchange instead of stacking it.
+
+**3. Hook and plugin injection** — Multiple UserPromptSubmit hooks can inject thousands of tokens on every prompt before you've typed a word. Audit your `settings.json` hooks regularly. If you can't articulate why a hook needs to fire on *every* prompt, disable it.
+
+**4. Cache misses** — Prompt cache has a 5-minute default lifetime. A coffee break means the system prompt, CLAUDE.md, and tool schemas all re-tokenize at full price. Sending a simple prompt before stepping away keeps the cache warm and saves significant cost.
+
+**5. Stopping wrong-direction generation** — When AI starts a long response and you can see within the first few lines it's heading the wrong way, don't wait for it to finish. `Cmd+.` (Mac) / `Ctrl+.` (Windows) stops generation immediately. A completed wrong response wastes output tokens *and* inflates the next turn's history cost.
+
+The core realization: **every session is an invoice, not a blank slate.** CLAUDE.md + hooks + plugins + tool schemas + conversation history are pre-charged on every turn. Reducing this baseline overhead has higher ROI than any amount of prompt optimization.
+
 ### Developer Insight
 
 > **Token costs are falling, and will continue to fall.** GPT-4-level performance dropped ~100x in cost over two years. Don't plan strategy around today's pricing as if it's permanent. But "it'll be cheap later so ignore it now" is also dangerous. **Use rationally today, bet on cost reduction tomorrow.** And above all — be someone who can still work when the tokens run out.
@@ -180,6 +196,7 @@ The developers who thrive in this era won't be those who use AI the most, nor th
 - [ ] Has your team agreed on delegation vs. hands-on boundaries?
 - [ ] Do you have review criteria specifically for AI-generated code?
 - [ ] Are you tracking token costs and measuring ROI?
+- [ ] Are you regularly auditing your CLAUDE.md, hooks, and MCP connections?
 - [ ] Do you have a fallback path for core work when AI is unavailable?
 - [ ] Are you reserving regular time for coding without AI?
 - [ ] Can you explain "why this code?" before every merge?
