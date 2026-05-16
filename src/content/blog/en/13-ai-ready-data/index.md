@@ -195,7 +195,7 @@ Go deeper into data structuring, and you'll encounter **Ontology** and **Knowled
 
 Recent research shows that [ontology-based knowledge graphs applied to RAG significantly outperform vector-search-only approaches](https://arxiv.org/html/2511.05991v1), and [extracting ontologies from DB schemas is cost-efficient and easy to maintain](https://arxiv.org/abs/2511.05991) since schemas tend to remain stable.
 
-This topic deserves its own deep study. For now, remember: **the endgame of data structuring is ontology and knowledge graphs.** Structuring data well is the first step toward that destination.
+This topic has its own dedicated guide. **[Ontology & Knowledge Graph Guide](/en/guides/ontology-knowledge-graph/)** covers the spectrum, triples, GraphRAG benchmarks, tool ecosystem, and how to get started. For now, remember: **the endgame of data structuring is ontology and knowledge graphs.** Structuring data well is the first step toward that destination.
 
 ### Developer Insight
 
