@@ -10,6 +10,7 @@ tags:
   - agentic-coding
   - guide
 guideUrl: "https://desty.github.io/dx-for-ax-guide/"
+repoUrl: "https://github.com/desty/dx-for-ax-guide"
 ---
 
 6 recurring problems people face jumping into AX without DX foundations, 10 DX skills redefined for the AX era, and a self-assessment checklist.
