@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # Obsidian
 .obsidian/
+
+# Temporary research
+.tmp-research/
