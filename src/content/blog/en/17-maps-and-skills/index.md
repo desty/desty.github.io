@@ -1,6 +1,6 @@
 ---
-title: "Code Maps and Skill Piles — Reading the Coding Agent's Next Battleground Through 4 Trending Repos"
-summary: "This month's GitHub trending threw codegraph, Understand-Anything, ECC, and pi up at once. I cloned all four and read the code — and 'why now' became clear. The center of gravity in coding agents has shifted from models and CLIs to context and skills. And the next battleground is trust."
+title: "Nobody Asked for a Smarter Model — Reading What Developers Actually Want Through 4 Trending Repos"
+summary: "This month's GitHub trending threw codegraph, Understand-Anything, ECC, and pi up at once. I cloned all four, read the code, and traced why people got so excited. The striking part — nobody was asking for a smarter model. Everyone wanted what sits around the model."
 date: "2026-05-31T18:00:00"
 tags:
   - ai-agent
@@ -13,165 +13,141 @@ tags:
 draft: false
 ---
 
-I was scanning GitHub trending this month and noticed a pattern. Similar things kept showing up at once.
+This month's GitHub trending filled up with AI coding repos. **codegraph** (#2 on trending May 23, +2,400 stars in 24 hours), **Understand-Anything**, **ECC** (160K stars), **pi**. Like [last time](/en/blog/15-hermes-vs-openclaw/), I cloned all four and read the source — and this time I went further and traced **why people got so excited: the issues, the discussions, the HN/Reddit reactions.**
 
-**codegraph** (#2 on trending May 23, +2,400 stars in 24 hours), **Understand-Anything**, **ECC** (160K+ stars), **pi**. On the surface they're all over the place, but they sort cleanly into two kinds. One is **"a tool that hands the AI a map of your codebase,"** the other is **"a toolkit that swaps skills and tools into the AI."**
+One thing stood out. None of them caught fire because "the model got smarter." A line from a codegraph writeup nailed it:
 
-Like I did [last time](/en/blog/15-hermes-vs-openclaw/), instead of comparing READMEs I **cloned all four and read the source.** This time I go one step further. Not just "what's different," but **"why is this hot right now,"** and — by watching where Claude Code, Codex, Gemini CLI, and MCP are moving — **"where does this go next?"**
+> "It doesn't make the model smarter — it helps it **get less lost.**"
 
-Bottom line first: the center of gravity in coding agents has shifted **from models and CLIs to context and skills.** These four are the signal. And the next battleground — I'll get to it at the end — is **trust.**
-
----
-
-## Why now ① : agents burn tokens *finding* code
-
-Anyone who's used a coding agent knows this. You ask one question and the agent spends ages `grep`ping, reading files, following imports, tracing call chains. **The stage before it can produce an actual answer — "figuring out what this codebase even is"** — is the discovery phase. A big chunk of the token budget evaporates right there.
-
-Through the first half of 2026 this got more painful. Three things converged.
-
-- **Token efficiency became a competitive axis.** OpenAI claims Codex CLI is roughly 4x more token-efficient than Claude Code. Who does the same job cheaper is now a marketing point.
-- **Context windows grew to 1M — but that isn't free.** Gemini and Opus both take a million tokens. Stuffing the whole codebase in every turn is slow and expensive anyway.
-- **MCP converged into a standard.** With Anthropic, Microsoft, and OpenAI all adopting the Model Context Protocol as a common interface, "build a tool once, plug it into every agent" became possible.
-
-So the answer that emerged is **"build the map ahead of time."** Don't grope around each turn — query a structure you've already indexed. codegraph and Understand-Anything aim at exactly this spot. But **the way they build the "map" is opposite.**
+What people wanted wasn't the model itself; it was **everything around the model.** And that want split three ways — **stop it getting lost (grounding), set it up once (reuse), let me control it (trust).** The four trending repos each answer one of those.
 
 ---
 
-## Two code maps : codegraph vs Understand-Anything
+## Want ① "I wish the agent would stop thrashing" — codegraph & Understand-Anything
 
-### codegraph — a machine-verified map
+Anyone who's used a coding agent knows it. One question and the agent spends ages `grep`ping, reading files, following imports, figuring out "what this codebase even is" before it can answer. That's the discovery phase, and in a per-token billing world it's pure cost. One developer's reaction to codegraph resonated widely:
 
-**What it is.** It parses code with tree-sitter, extracts functions, classes, imports, and call relationships, and puts them into a local **SQLite graph**. The AI agent queries that graph through an **MCP server** — 10 tools like `codegraph_search` / `callers` / `callees` / `trace` / `impact`.
+> "Hit this exact pain. Explore agents kept re-scanning the same files with no shared symbol cache. A pre-built graph the agent consults before grepping is a real UX gain, not just perf."
 
-**Core tech.**
-- Parsing uses tree-sitter WASM grammars (those `.wasm` files in the repo). Storage is Node's built-in `node:sqlite` + an FTS5 full-text index.
-- **No LLM anywhere.** No embeddings, no model calls. Pure static analysis. So the graph's contents are facts mechanically derived from code — no room for hallucination.
-- I checked the code directly, and **"100% local, no external transmission" holds.** There's no outbound HTTP or telemetry; the only network usage is Unix-socket IPC to a local daemon.
+Same itch — but **the two repos target a different thing getting lost.**
 
-**Take the numbers with salt.** The repo touts "57% fewer tokens, 62% fewer tool calls" (third-party writeups say 59% tokens / 70% calls; package.json even says 94%). A benchmark harness does ship in the repo, but it's **author-run with a small sample (median of n=4, some n=1).** The figures swing from 30% to 94% across documents. **Trust the direction (it goes down); treat any specific percentage as marketing.**
+### codegraph — so the agent gets less lost
 
-> **When to use it**
-> When you can see the agent thrashing and burning tokens in a large codebase. When you want to plug it into Claude Code, Codex, or Cursor via MCP. When not a single line of code may leave the building (internal / security-sensitive). It's a map used as **fuel for the agent.**
+**What it is.** Parses code with tree-sitter, puts functions, classes, imports, and call relationships into a local **SQLite graph**, and the AI agent queries it through an **MCP server** (10 tools like `codegraph_search`, `callers`, `callees`, `trace`, `impact`).
 
-### Understand-Anything — a map humans read
+**Why it landed.** The wins were concrete and repeatable. On the VS Code repo, "how does the extension host talk to the main process" dropped from **52 tool calls to 3.** Across 7 real codebases: ~57% fewer tokens, ~62% fewer tool calls (author-run benchmarks, so read the *direction*, not the exact percent). And it's **100% local — no LLM, no embeddings, no API keys** — not a line of code leaves the machine. tree-sitter gives mechanically-derived facts, so no hallucination.
 
-**What it is.** Same "code → knowledge graph," but the output and purpose differ. An **LLM multi-agent pipeline** scans the project, summarizes it, groups it into architectural layers, and writes a single `.understand-anything/knowledge-graph.json`. Then it visualizes that as an **interactive React Flow dashboard** — color-coded by layer, click a node for its code, relationships, and plain-English explanation, and the detail level even adapts to who's looking (junior dev / PM / power user).
-
-**Core tech.**
-- tree-sitter scrapes the skeleton (files, imports) mechanically, but **the summaries, layers, relationships, and tours are written by an LLM.** The 7-phase build is defined as prompts in `SKILL.md`, and the host agent runs subagents to fill it in.
-- In other words, this graph is **"JSON written by an LLM."** Not facts the code verified, but a model's reading of the code. Quality depends on the driving model.
-- To be honest: the source has a semantic-search engine (`embedding-search.ts`), but **nothing in the pipeline ever generates embeddings.** Actual "ask a question" amounts to grepping the JSON. "Semantic search" is somewhat overstated.
-- Support for Claude Code / Codex / Cursor / Copilot / Gemini CLI is real, but it's done via **config files + symlinked markdown skills, not MCP.** No telemetry.
+The most telling signal: people **immediately wanted more.** The top issue request was to import **docs and specs into the graph too**, not just code. Someone ported it to Kiro within days ("the idea was brilliant, so I ported it"). The demand is spilling past the tool into "a map of the whole project's knowledge."
 
 > **When to use it**
-> When you just joined an unfamiliar codebase and **a human needs to understand the structure fast.** Team onboarding, mapping legacy, wanting to *see* "how does this domain logic flow?" as a picture. It graphs not only code but also docs and wikis (e.g. the Karpathy LLM wiki). It's a map **for people.**
+> When you can see the agent thrashing and burning tokens in a large codebase. When you want it plugged into Claude Code / Codex / Cursor via MCP. When code can't leave the building (internal / security-sensitive). It's **fuel the agent eats.**
 
-### The one line where they split
+### Understand-Anything — so the human gets less lost
+
+**What it is.** Same "code → knowledge graph," but the output is **for people.** An LLM multi-agent pipeline scans and summarizes the project, groups it into architectural layers, and visualizes it as an **interactive dashboard.**
+
+**Why it landed.** The creator's slogan hit a nerve — **"Graphs that teach > graphs that impress."** It was a reaction against prior repo-map tools that produced "a giant graph that looks impressive but doesn't actually help you understand the code." What people loved most wasn't the flashy dependency hairball but the **business-logic view** ("how code maps to real business processes — domains, flows, steps") and the **persona-adaptive view** (detail level shifts for junior dev / PM / power user). On HN the creator said it plainly: *"Engineers love the business knowledge mode."*
+
+The next want was just as clear. The most-requested thing in discussions: **a team-shared, remotely stored graph** — so everyone doesn't regenerate it — growing into a "long-term agent-memory companion."
+
+> **When to use it**
+> When you've joined an unfamiliar codebase and **a human needs to understand the structure fast.** Team onboarding, mapping legacy, explaining a system to a non-technical stakeholder. A better intro than "read the README and ask questions."
 
 | | codegraph | Understand-Anything |
 |---|---|---|
-| Graph creation | tree-sitter static analysis (0% LLM) | LLM multi-agent pipeline |
-| Output | SQLite + FTS5 (for querying) | JSON + visual dashboard (for viewing) |
-| Trust model | machine-verified facts | model's interpretation |
-| Consumer | **the agent** (10 MCP tools) | **humans** (browser dashboard) |
-| Integration | MCP-native | config files + symlinked skills |
-| Core value | token / tool-call savings | structural understanding, onboarding |
+| Who gets less lost | **the agent** | **the human** |
+| Output | SQLite graph (MCP queries) | visual dashboard (viewing, onboarding) |
+| Strength | token/tool-call savings, 100% local | business-logic & persona views |
+| What people wanted next | docs & specs in the graph | team-shared, remote graphs |
 
-They aren't competitors. **codegraph is fuel the agent eats; Understand-Anything is a map people look at.** The similar names lump them into one category, but once "who reads the map" differs, the whole design diverges. That's a difference you can't see until you open the code.
+They aren't competitors — they're **two faces of the same want.** And both are shouting the same "next": more knowledge, shared across the team. Grounding is moving from a one-off tool to a **shared asset.**
 
 ---
 
-## Why now ② : skills became a cross-agent standard
+## Want ② "I don't want to set this up from scratch every time" — ECC
 
-On to the second cluster. Its backdrop is simpler.
+ECC (Everything Claude Code) hit **160K stars** not because of its skill count. The reason people cited most was the **empty-config problem.** Augment Code put it precisely:
 
-`SKILL.md` — a plain format where you write "name + when to use it" in YAML frontmatter and the procedure in the body — **became the de facto standard.** A skill built in Claude Code runs as-is in Codex CLI, Cursor, OpenCode, and other SKILL.md-compatible agents. Anthropic laid the templates with its official `skills` repo and role-specific `knowledge-work-plugins`, and the marketplaces exploded. Some directories now boast 6,700+ skills and 2,500+ marketplaces.
+> "The tools ship with almost no configuration. So you rebuild the same hooks, guardrails, and memory setup on every project. Teams write custom CLAUDE.md files, Cursor rules, and MCP configs, then repeat it all on the next project."
 
-When a standard appears and the barrier drops, a **gold rush** follows. People pile in on both ends: "bundles that hoard as many skills as possible" and "infrastructure that runs skills and agents." ECC and pi are precisely those two extremes.
+ECC is the **batteries-included** answer to that repetition. It grew out of an Anthropic hackathon win in Sept 2025 (the config behind an app "built in Claude Code in 8 hours"), ships as one MIT repo with a sub-2-minute install and language-specific rules via `./install.sh python`.
 
----
+**Why it landed — what people specifically named.**
+- **AgentShield security** (1,282 tests, an `--opus` red-team/blue-team/auditor pipeline) — "the first thing I'd evaluate if your team runs MCP configs or CLAUDE.md in production."
+- **Instincts / memory** — "extracts patterns from coding sessions, scores them by confidence, clusters them into reusable skills." A direct answer to long-session context loss.
+- **Cross-harness portability** — "for teams running Claude Code on the backend and Cursor on the frontend, ECC becomes a single config source." Someone called it **"the .editorconfig for AI coding tools,"** and the analogy stuck.
 
-## Two skill/toolkits : ECC vs pi
-
-### ECC (Everything Claude Code) — a config layer that covers by volume
-
-**What it is.** A **giant config + skill bundle** you plug into many harnesses at once — Claude Code, Cursor, Codex, OpenCode, Gemini, Zed, Copilot. It grew out of an Anthropic hackathon win in September 2025 and has passed **160K stars** by third-party counts. It version-controls ~60 agents, ~250 skills, 76 commands, hooks, and a security scanner (AgentShield).
-
-**Core tech — and an honest note.**
-- The multi-harness integration is real. It ships per-harness directories and adapters (`.claude/`, `.cursor/`, `.codex/`, `.gemini/`), 6 MCP servers in `.mcp.json`, and working hook dispatchers. Memory is file-based but has a real implementation (session hooks, an 1,800-line `instinct-cli.py`).
-- **But you have to question the code density.** Counting directly, **of ~250 skills only 12 contain actual code; the rest are markdown prompts.** There's a lot of coding-irrelevant verticals mixed in — customs, visas, healthcare. Much of "security" is a prompt-defense boilerplate pasted into 75 files, and the headline security monitor is a wrapper around someone else's pip package (off by default).
-- The star count is overwhelming, but the code shows **count ≠ value.** This isn't a knock on ECC specifically — it's a general principle for evaluating trending bundles.
+The line that captured it: *"I'd rather adopt it now than build the same thing myself six months from now."* And **26K forks** — that's not window-shopping, that's real integration into team workflows.
 
 > **When to use it**
-> When you hop across multiple agents and want to **unify your config into one set.** When you don't want to write hooks / MCP / harness adapters from scratch and need a well-stocked starting point. Just drop the fantasy of using all 250 skills and go in with the mindset of **picking the 12 you need.**
+> When you hop across multiple agents and want to **unify your config into one set.** When you don't want to assemble hooks / MCP / memory / security from scratch and need a well-stocked starting point. Most people **cherry-pick the parts that fit their workflow** rather than installing all of it.
 
-### pi — an infra layer that goes by depth
-
-**What it is.** A **TypeScript monorepo toolkit** built by **Mario Zechner** (creator of libGDX), brought along when he joined Earendil in April 2026. Not a pile of skills — it builds the **foundation that runs agents.** Four packages.
-
-| Package | Role |
-|---|---|
-| `pi-coding-agent` | coding agent CLI |
-| `pi-ai` | unified API across multiple LLMs |
-| `pi-agent-core` | agent execution runtime (tool calling, state mgmt) |
-| `pi-tui` | terminal UI library |
-
-**Core tech.**
-- **Unified LLM API.** Abstracts 9 providers behind one interface — Anthropic, OpenAI (+Codex/Azure), Google (Gemini/Vertex), Mistral, AWS Bedrock. Avoiding vendor lock-in is a design goal.
-- **The supply-chain hardening is real.** I verified it in code: all external deps pinned to exact versions (`save-exact`), a shrinkwrap with 134 integrity hashes in the published package, `--ignore-scripts` on install, even a CI script that checks the pinning. "Supply-chain safety" isn't a slogan here, it's in the code.
-- High engineering maturity. Biome, strict TS, 252 tests. (Note: the Slack bot / vLLM bits are in the toolkit's broader scope but live in a separate repo, `pi-chat`, not the main monorepo.)
-
-> **When to use it**
-> When you're **building an agent yourself.** Writing an app that swaps between several LLMs, or standing up your own coding agent / TUI. Especially if **supply-chain security matters to your org**, its pinning / shrinkwrap / ignore-scripts double as a reference. It's a **foundation for builders,** not an end-user bundle.
-
-### The one line where they split
-
-| | ECC | pi |
-|---|---|---|
-| What it is | multi-harness config/skill bundle | agent-dev infrastructure monorepo |
-| Center of gravity | **volume** (count of agents/skills) | **depth** (runtime, integration, supply chain) |
-| Audience | people who **use** agents | people who **build** agents |
-| Basis of trust | star count, hackathon pedigree | code, supply-chain hardening, author track record |
-| The trap | count inflation (12/250 skills have code) | over-abstraction for end users |
+The want ECC answered isn't "make the model stronger" — it's **"configure the agent for production."** People moved from "let's try the AI tool" to **"let's set the AI tool up for daily, production use,"** and ECC is the emblem of that shift.
 
 ---
 
-## So, where does this go next?
+## Want ③ "I want to see and control what goes into the model" — pi
 
-Read all four down to the code and overlay them on recent platform moves, and three directions emerge.
+pi was built by **Mario Zechner** (creator of libGDX and Spine), brought along when he joined Earendil in April 2026. It earned trust not by star count but by **philosophy.**
 
-**① Code indexing gets absorbed into the agent, or converges onto the MCP standard.**
-Right now standalone tools like codegraph ride the trending wave, but "the agent burns tokens groping through the codebase" is too universal a problem — it'll most likely end up **built into the agent itself, or pulled into a standard MCP tool.** Today's standalone indexers are a transitional bet, filling a gap before the standard settles.
+Mario's core argument: mainstream harnesses *"inject stuff behind your back that isn't even surfaced in the UI,"* making real context engineering impossible. pi's answer is **control through subtraction** — four tools (Read, Write, Edit, Bash) and a sub-1,000-token system prompt. The lines people quote back:
 
-**② Skills commoditize, and the moat moves from "count" to "curation and verification."**
-In an era of 6,700 skills, "we have 250" is no longer a brag. As ECC's code density shows, **volume no longer differentiates.** The next step is "does this skill actually work, is it verified?" Approaches like [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) — which verifies citations through integrity gates you can't skip and runs 1,500 tests — are, unglamorous as they are, closer to the future.
+> "If I don't need it, it won't be built. And I don't need a lot of things."
+> "Exactly controlling what goes into the model's context yields better outputs."
 
-**③ The next battleground is trust.**
-The more autonomously an agent runs, and the more code it executes, **the more trust matters over cost.** It comes in three strands.
-- **Supply chain** — the exact problem pi pre-answered with pinning / shrinkwrap / ignore-scripts. In a world where agents install npm packages and run code, this isn't optional.
-- **Verification** — is the graph, the skill, the answer *real*? codegraph dropping the LLM for pure static analysis is also a trust design: give hallucination-free facts.
-- **Provenance** — trending is full of impressive-sounding names (among the repos I looked at this round, one prepends "Anthropic" but is an unofficial repo made by an individual). Judge by code and author, not name.
+**Why it landed.** The trust signals stacked up. Armin Ronacher (creator of Flask) endorsed it publicly: *"Pi is written like excellent software. It doesn't flicker, doesn't eat memory, doesn't randomly break. It's the coding agent I use almost exclusively."* On HN, Mario's depth ("the first blog in years I spent an hour reading") and pedigree bought instant trust. And the **anti-lock-in stance is explicit** — `pi-ai` wraps Anthropic, OpenAI, Google, Bedrock, Mistral and more behind one interface; deps are exact-pinned, install uses `--ignore-scripts`, with a shrinkwrap. Having lived through RoboVM breaking after an acquisition, his *"pi is MIT. It stays MIT. The fork button always works"* is what won people over.
+
+One striking signal: pi was the **hidden engine** under OpenClaw, which spiked to 100K+ stars in a week. Many people discovered pi *through* it.
+
+> **When to use it**
+> When you're **building an agent yourself** — an app that swaps between LLMs, your own coding agent / TUI. Above all, for people who want to **know and control exactly what goes into the model.** If supply-chain security matters to your org, its pinning / shrinkwrap setup doubles as a reference.
+
+---
+
+## The one line running through all three wants
+
+Read all four down to the code, follow the reactions, and the same sentence shows up wearing three faces.
+
+- codegraph & Understand-Anything → "don't make the model smarter, make it **get less lost**." (grounding)
+- ECC → "don't rebuild it every time, **set it up once and reuse**." (reuse)
+- pi → "I can't see what you're injecting, so **let me look and control**." (trust)
+
+Developers in 2026 weren't asking for a stronger model. The model is already strong enough. What they actually wanted was **how to tame that strong model** — what to feed it (grounding), how to pass the setup along (reuse), how to look inside what it's given (trust). It's the most honest evidence that the frontier has moved **from the model to everything around it.**
+
+---
+
+## So where does this go next?
+
+The wants point fairly clearly.
+
+**① Grounding becomes a "shared asset" — and eventually gets absorbed into the platform.**
+The key tell is that codegraph users immediately asked for "docs and specs too" and Understand-Anything users asked for "a team-shared graph." Code maps are moving past one-off tools into a **shared project-knowledge layer for the team.** "Agents grope through the codebase" is so universal a problem that this feature will likely get **built into agents/platforms** or pulled into an MCP standard before long.
+
+**② "Agent config" gets standardized — the .editorconfig moment.**
+ECC's 160K stars mean the empty-config problem is that universal. A giant bundle fills the gap today, but just as `.editorconfig` and `.prettierrc` did, **agent config will converge on a light, standardized format.** People didn't want "250 skills" — they wanted "define my config once and carry it across every tool and project."
+
+**③ Control and transparency become the bar for trust.**
+The more autonomously an agent runs, and the more code it executes, the more people start asking *"can I see what this is doing inside?"* It's no accident pi won trust by being minimal, transparent, and forkable. The differentiator for the next generation of tools won't be "feature count" — it'll be **"can I understand and control it?"**
 
 ---
 
 ## Closing
 
-All four I looked at cloned as a **single squashed commit** — meaning, being trending newcomers, their development history is invisible. Star counts, skill counts, names — every surface signal wobbles. So [last time](/en/blog/15-hermes-vs-openclaw/) and again now, I land on the same conclusion. **You have to open the code to see what's real.**
+I started out trying to "open the code and see what's flimsy." But following why people actually got excited produced a more interesting picture. **These four aren't a list of flaws — they're a map of demand.**
 
-In [post #14](/en/blog/14-agent-engineering/) I wrote that what agent engineers really design are the layers outside the model. This week's trending shows exactly that. The model is already powerful. What people are building now is **how to feed it code (context), what to make it do (skills), and how to trust it (trust).**
+In [post #14](/en/blog/14-agent-engineering/) I wrote that what agent engineers really design are the layers outside the model. This week's trending proves the same thing from the user side. The model race has leveled off, and now people give their stars to **the tools that tame the model.**
 
-I'll be watching trending again next week. The question I'll bring is one.
+I'll be watching trending again next week. The question I'll bring is this:
 
-**Is this a new capability, or just more of the same capability piled higher?**
+**Does this make the model smarter, or does it make us better at handling the model?** — lately, people star the latter.
 
 ---
 
 ## References
 
-- [codegraph (colbymchenry)](https://github.com/colbymchenry/codegraph) — MIT, MCP-native code knowledge graph
+- [codegraph (colbymchenry)](https://github.com/colbymchenry/codegraph) — MCP-native code knowledge graph
 - [Understand-Anything (Lum1104)](https://github.com/Lum1104/Understand-Anything) — code → interactive knowledge graph
-- [ECC / Everything Claude Code (affaan-m)](https://github.com/affaan-m/ECC) — multi-harness config bundle
+- [ECC / Everything Claude Code (affaan-m)](https://github.com/affaan-m/ECC) — multi-harness config layer
 - [pi (earendil-works)](https://github.com/earendil-works/pi) — agent development toolkit
-- [The 2026 MCP Roadmap](https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) — MCP standard convergence
-- [Agentic Coding in 2026: Claude Code vs Codex vs Gemini vs Cursor](https://ofox.ai/blog/agentic-coding-claude-codex-gemini-cursor-2026/) — coding agent comparison
+- [Mario Zechner — Pi Coding Agent](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/) · [Armin Ronacher — pi](https://lucumr.pocoo.org/2026/1/31/pi/)
 - Related: [Hermes vs OpenClaw — Same Dream, Different Design](/en/blog/15-hermes-vs-openclaw/) · [What Agent Engineers Actually Design](/en/blog/14-agent-engineering/)
