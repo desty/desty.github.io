@@ -9,11 +9,14 @@ function formatDate(date: Date | string): string {
 }
 
 export const GET: APIRoute = async () => {
-  const blog = filterByLang(await getCollection("blog"), "ko")
-  const guides = filterByLang(await getCollection("guides"), "ko")
+  const byDate = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 
-  blog.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  guides.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  const blog = filterByLang(await getCollection("blog"), "ko").sort(byDate)
+  const guides = filterByLang(await getCollection("guides"), "ko").sort(byDate)
+  const projects = filterByLang(await getCollection("projects"), "ko").sort(byDate)
+  const study = filterByLang(await getCollection("study"), "ko").sort(byDate)
+  const prompts = filterByLang(await getCollection("prompts"), "ko").sort(byDate)
 
   const sections: string[] = [
     `# ${SITE.TITLE}`,
@@ -22,16 +25,20 @@ export const GET: APIRoute = async () => {
     ``,
   ]
 
-  if (blog.length > 0) {
-    sections.push(`---`, ``, `## Blog`, ``)
-    for (const post of blog) {
+  const pushSection = (
+    title: string,
+    entries: { data: { title: string; date: Date; tags: string[] }; body?: string }[]
+  ) => {
+    if (!entries.length) return
+    sections.push(`---`, ``, `## ${title}`, ``)
+    for (const entry of entries) {
       sections.push(
-        `### ${post.data.title}`,
+        `### ${entry.data.title}`,
         ``,
-        `Date: ${formatDate(post.data.date)}`,
-        `Tags: ${post.data.tags.join(", ")}`,
+        `Date: ${formatDate(entry.data.date)}`,
+        `Tags: ${entry.data.tags.join(", ")}`,
         ``,
-        post.body ?? "",
+        entry.body ?? "",
         ``,
         `---`,
         ``,
@@ -39,22 +46,11 @@ export const GET: APIRoute = async () => {
     }
   }
 
-  if (guides.length > 0) {
-    sections.push(`## Guides`, ``)
-    for (const guide of guides) {
-      sections.push(
-        `### ${guide.data.title}`,
-        ``,
-        `Date: ${formatDate(guide.data.date)}`,
-        `Tags: ${guide.data.tags.join(", ")}`,
-        ``,
-        guide.body ?? "",
-        ``,
-        `---`,
-        ``,
-      )
-    }
-  }
+  pushSection("Blog", blog)
+  pushSection("Guides", guides)
+  pushSection("Projects", projects)
+  pushSection("Study", study)
+  pushSection("Prompts", prompts)
 
   return new Response(sections.join("\n"), {
     headers: {
