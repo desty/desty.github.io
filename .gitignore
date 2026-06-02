@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # Temporary research
 .tmp-research/
+
+.claude/
