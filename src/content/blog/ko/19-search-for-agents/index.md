@@ -24,6 +24,8 @@ draft: false
 
 그런데 이제 질의를 던지는 주체가 바뀌고 있다. 점점 더 많은 검색이 사람이 아니라 **멀티스텝으로 추론하는 에이전트**에서 나온다. 에이전틱 RAG는 한 번 검색하고 끝내지 않는다. 질문을 쪼개고, 검색하고, 부족하면 다시 검색하는 **반복적·멀티홉 회수**를 한다([arXiv 2501.09136, agentic RAG survey](https://arxiv.org/html/2501.09136v3)). 이 사용자는 파란 링크를 클릭하지 않는다. 페이지를 "읽지도" 않는다. 필요한 건 추론에 바로 꽂을 수 있는 사실 조각이다.
 
+> **업데이트 (2026-06-07):** 이 반복 루프엔 빠진 질문이 하나 있다 — *언제 멈추나?* 구글이 최근 Gemini Enterprise에 [Sufficient Context Agent를 더했다](https://research.google/blog/unlocking-dependable-responses-with-gemini-enterprise-agent-platforms-agentic-rag/). 검색을 또 할지 멈출지를 "지금 모은 컨텍스트가 답하기에 *충분한가*"로 판단하는 에이전트다. 배경 연구([Sufficient Context, ICLR 2025](https://arxiv.org/abs/2411.06037))의 발견이 뼈아프다 — 컨텍스트를 붙이면 모델이 과신해서 **모를 때 기권하는 능력이 오히려 떨어진다**(Claude 3.5 Sonnet 기권율 84%→52%). 에이전틱 RAG의 진짜 난제는 "다시 검색하는 법"이 아니라 "충분한지 알고, 모르면 기권하는 법"이라는 뜻이다.
+
 사용자가 바뀌면 인터페이스가 바뀐다. 이게 이 글의 한 문장짜리 명제다. **검색의 사용자가 사람에서 에이전트로 넘어가고 있고, 검색 엔진은 그 새 사용자에 맞춰 다시 설계되고 있다.**
 
 ---
@@ -123,4 +125,5 @@ Web IQ 발표문 한 장을 읽고 시작했지만, 더 오래 남는 그림은 
 - [Google AI Overviews & publisher traffic (Digiday)](https://digiday.com/media/google-ai-overviews-linked-to-25-drop-in-publisher-referral-traffic-new-data-shows/) · [차단해도 인용은 계속된다 (ppc.land)](https://ppc.land/blocking-ai-crawlers-doesnt-stop-citations-new-data-shows-why/)
 - [IETF AIPREF Working Group](https://datatracker.ietf.org/doc/charter-ietf-aipref/) — AI 선호 표현 표준
 - 검색 API: [Anthropic web search](https://platform.claude.com/docs/en/docs/agents-and-tools/tool-use/web-search-tool) · [OpenAI 가격](https://developers.openai.com/api/docs/pricing) · [Gemini grounding 가격](https://ai.google.dev/gemini-api/docs/pricing) · [Brave Search API](https://brave.com/blog/most-powerful-search-api-for-ai/) · [Linkup SimpleQA](https://www.linkup.so/blog/linkup-establishes-sota-performance-on-simpleqa)
+- Sufficient context: [Unlocking dependable responses (Google Research, 2026)](https://research.google/blog/unlocking-dependable-responses-with-gemini-enterprise-agent-platforms-agentic-rag/) · [Sufficient Context: A New Lens on RAG (ICLR 2025)](https://arxiv.org/abs/2411.06037)
 - 관련 글: [GEO — AI에게 인용되는 콘텐츠](/blog/05-geo-seo/) · [AI 콘텐츠 생태계](/blog/04-ai-content-ecosystem/) · [AI 토큰을 아끼는 Headroom](/blog/18-headroom/) · [모델 바깥의 전쟁](/blog/14-agent-engineering/)
