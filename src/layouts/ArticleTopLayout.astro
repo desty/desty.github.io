@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { formatDate, readingTime } from "@lib/utils"
+import { formatDate, readingTime, mdLinksToHtml } from "@lib/utils"
 import { getLangFromUrl, localizedPath } from "@lib/i18n"
 import { t } from "@lib/ui-strings"
 
@@ -48,9 +48,7 @@ const backLabel = collection === "blog" ? t("article.backBlog", lang) : collecti
   <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
     {title}
   </h1>
-  <div class="mt-1">
-    {summary}
-  </div>
+  <div class="mt-1" set:html={mdLinksToHtml(summary)} />
   {(demoUrl || repoUrl || guideUrl || studyUrl) &&
   <div class="mt-4 flex flex-wrap gap-2">
     {studyUrl &&

@@ -1,4 +1,4 @@
-import { formatDate, truncateText } from "@lib/utils"
+import { formatDate, truncateText, stripMdLinks } from "@lib/utils"
 import { localizedPath, stripLangFromSlug, type Lang } from "@lib/i18n"
 import type { CollectionEntry } from "astro:content"
 
@@ -30,7 +30,7 @@ export default function ArrowCard({ entry, pill, lang = "ko" }: Props) {
         </div>
 
         <div class="text-sm line-clamp-2">
-          {entry.data.summary}
+          {stripMdLinks(entry.data.summary)}
         </div>
         <ul class="flex flex-wrap mt-2 gap-1">
           {entry.data.tags.map((tag: string) => (

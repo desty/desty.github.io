@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions"
 import { getLangFromUrl, localizedPath } from "@lib/i18n"
+import { stripMdLinks } from "@lib/utils"
 
 interface Props {
   title: string
@@ -19,7 +20,8 @@ const basePath = lang === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" 
 const koUrl = new URL(basePath, Astro.site)
 const enUrl = new URL(`/en${basePath === "/" ? "" : basePath}`, Astro.site)
 
-const { title, description, image = "/open-graph.jpg", author, publishDate, tags } = Astro.props
+const { title, description: rawDescription, image = "/open-graph.jpg", author, publishDate, tags } = Astro.props
+const description = stripMdLinks(rawDescription)
 
 const jsonLd = publishDate ? JSON.stringify({
   "@context": "https://schema.org",

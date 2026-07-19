@@ -1,6 +1,6 @@
 ---
 title: "'A Chinese Open Model Beat Everyone' — Kimi K3, I Rolled the Tape to Check"
-summary: "On July 16 Moonshot shipped the 2.8-trillion-parameter Kimi K3, and the headline that an open model beat Fable 5 and GPT-5.6 Sol swallowed the week. In the last two posts (#21, #31) U.S. labs locked their strongest tier behind government gates; China did the opposite and routed around the wall by open-sourcing the biggest one. But is 'beat everyone' true? Rolling the tape on only the comparable numbers, it's half true, half marketing — 3rd–4th on overall intelligence depending on how you count, but genuinely #1 on three axes. Here's what's real and what's spin, split by data."
+summary: "On July 16 Moonshot shipped the 2.8-trillion-parameter Kimi K3, and the headline that an open model beat Fable 5 and GPT-5.6 Sol swallowed the week. In the last two posts ([#21](/blog/21-claude-fable-5/), [#31](/blog/31-gpt-5-6-sol-terra-luna/)) U.S. labs locked their strongest tier behind government gates; China did the opposite and routed around the wall by open-sourcing the biggest one. But is 'beat everyone' true? Rolling the tape on only the comparable numbers, it's half true, half marketing — 3rd–4th on overall intelligence depending on how you count, but genuinely #1 on three axes. Here's what's real and what's spin, split by data."
 date: "2026-07-18T10:00:00"
 tags:
   - kimi-k3

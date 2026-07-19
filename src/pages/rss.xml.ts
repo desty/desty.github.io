@@ -2,6 +2,7 @@ import rss from "@astrojs/rss"
 import { getCollection } from "astro:content"
 import { SITE } from "@consts"
 import { filterByLang, stripLangFromSlug } from "@lib/i18n"
+import { stripMdLinks } from "@lib/utils"
 
 type Context = {
   site: string
@@ -21,7 +22,7 @@ export async function GET(context: Context) {
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,
-      description: item.data.summary,
+      description: stripMdLinks(item.data.summary),
       pubDate: item.data.date,
       link: `/${item.collection}/${stripLangFromSlug(item.id)}/`,
     })),

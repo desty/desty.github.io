@@ -22,6 +22,23 @@ export function readingTime(html: string, lang: string = "ko") {
 }
 
 
+const MD_LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g
+
+// summary 속 마크다운 링크를 순수 텍스트로 — meta description·카드·RSS용
+export function stripMdLinks(text: string): string {
+  return text.replace(MD_LINK, "$1")
+}
+
+// summary 속 마크다운 링크를 <a>로 — 글 상단 요약 표시용
+export function mdLinksToHtml(text: string): string {
+  const escaped = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+  return escaped.replace(MD_LINK, '<a href="$2" class="underline underline-offset-2 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">$1</a>')
+}
+
 export function truncateText(str: string, maxLength: number): string {
   const ellipsis = '…';
 

@@ -2,6 +2,7 @@ import type { APIRoute } from "astro"
 import { getCollection } from "astro:content"
 import { SITE } from "@consts"
 import { filterByLang, stripLangFromSlug } from "@lib/i18n"
+import { stripMdLinks } from "@lib/utils"
 
 export const GET: APIRoute = async () => {
   const byDate = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
@@ -25,7 +26,7 @@ export const GET: APIRoute = async () => {
           `## ${title}`,
           ``,
           ...entries.map(
-            (e) => `- [${e.data.title}](${site}/${base}/${stripLangFromSlug(e.id)}/): ${e.data.summary}`
+            (e) => `- [${e.data.title}](${site}/${base}/${stripLangFromSlug(e.id)}/): ${stripMdLinks(e.data.summary)}`
           ),
           ``,
         ]
