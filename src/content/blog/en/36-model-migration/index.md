@@ -1,5 +1,5 @@
 ---
-title: "The New Model Wins While Thinking Less — Real-World Accounting for Migrating a Production Agent"
+title: "Switching to GPT-5.6: 2.2x Faster, 27% Cheaper — but Only After Fixing the Harness"
 summary: "For four months, Claude Opus 4.8 was unbeaten on Ploy's production evals. Then GPT-5.6 took the crown: 27% lower cost per completion, 2.2x faster, higher quality — while emitting half the output tokens. On this workload, the new model produced more with less. Roughly a third of the first run's raw failures came not from the model but from a harness bent around Opus; tool schemas, caching, and reasoning replay had to migrate with it for a fair comparison. [#35](/blog/35-harness-engineering/) asked 'is that the model's score, or the harness's?' — this is that question in live production."
 date: "2026-07-19T18:00:00"
 tags:
