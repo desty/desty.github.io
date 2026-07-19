@@ -1,6 +1,6 @@
 ---
 title: "'중국 오픈모델이 미국 최강 다 씹어먹었다' — Kimi K3, 진짜인지 테이프를 돌려봤다"
-summary: "7월 16일 Moonshot이 2.8조 파라미터 Kimi K3를 냈고, '오픈모델이 Fable 5·GPT-5.6 Sol을 다 이겼다'는 헤드라인이 이번 주를 덮었다. 지난 두 글(#21·#31)에서 미국 랩들이 제일 센 등급을 정부 뒤로 잠그는 걸 정리했는데, 중국은 정반대로 제일 큰 걸 통째로 풀어 그 벽을 우회했다. 그런데 '다 씹어먹었다'가 진짜일까? 비교 가능한 수치만 골라 테이프를 돌려보니 반은 사실, 반은 마케팅이었다 — 종합 지능에선 4위지만, 세 개 축에서는 진짜로 1등을 먹었다. 어디가 진짜고 어디가 뻥인지 데이터로 갈랐다."
+summary: "7월 16일 Moonshot이 2.8조 파라미터 Kimi K3를 냈고, '오픈모델이 Fable 5·GPT-5.6 Sol을 다 이겼다'는 헤드라인이 이번 주를 덮었다. 지난 두 글(#21·#31)에서 미국 랩들이 제일 센 등급을 정부 뒤로 잠그는 걸 정리했는데, 중국은 정반대로 제일 큰 걸 통째로 풀어 그 벽을 우회했다. 그런데 '다 씹어먹었다'가 진짜일까? 비교 가능한 수치만 골라 테이프를 돌려보니 반은 사실, 반은 마케팅이었다 — 종합 지능에선 집계에 따라 3~4위지만, 세 개 축에서는 진짜로 1등을 먹었다. 어디가 진짜고 어디가 뻥인지 데이터로 갈랐다."
 date: "2026-07-18T10:00:00"
 tags:
   - kimi-k3
@@ -23,19 +23,19 @@ draft: false
 
 ## 먼저, 무슨 일이 일어났나
 
-- **규모:** 총 2.8조 파라미터. MoE 구조(LatentMoE)로 전문가 896개 중 토큰당 16개만 활성화. 활성 파라미터 수는 비공개.
+- **규모:** 총 2.8조 파라미터. MoE 구조(Stable LatentMoE)로 전문가 896개 중 토큰당 16개만 활성화. 활성 파라미터 수는 비공개(돌아다니는 "A50B"는 비율로 역산한 커뮤니티 추정치다).
 - **어텐션:** Kimi Delta Attention(KDA), 하이브리드 선형 어텐션. 전체 KV 캐시 대신 순환 상태로 남길 것과 덮어쓸 것을 제어해 100만 토큰 컨텍스트를 감당한다.
 - **모드:** 네이티브 비전, 기본 100만 토큰 컨텍스트, 최대 추론이 **항상 켜져 있고 끌 수 없다**(기본 출력 13만, 최대 104만 토큰).
-- **가격:** API 입력 $3 / 출력 $15(100만 토큰당). 이전 세대 K2.6($0.95/$4)의 서너 배로 **중국 랩 역대 최고가**지만, Opus 4.8($5/$25)보다는 싸다.
-- **가중치:** 7월 27일 Hugging Face 전체 공개 예정(라이선스는 그날 확인 필요).
+- **가격:** API 입력 $3 / 출력 $15(100만 토큰당, 캐시 히트 입력은 $0.30). Claude Sonnet 5 정가와 똑같다(다만 Sonnet 5는 8월 말까지 $2/$10 프로모션 중). 이전 세대 K2.6($0.95/$4)의 서너 배로 **중국 랩 역대 최고가**지만, Opus 4.8($5/$25)보다는 싸다.
+- **가중치:** 7월 27일까지 전체 공개를 약속("by July 27" — 그날까지라는 뜻이다). 배포처는 Hugging Face가 유력하지만 공식 명시는 없고, 라이선스도 미공개다(전작 K2는 Modified MIT).
 
 여기까지가 스펙이다. 이제 "다 씹어먹었다"를 세 조각으로 검증한다.
 
 ---
 
-## 검증 1: 종합 지능에선 씹어먹지 못했다 — 4위다
+## 검증 1: 종합 지능에선 씹어먹지 못했다 — 3~4위다
 
-먼저 함정 하나. 각 랩이 발표한 SWE-bench·Terminal-Bench·GPQA 숫자는 **서로 비교하면 안 된다.** 랩마다 다른 에이전트 하네스에서 잰 자체 발표치라, Moonshot의 88점과 Anthropic의 88점은 같은 시험이 아니다. 헤드라인들이 이걸 뭉개고 "K3가 이겼다"를 만든다.
+먼저 함정 하나. 각 랩이 발표한 SWE-bench·Terminal-Bench·GPQA 숫자는 **서로 비교하면 안 된다.** 랩마다 다른 에이전트 하네스에서 잰 자체 발표치라, Moonshot의 88점과 Anthropic의 88점은 같은 시험이 아니다. 실제로 Moonshot의 비교표는 리더보드 수치·자체 측정·내부 수치가 섞여 있고, ProgramBench 관리자는 부분점수를 평균 내는 방식에 공개적으로 이의를 제기했다. 헤드라인들이 이걸 뭉개고 "K3가 이겼다"를 만든다.
 
 같은 방법론으로 한 곳(Artificial Analysis)이 모든 모델을 돌린 **유일한 사과-대-사과 지표**가 종합 지능 지수(Intelligence Index)다. 여기서는 이렇게 나온다.
 
@@ -44,10 +44,10 @@ draft: false
 | Claude Fable 5 | 60 (1위) |
 | GPT-5.6 Sol | 59 |
 | Gemini 3.1 Pro | ~57 |
-| **Kimi K3** | **57 (4위)** |
+| **Kimi K3** | **57 (3~4위)** |
 | Claude Opus 4.8 | 56 |
 
-**K3는 4위다.** Fable 5·Sol이 위에 있고, Gemini 3.1 Pro와 사실상 동률, Opus 4.8을 근소하게 앞선다. "전부 이겼다"는 헤드라인은 여기서 무너진다. 종합 능력으로만 보면 K3는 프런티어에 근접했을 뿐 정상은 아니다.
+**K3는 집계에 따라 3위 또는 4위다.** AA가 발표 글 제목에 쓴 건 "3위"(모델 패밀리당 최고 구성 하나만 세는 기준, 반올림 전 57.1로 Gemini를 반 끗 앞선다)고, 구성 단위로 줄 세우는 모델 페이지에서는 4위다. 어느 쪽이든 **Fable 5와 Sol이 위에 있다는 사실은 같다.** "전부 이겼다"는 헤드라인은 여기서 무너진다. 종합 능력으로만 보면 K3는 프런티어에 근접했을 뿐 정상은 아니다.
 
 에이전트 작업(GDPval v2 Elo)에선 격차가 더 벌어진다 — Fable 5가 1,760인데 K3는 1,668이다(Opus 4.8은 1,600). 긴 자율 에이전트 작업이라면 아직 Fable 5가 확실히 위다.
 
@@ -59,11 +59,11 @@ draft: false
 
 **(1) 다운로드할 수 있는 모델 중엔 압도적 1위.**
 
-종합 4위라는 건 뒤집으면 **가중치를 통째로 가질 수 있는 모델 중에는 최강**이라는 뜻이다. 위의 세 자리(Fable 5·Sol·Gemini)는 전부 폐쇄 API고, 그중 최상위(Mythos 5·Sol)는 [정부 게이트 뒤에 잠겼다](/blog/31-gpt-5-6-sol-terra-luna/). Sol을 못 쓰는 나라·기업·연구실 입장에서 K3는 "차선"이 아니라 **손에 쥘 수 있는 것 중 사실상 천장**이다. 오픈웨이트의 바닥이 프런티어 바로 밑까지 올라온 것 — 이게 DeepSeek 때와 같은 시장 반응을 부른 진짜 이유다.
+종합 3~4위라는 건 뒤집으면 **가중치를 통째로 가질 수 있는 모델 중에는 최강**이라는 뜻이다. 위의 세 자리(Fable 5·Sol·Gemini)는 전부 폐쇄 API고, 그중 최상위(Mythos 5·Sol)는 [정부 게이트 뒤에 잠겼다](/blog/31-gpt-5-6-sol-terra-luna/). Sol을 못 쓰는 나라·기업·연구실 입장에서 K3는 "차선"이 아니라 **손에 쥘 수 있는 것 중 사실상 천장**이다. 오픈웨이트의 바닥이 프런티어 바로 밑까지 올라온 것 — 이게 DeepSeek 때와 같은 시장 반응을 부른 진짜 이유다.
 
 **(2) 프론트엔드 코딩 블라인드 선호 1위 — 폐쇄 최강까지 이겼다.**
 
-Arena의 프론트엔드 코드 아레나에서 K3가 **1위**다. 이건 정답률을 재는 벤치마크가 아니라, 개발자에게 두 결과물을 뭘로 만든 건지 모르게 나란히 보여 주고 나은 쪽을 고르게 한 블라인드 비교다. 거기서 사람들이 **Fable 5와 GPT-5.6 Sol보다 K3의 프론트엔드 결과물을 더 자주 골랐다.** 종합 4위가 특정 직무의 사람 선호에서는 폐쇄 최강을 제쳤다는 뜻이다. "이 모델이 더 똑똑하다"가 아니라 "이 일엔 이걸 쓰겠다"의 승리다.
+Arena.ai의 프론트엔드 코드 아레나(WebDev)에서 K3가 **1위**다 — 7월 19일 기준으로도 Elo 1,679로 Fable 5(1,631)·Sol(1,618) 위에 있다. 이건 정답률을 재는 벤치마크가 아니라, 개발자에게 두 결과물을 뭘로 만든 건지 모르게 나란히 보여 주고 나은 쪽을 고르게 한 블라인드 비교다. 거기서 사람들이 **Fable 5와 GPT-5.6 Sol보다 K3의 프론트엔드 결과물을 더 자주 골랐다**(1:1 승률 76%). 단서는 둘 — 이 보드의 Elo 오차범위가 ±17이라 1위가 못 박힌 건 아니고, 프론트엔드 밖 종합 텍스트 아레나에서는 9위다. 그러니까 이건 "이 모델이 더 똑똑하다"가 아니라 "이 일엔 이걸 쓰겠다"의, 딱 그 직무에 한정된 승리다. 그래도 종합 3~4위가 특정 직무의 사람 선호에서 폐쇄 최강을 제쳤다는 사실은 남는다.
 
 **(3) 작업당 비용은 제일 싸다.**
 
@@ -75,7 +75,7 @@ Arena의 프론트엔드 코드 아레나에서 K3가 **1위**다. 이건 정답
 | GPT-5.6 Sol | $1.04 |
 | Claude Opus 4.8 | $1.80 |
 
-같은 일을 시켰을 때 K3가 Sol보다 싸고 Opus 4.8의 거의 절반이다. **가성비 축에서는 진짜로 씹어먹었다.**
+같은 일을 시켰을 때 K3가 Opus 4.8의 거의 절반이다. 다만 Sol과의 차이는 AA 스스로 "비슷하다"고 부를 만큼 박빙이라, **가성비 1위는 맞지만 압도한 건 Opus 쪽이지 Sol이 아니다.** 실전에서 더 큰 지렛대는 따로 있다 — 캐시 히트 입력이 $0.30까지 떨어지는 90% 캐싱 할인.
 
 정리하면, "다 씹어먹었다"는 틀렸지만 "오픈웨이트·프론트엔드·가성비를 씹어먹었다"는 맞다. 헤드라인은 이 셋을 "전부"로 부풀린 것이다.
 
@@ -86,9 +86,18 @@ Arena의 프론트엔드 코드 아레나에서 K3가 **1위**다. 이건 정답
 균형을 위해 반대쪽도 봐야 한다. K3에는 헤드라인이 감춘 약점이 있다.
 
 - **환각이 늘었다.** AA-Omniscience에서 정확도는 33%→46%로 올랐는데, **환각률도 39%→51%로 같이 올랐다.** 더 많이 맞히는 대신 더 자주 지어낸다. 사실성이 중요한 작업(리서치·팩트 정리)에서는 위험 신호다.
-- **느리다.** 출력 속도가 초당 62토큰으로, 비슷한 가격대 추론 모델 중앙값(71)보다 아래다. 최대 추론이 상시 켜져 있어 응답도 길다. 지연이 중요한 실시간 용도엔 안 맞는다.
+- **느리다.** AA 벤치 기준 출력 초당 62토큰으로 비슷한 급 추론 모델 중앙값(약 73)보다 아래인데, 첫 주에 실사용자들이 잰 실제 API 속도는 26~28토큰까지 떨어졌다. 최대 추론이 상시 켜져 있어 응답도 길다. 지연이 중요한 실시간 용도엔 안 맞는다.
 - **과학·사실·비전은 Gemini가 위.** 같은 4위권이라도 K3는 코딩·에이전트로 점수를 벌고, Gemini 3.1 Pro는 과학 지식·사실 신뢰도·시각 추론에서 앞선다.
-- **'오픈'의 조건.** 가중치는 아직(7/18) 못 받고 7월 27일 예정이며, 받아도 KDA 전용 커널·추론 히스토리 보존·툴 파싱 규약 같은 "하네스 계약"을 재현해야 앱과 같게 돈다. 오픈이 곧 저렴·자유는 아니다.
+- **증류 의혹.** 이번 주 후반 커뮤니티의 최대 논쟁은 벤치마크가 아니라 이거였다. K3가 대화에서 자신을 Claude라고 소개한 사례들이 보고됐고, Anthropic이 앞서 Moonshot 등 중국 랩들의 대규모 Claude 응답 무단 수집 의혹을 제기했던 일이 다시 소환됐다. 증명된 건 없다 — 웹 데이터 오염이나 롤플레이 누출로도 설명이 된다. 다만 사실로 드러나면 "오픈웨이트의 성취"라는 서사 자체가 흔들리는 문제라 지켜볼 필요가 있다.
+- **'오픈'의 조건.** 가중치는 아직(7/19) 못 받고 "7월 27일까지 공개" 약속만 있다. 받아도 현실이 만만치 않다 — 1.58bit로 눌러 담아도 512GB RAM을 넘겨서, 실질 최소 사양이 워크스테이션급 GPU 4장이나 1TB RAM 서버(그것도 초당 한 자릿수 토큰)다. KDA·Stable LatentMoE 같은 새 구조는 llama.cpp·Ollama에 아직 안 들어갔고, 추론 히스토리 보존·툴 파싱 규약 같은 "하네스 계약"도 재현해야 앱과 같게 돈다. 오픈이 곧 저렴·자유는 아니다.
+
+---
+
+## 덤: 제일 흥미로운 건 순위가 아니라 커널 이야기다
+
+Moonshot이 발표에서 가장 공들여 소개한 건 순위표가 아니라 사례 하나다. K3에게 자사 학습 인프라의 실제 커널(FLA Triton, 96 layers·8192-dim 프로덕션 규모)을 주고 "**계산 결과는 그대로 두고 더 빠르게 만들라**"는 과제를 줬다. K3는 15시간 동안 사람 개입 없이 돌면서 two-phase 알고리즘과 kernel fusion을 새로 설계했고, forward+backward를 283.6ms에서 114.4ms로 — 약 2.5배 — 줄였다. 같은 과제를 받은 Fable 5도 비슷한 최종 성능에 도달했지만, 반복당 개선 속도는 K3가 더 빨랐다고 한다.
+
+이게 중요한 건 이 커널이 데모용 문제가 아니라 Moonshot의 실제 학습 코드라서다. 모델이 자기 학습 인프라를 빠르게 만들면 다음 모델이 더 싸고 빠르게 학습되고, 그 모델이 다시 인프라를 개선한다 — [#22에서 다룬 재귀적 자기개선](/blog/22-recursive-self-improvement/) 루프의 초입을 상용 랩이 발표 전면에 내세운 셈이다. 물론 전부 Moonshot 자체 발표고 독립 검증은 없다. 그래도 "얼마나 똑똑한가" 대신 "자기를 얼마나 빨리 개선하는가"를 간판으로 건 프런티어급 발표는 이번이 처음이라, 순위표보다 이쪽이 오래 남을 이야기일 수 있다.
 
 ---
 
@@ -107,13 +116,15 @@ Arena의 프론트엔드 코드 아레나에서 K3가 **1위**다. 이건 정답
 
 "중국 오픈모델이 다 씹어먹었다"를 테이프로 돌려본 결과는 이렇다.
 
-- **틀린 부분:** 종합 지능은 4위다. Fable 5·Sol이 위고, 에이전트·사실성·속도에선 밀린다. "전부 이겼다"는 뻥이다.
+- **틀린 부분:** 종합 지능은 3~4위다. Fable 5·Sol이 위고, 에이전트·사실성·속도에선 밀린다. "전부 이겼다"는 뻥이다. Moonshot 스스로도 K3를 "프런티어는 아니다"라고 말한다.
 - **맞는 부분:** 다운로드 가능한 모델 중 1위, 프론트엔드 블라인드 선호 1위, 작업당 비용 1위. 하필 실무에서 제일 자주 걸리는 세 축을 가져갔다.
+
+시장도 이걸 그대로 재연했다. 발표 다음 날(7/17) 대만 증시가 6% 빠지고 엔비디아가 출렁였다가 하루 안에 대부분 회복됐다 — DeepSeek 때의 재방송이되, 이번엔 K3가 오히려 비싸진 모델이라 "프런티어급엔 여전히 비싼 컴퓨팅이 든다"는 쪽으로 읽히며 낙폭이 금방 메워졌다. 워싱턴에선 백악관이 오픈소스 AI 행정명령을 검토한다는 보도가 나왔고, 반대편에선 "뒤처진 쪽이 프런티어 아닌 모델을 여는 건 합리적 전략일 뿐"이라는 반론도 나왔다. 공포든 반론이든, 반응한 지점은 순위가 아니라 이 글이 짚은 그 사실 — 손에 쥘 수 있는 모델의 천장이 올라왔다는 것이다.
 
 #21·#31에서 프런티어는 세로로 갈라졌다 — 살 수 있는 아래 칸과, 정부 뒤에 잠긴 윗 칸. K3는 거기에 가로 축을 그었다. 폐쇄 API 쪽과, 가중치를 쥘 수 있는 오픈 쪽. 그리고 **오픈 쪽 바닥이 프런티어 바로 밑까지 올라온 게 이번 주의 진짜 사건**이다. 헤드라인이 부풀린 "전부"를 걷어내도, 그 사실 하나만으로 충분히 큰 뉴스다.
 
-#31을 닫으며 "제일 센 모델은 누가 쓸 수 있고, 우리에게 풀린 등급으로 무엇을 조립할 것인가"가 질문이 됐다고 썼다. K3는 답을 한 칸 넓힌다 — 이제 그 조립 목록에 **"내려받아 내 서버에 올릴 수 있는, 프런티어 바로 밑 모델"**이 처음으로 들어왔다. 순위표 1등을 올려다보는 것만큼이나, "이 직무에서 실제로 이긴 게 누구냐"를 데이터로 가르는 게 실무의 일이 됐다.
+#31을 닫으며 "제일 센 모델은 누가 쓸 수 있고, 우리에게 풀린 등급으로 무엇을 조립할 것인가"가 질문이 됐다고 썼다. K3는 답을 한 칸 넓힌다 — 이제 그 조립 목록에 "**내려받아 내 서버에 올릴 수 있는, 프런티어 바로 밑 모델**"이 처음으로 들어왔다. 순위표 1등을 올려다보는 것만큼이나, "이 직무에서 실제로 이긴 게 누구냐"를 데이터로 가르는 게 실무의 일이 됐다.
 
 ---
 
-*참고: [Kimi K3 (Moonshot AI)](https://kimik3.xyz/), [Kimi K3 – Intelligence, Performance & Price (Artificial Analysis)](https://artificialanalysis.ai/models/kimi-k3), [Kimi's open model K3 nears GPT-5.6 Sol and Fable 5 (The Decoder)](https://the-decoder.com/kimis-open-model-k3-nears-gpt-5-6-sol-and-fable-5-while-signaling-the-end-of-super-cheap-chinese-ai/), [Kimi K3, and what we can still learn from the pelican benchmark (Simon Willison)](https://simonwillison.net/2026/Jul/16/kimi-k3/), [China's Moonshot AI releases Kimi K3, the largest open-source model ever (VentureBeat)](https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems), [Moonshot releases 2.8-trillion-parameter Kimi K3 (Tom's Hardware)](https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3), [Kimi K3: The 2.8T Model Promising Open Weights—and a Hidden Harness Contract (rohitai)](https://rohitai.com/blog/kimi-k3-open-model-harness-contract). 벤치마크·가격은 2026-07-18 기준 공개치이며, 7월 27일 가중치·라이선스 공개에서 세부가 바뀔 수 있다.*
+*참고: [Kimi K3 공식 블로그 (Moonshot AI)](https://www.kimi.com/blog/kimi-k3), [Kimi K3 – Intelligence, Performance & Price (Artificial Analysis)](https://artificialanalysis.ai/models/kimi-k3), [Kimi K3 achieves #3 in the AA Intelligence Index (Artificial Analysis)](https://artificialanalysis.ai/articles/kimi-k3-achieves-3-in-the-artificial-analysis-intelligence-index-comparable-to-opus-4-8-and-gpt-5-5), [Arena.ai WebDev 리더보드](https://arena.ai/leaderboard), [Kimi's open model K3 nears GPT-5.6 Sol and Fable 5 (The Decoder)](https://the-decoder.com/kimis-open-model-k3-nears-gpt-5-6-sol-and-fable-5-while-signaling-the-end-of-super-cheap-chinese-ai/), [Kimi K3, and what we can still learn from the pelican benchmark (Simon Willison)](https://simonwillison.net/2026/Jul/16/kimi-k3/), [China's Moonshot AI releases Kimi K3, the largest open-source model ever (VentureBeat)](https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems), [Moonshot releases 2.8-trillion-parameter Kimi K3 (Tom's Hardware)](https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3), [Kimi K3: The 2.8T Model Promising Open Weights—and a Hidden Harness Contract (rohitai)](https://rohitai.com/blog/kimi-k3-open-model-harness-contract), [AINews: Kimi K3 (latent.space)](https://www.latent.space/p/ainews-kimi-k3-28t-a50b-the-largest), [Markets experience new DeepSeek shock (Fortune)](https://fortune.com/2026/07/17/china-moonshot-kimi-k3-markets-china-ai/), [Kimi K3 is no reason for China panic (Transformer)](https://www.transformernews.ai/p/kimi-k3-is-no-reason-for-china-panic-export-controls-xi-jingping). 벤치마크·가격은 2026-07-19 기준 공개치이며(첫 발행 후 외부 반응·팩트체크를 반영해 업데이트), 7월 27일 가중치·라이선스 공개에서 세부가 바뀔 수 있다.*
