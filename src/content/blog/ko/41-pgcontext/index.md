@@ -11,13 +11,13 @@ tags:
 draft: false
 ---
 
-트렌딩 오픈소스를 까보는 시리즈다. [headroom(#18)](/blog/18-headroom/) 때처럼 이번에도 출발점은 "이 코드가 잘났나"가 아니라 **"사람들이 왜 이걸 원했나"다.** 이번 주 GitHub에서 눈에 띈 [pgContext](https://github.com/Evokoa/pgContext)는 "A full AI search engine, built into Postgres"를 표방하는 PostgreSQL 17/18 확장이다. 별표 수는 아직 세 자리 초반이지만, 이 물건이 서 있는 자리가 재미있다. 벡터 검색 시장에서 지금 제일 뜨거운 질문 위에 정확히 서 있기 때문이다.
+트렌딩 오픈소스를 까보는 시리즈다. [headroom(#18)](/blog/18-headroom/) 때처럼 이번에도 출발점은 "이 코드가 잘났나"가 아니라 **"사람들이 왜 이걸 원했나"다.** 이번 주 GitHub에서 눈에 띈 [pgContext](https://github.com/Evokoa/pgContext)는 "A full AI search engine, built into Postgres"를 표방하는 PostgreSQL 17/18 확장이다. 별표 수는 아직 세 자리 초반이지만, 벡터 검색에서 지금 제일 뜨거운 질문을 정면으로 건드리는 물건이라 들여다볼 가치가 있다.
 
 ---
 
 ## 왜 자꾸 "전부 Postgres로"가 나오나
 
-RAG나 시맨틱 검색을 처음 붙이는 팀의 장바구니를 떠올려보자. 앱 DB는 이미 Postgres다. 여기에 임베딩을 저장할 곳이 필요해지면 선택지가 갈린다. Pinecone 같은 관리형 서비스를 계약하거나, Qdrant나 Weaviate를 직접 띄우거나, 아니면 그냥 pgvector 확장을 켜거나.
+RAG나 시맨틱 검색을 처음 붙이는 팀을 떠올려보자. 앱 DB는 이미 Postgres다. 임베딩을 저장할 곳이 필요해지면 선택지가 갈린다. Pinecone 같은 관리형 서비스를 계약하거나, Qdrant나 Weaviate를 직접 띄우거나, 아니면 그냥 pgvector 확장을 켜거나.
 
 전용 벡터 DB를 고르는 순간 청구서에 없는 비용이 따라온다. 원본 데이터를 벡터 DB로 **복사해서 동기화하는 파이프라인이** 하나 생긴다. 원본이 바뀌면 임베딩도 다시 밀어넣어야 하고, 지연되면 검색 결과와 실제 데이터가 어긋난다. 백업과 장애 복구를 두 시스템에서 따로 챙겨야 하고, "이 사용자는 이 문서를 볼 수 없다" 같은 권한 규칙은 Postgres의 RLS로 한 번, 벡터 DB의 페이로드 필터로 또 한 번, 이중으로 구현해야 한다. 운영할 줄 아는 사람도 귀찮은데, 사이드 프로젝트로 RAG를 처음 만들어보는 사람에게는 이 두 번째 시스템이 진입장벽 그 자체다. 배워야 할 쿼리 언어가 하나 늘고, 띄워야 할 컨테이너가 하나 늘고, 뭔가 안 맞을 때 의심할 곳이 두 배가 된다.
 
@@ -40,7 +40,7 @@ LIMIT 10;
 
 멀티테넌트 SaaS라면 모든 검색 쿼리가 이렇게 생겼을 거다. pgvector의 HNSW 인덱스는 **필터를 모른 채** 벡터 공간에서 가까운 이웃부터 뽑고, WHERE 절은 그 결과를 사후에 거른다(post-filtering). acme 테넌트의 문서가 전체의 1%라면, 인덱스가 뽑아온 후보 40개(기본 `ef_search`) 중 필터를 통과하는 건 평균 0.4개다. 쿼리는 에러 없이 돌고, 결과도 나온다. 다만 **정답이 아닐 뿐이다.** 더 가까운 acme 문서가 분명히 있는데 후보에 못 들어서 누락된다. recall이 조용히 무너지는 거고, RAG라면 "관련 문서를 못 찾아서 이상한 답을 하는" 형태로 사용자에게 도달한다.
 
-이건 변방의 엣지케이스가 아니다. pgvector의 약점을 짚는 글마다 첫손에 꼽는 항목이고(Franck Pachot의 [pre-filtering 부재 분석](https://dev.to/franckpachot/no-pre-filtering-in-pgvector-means-reduced-ann-recall-1aa1), [ParadeDB의 한계 정리](https://www.paradedb.com/learn/postgresql/pgvector-limitations)), pgvector 0.8이 iterative index scan을 넣은 것도 이 때문이다. 후보가 모자라면 그래프를 더 걷는 식의 완화책인데, 그만큼 CPU와 꼬리 지연시간을 낸다. 전용 벡터 DB들이 "우린 필터 인식 검색이 된다"를 세일즈 포인트로 삼는 것도 같은 이유다. 요컨대 **"Postgres 하나로"가 마지막으로 막히는 지점이 필터고, 벡터 DB를 따로 두는 비용을 정당화해온 것도 필터다.**
+이건 드문 엣지케이스가 아니다. pgvector의 약점을 짚는 글마다 첫손에 꼽는 항목이고(Franck Pachot의 [pre-filtering 부재 분석](https://dev.to/franckpachot/no-pre-filtering-in-pgvector-means-reduced-ann-recall-1aa1), [ParadeDB의 한계 정리](https://www.paradedb.com/learn/postgresql/pgvector-limitations)), pgvector 0.8이 iterative index scan을 넣은 것도 이 때문이다. 후보가 모자라면 그래프를 더 걷는 식의 완화책인데, 그만큼 CPU와 꼬리 지연시간을 낸다. 전용 벡터 DB들이 "우린 필터 인식 검색이 된다"를 세일즈 포인트로 삼는 것도 같은 이유다. 요컨대 **"Postgres 하나로"가 마지막으로 막히는 지점이 필터고, 벡터 DB를 따로 두는 비용을 정당화해온 것도 필터다.**
 
 ---
 
@@ -56,7 +56,7 @@ LIMIT 10;
 
 자체 벤치마크 수치는 이렇다. 표준 GloVe-100-angular(118만 벡터)에서 pgvector와 같은 recall 곡선을 그리면서 **3.8~5.3배 빠르고**, 문제의 필터 검색에서는 선택도 1~50% 전 구간에서 pgvector가 recall 0.34~0.49에 갇히는 동안(위에서 말한 필터 기아 현상 그대로다) pgContext의 컬렉션 API는 1.000을 유지했다.
 
-숫자보다 인상적인 건 벤치마크 문서의 태도다. "pgContext가 지는 레인"을 문서에 명시해놨다. 인덱스 빌드는 pgvector보다 레인에 따라 1.7~3.5배 느리고, 필터 검색의 recall은 이기지만 **지연시간은 Qdrant가 압도한다**(full recall 기준 1~2ms 대 22~71ms). 초기 프로젝트의 자체 벤치마크는 원래 반쯤 접어 읽는 게 맞는데, 자기가 지는 표까지 실어놓은 문서는 접는 각도를 좀 줄여도 된다. 포지셔닝도 그래서 정직하게 읽힌다 — "Qdrant를 이겼다"가 아니라 **"Postgres 안에서, pgvector가 못 막던 구멍을 막았다"다.**
+숫자보다 인상적인 건 벤치마크 문서의 태도다. "pgContext가 지는 레인"을 문서에 명시해놨다. 인덱스 빌드는 pgvector보다 레인에 따라 1.7~3.5배 느리고, 필터 검색의 recall은 이기지만 **지연시간은 Qdrant가 압도한다**(full recall 기준 1~2ms 대 22~71ms). 초기 프로젝트의 자체 벤치마크는 원래 반쯤 걸러 읽는 게 맞지만, 자기가 지는 표까지 실어놓은 문서라면 조금은 더 믿어줄 만하다. 포지셔닝도 그래서 정직하게 읽힌다 — "Qdrant를 이겼다"가 아니라 **"Postgres 안에서, pgvector가 못 막던 구멍을 막았다"다.**
 
 ---
 
@@ -76,6 +76,6 @@ pgContext를 쓰든 말든, post-filtering 함정 자체는 지금 pgvector를 �
 
 ## 관전 포인트
 
-repo에서 하나 더 눈에 걸린 건 사람용 README 옆에 놓인 **AGENTS.md다.** AI 코딩 에이전트가 비대화형으로 설치·검증·연동까지 마칠 수 있게 쓴 문서인데, 이 프로젝트가 상정하는 소비자가 누군지 보여준다. "초심자가 RAG를 붙인다"의 2026년판은 사람이 문서를 읽는 게 아니라 에이전트가 스택을 조립하는 것이고, 그 에이전트는 컨테이너 두 개짜리 스택보다 `CREATE EXTENSION` 한 줄을 고를 거다. DB를 하나로 줄이려는 수요는 사람보다 에이전트 쪽에서 더 강하게 올 수 있다.
+repo에서 하나 더 눈에 띈 건 사람용 README 옆에 놓인 **AGENTS.md다.** AI 코딩 에이전트가 비대화형으로 설치·검증·연동까지 마칠 수 있게 쓴 문서인데, 이 프로젝트가 상정하는 소비자가 누군지 보여준다. "초심자가 RAG를 붙인다"의 2026년판은 사람이 문서를 읽는 게 아니라 에이전트가 스택을 조립하는 것이고, 그 에이전트는 컨테이너 두 개짜리 스택보다 `CREATE EXTENSION` 한 줄을 고를 거다. DB를 하나로 줄이려는 수요는 사람보다 에이전트 쪽에서 더 강하게 올 수 있다.
 
-물건 자체는 초기다. 별표 세 자리, 커밋 80개, 검증되지 않은 자체 벤치마크. 하지만 이 글의 관심사는 pgContext의 성공 여부보다 이런 물건이 계속 나온다는 사실 쪽이다. pgvector 0.8의 iterative scan, pgvectorscale, ParadeDB, 그리고 pgContext까지 — 전부 "Postgres 하나로 가되, 필터 걸린 검색의 recall을 누가 책임지나"라는 같은 질문에 다른 답을 내는 중이다. 벡터 DB를 따로 둬야 할 마지막 이유가 지워지는 중이고, 그 마지막 이유의 이름이 필터다.
+물건 자체는 초기다. 별표 세 자리, 커밋 80개, 검증되지 않은 자체 벤치마크. 하지만 이 글의 관심사는 pgContext의 성공 여부보다 이런 물건이 계속 나온다는 사실 쪽이다. pgvector 0.8의 iterative scan, pgvectorscale, ParadeDB, 그리고 pgContext까지 — 전부 "Postgres 하나로 가되, 필터 걸린 검색의 recall을 누가 책임지나"라는 같은 질문에 다른 답을 내는 중이다. 벡터 DB를 따로 둬야 할 마지막 이유가 지워지는 중이고, 그 마지막 이유가 필터다.
