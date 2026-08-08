@@ -1,7 +1,7 @@
 ---
 title: "Four Flavors of RAG on One Scale — The Bottleneck Wasn't Retrieval"
 summary: "In late June, engineers from AWS and Cisco published a paper with a provocative title: Is GraphRAG Needed? It puts nine scenarios — from regular RAG through GraphRAG to Agentic RAG — on the same knowledge base and the same model, implemented side by side. The scorecard holds three upsets: graph-only retrieval collapsed, a plain RAG that flattens relations into documents beat hybrid GraphRAG, and handing an agent an extra graph tool made it 12% worse. The more painful number comes after: even when retrieval brings in 83.5% of the ground-truth evidence, the model only uses 47.9% of it. This post covers the fix that cut tokens nearly in half by changing only how retrieval results are written down, and the order of operations to run through before you reach for a graph."
-date: "2026-08-10T10:00:00"
+date: "2026-07-29T10:00:00"
 tags:
   - rag
   - graphrag

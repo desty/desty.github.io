@@ -1,7 +1,7 @@
 ---
 title: "How a Chunking Library Made It to YC — What Sold Wasn't Smarts, It Was Lightness"
 summary: "In RAG tutorials, chunking is the one-line preprocessing chore. A library that does only that step now pulls 1.19 million monthly downloads, and its two creators went through Y Combinator. The interesting part comes after: the '33x faster' claim was against the slowest competitor (1.06x against the leader), '100GB/s' is what you get when you stop counting tokens entirely, and the founder himself admitted on HN that 'perfect splits don't move the needle much' for retrieval quality. Downloads kept climbing anyway. Against a research landscape that keeps confirming semantic chunking can't beat plain recursive splitting, this post dissects what people were actually buying, why long context didn't kill chunking, which of the 11 chunkers to pick, and how the company pivoted away while the library stayed."
-date: "2026-08-13T10:00:00"
+date: "2026-07-29T14:00:00"
 tags:
   - rag
   - retrieval

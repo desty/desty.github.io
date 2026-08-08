@@ -1,7 +1,7 @@
 ---
 title: "The Most Trustworthy AI Wasn't One Model — Why Cross-Agent Review Went Mainstream"
 summary: "Watching Codex write a parser while Claude reviews the same change in the next pane is no longer a party trick. Anthropic Code Review, VS Code multi-agent workflows, builder–validator chains, and cross-provider hubs like CCB (Claude Codex Bridge) all point the same way: trust comes less from one model's intelligence than from agents with different failure modes inspecting each other. Once the copy-paste tax disappears, the real design work is circuit breakers, role separation, and knowing when two agents are enough."
-date: "2026-08-18T10:00:00"
+date: "2026-08-02T14:00:00"
 tags:
   - multi-agent
   - code-review

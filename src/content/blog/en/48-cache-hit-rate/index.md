@@ -1,7 +1,7 @@
 ---
 title: "Cache Hit Rate Is Your Prompt Design Report Card — What's Behind That 98%"
 summary: "In July, Musinsa's tech blog posted numbers you rarely see from a Korean company: 64% LLM cost reduction, 98% cache hit rate. It's effectively the first Korean tech blog post to publish measured prompt-caching results. But what lingers isn't the savings — it's the nature of the number itself. Cache hit rate isn't a discount line on your invoice; it's a graded score on one design question: did you put what never changes in front and what always changes at the end? This post lines up the other answer sheets to the same exam — a security agent that jumped from 7% to 84%, Anthropic declaring incidents when hit rate drops, Manus calling KV-cache hit rate 'the single most important metric for a production agent' — and walks from how one token breaks the hash chain, through a four-provider caching policy comparison, to the order in which to raise your own score."
-date: "2026-08-16T10:00:00"
+date: "2026-08-02T10:00:00"
 tags:
   - prompt-caching
   - llm-cost
