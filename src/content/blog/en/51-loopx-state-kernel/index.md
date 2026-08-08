@@ -1,7 +1,7 @@
 ---
 title: "The Loop's Next Bottleneck Is State — LoopX, the Tool That Loops Built"
 summary: "4,037 commits in ten weeks. LoopX, built by a ByteDance engineer, is the first serious implementation to appear just six weeks after the loop engineering discourse coined its name. Starting from the observation that chat memory and a timer can't govern multi-day loops, it pulls objectives, gates, evidence, and quota out of the agent into an external state kernel. The stranger part: the tool is building itself with its own loops — a self-iteration case of 74 commits in one day, an AGENTS.md written for agents, and a README that grades its own claims with evidence labels. What the state-kernel demand actually is, what the meta-case signals and warns, and when a third-party kernel makes sense in the era of built-in /loop."
-date: "2026-08-20T10:00:00"
+date: "2026-08-08T10:00:00"
 tags:
   - loop-engineering
   - agent-engineering
