@@ -1,7 +1,7 @@
 ---
 title: "Agent Memory Isn't a Chat Log — Where TencentDB Agent Memory Pins Team Memory"
 summary: "Tencent's open-source TencentDB Agent Memory is not a conversation dump. It governs four assets — Chat Memory, Skill, Wiki, and CodeGraph — at team scope. The design bets are layered L0–L3 distillation, memory as agent loadout rather than a global prompt, and a transparent MemoryProxy that injects context into coding agents without code changes. The PersonaMem jump from 48% to 76% matters less than the shift from RAG's 'what can be found' to 'who may use it, which version is live, and which agent is equipped.' Architecture, DX, and the rough edges as of the v2.0 release and ~17k stars."
-date: "2026-08-19T10:00:00"
+date: "2026-08-08T09:00:00"
 tags:
   - agent-memory
   - multi-agent

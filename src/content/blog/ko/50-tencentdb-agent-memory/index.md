@@ -1,7 +1,7 @@
 ---
 title: "에이전트 메모리는 채팅 로그가 아니다 — TencentDB Agent Memory가 팀 기억을 다루는 법"
 summary: "텐센트가 오픈소스한 TencentDB Agent Memory는 '대화 저장소'가 아니라 Chat Memory·Skill·Wiki·CodeGraph 네 자산을 팀 단위로 거버넌스하는 허브다. 핵심 설계는 세 가지다. 기억은 L0→L3로 증류되고, 전역 프롬프트가 아니라 에이전트 로드아웃으로 장착되며, MemoryProxy가 Claude Code 같은 코딩 에이전트에 코드 한 줄 없이 주입 경로를 연다. PersonaMem 48%→76%라는 숫자보다 중요한 건, RAG가 답하는 '무엇이 검색되나' 위에 '누가 쓰고, 어떤 버전이 유효하고, 어느 에이전트에 장착되나'를 올렸다는 점이다. 1.7만 스타와 v2.0 릴리즈를 기준으로 아키텍처·DX·한계까지 해부한다."
-date: "2026-08-19T10:00:00"
+date: "2026-08-08T09:00:00"
 tags:
   - agent-memory
   - multi-agent
