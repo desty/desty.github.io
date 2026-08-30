@@ -152,6 +152,8 @@ Structure clarifies meaning. It does not confer trust.
 
 Submissions close at 1 p.m. Pacific Time on September 3. Developers, founders, designers, startups, and independent builders can participate, and an existing application can enter by adding WebMCP support. OpenAI's examples include 3D modeling, collaborative writing, crossword construction, itinerary planning, and in-browser data analysis.
 
+If you already have a deployed web application, this is a good opportunity to submit something yourself. Rather than converting every feature at once, pick one workflow people repeat often and expose it through a small set of purpose-built WebMCP tools. A demo that shows a person reviewing the agent's result in the same interface and then continuing the work will also make the human-agent experience concrete. Because the challenge accepts WebMCP added to an existing product, it can be a focused experiment instead of an entirely new application.
+
 Ten days is too short to determine the fate of a web standard, and $3,000 is not enough to move a browser ecosystem by itself. The more interesting signal is the combination: OpenAI is running the challenge; people from Chrome, Cloudflare, Vercel, Shopify, Netlify, and Render are involved as sponsors and judges; and OpenAI has published an internal evaluation workflow already using WebMCP. None of that guarantees adoption. It does show that “how agents use the web” is becoming an interface problem for the web platform, not only a perception problem for model builders.
 
 The human web evolved around buttons, menus, forms, and canvases. Agents currently use that surface by looking through a camera and imitating a finger. WebMCP proposes exposing the application logic underneath as tools.
