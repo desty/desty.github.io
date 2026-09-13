@@ -1,5 +1,5 @@
 ---
-title: "DeepSeek Harness code analysis: swapping even the agent loop as a plugin"
+title: "DeepSeek Harness code analysis: making the agent loop a plugin boundary"
 summary: "DeepSeek Harness treats the model, tools, and session — and the loop that drives a turn — as plugins. Cordis mounts services on ctx keys; the default driver is ctx.agentLoop. This splits what is kernel from what you change in config, at the 10 September 2026 commit."
 date: "2026-09-13T10:20:00+09:00"
 tags:
@@ -15,7 +15,7 @@ A small change to a coding agent often turns into a fork of the whole harness. Y
 
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) is an open-source harness that splits those parts into plugins. The slogan is “Everything is a Plugin.” Model adapters, tools, sessions, sandboxes, scheduling, and the UI are plugins — and so is the **default agent loop**, the `dsh-agent-loop` package. The license is MIT. The docs call it a developer preview and warn that compatibility will break.
 
-This article reads `docs/architecture.md` and `packages/core` at commit `c291e79` (0.1.5 sync) on 10 September 2026. It is not a log from `npx @deepseek-ai/dsh web`. It takes the claim from [harness engineering](/en/blog/35-harness-engineering/) — you design the outside of the model — and checks it in a tree that makes the loop itself a replaceable unit. The same-day [OpenViking](/en/blog/63-openviking/) piece is about treating memory locations as paths.
+This article reads [`docs/architecture.md`](https://github.com/deepseek-ai/deepseek-harness/blob/c291e79/docs/architecture.md) and `packages/core` at commit [`c291e79`](https://github.com/deepseek-ai/deepseek-harness/tree/c291e79) (0.1.5 sync) on 10 September 2026. It is not a log from `npx @deepseek-ai/dsh web`. It takes the claim from [harness engineering](/en/blog/35-harness-engineering/) — you design the outside of the model — and checks it in a tree that makes the loop itself a replaceable unit. The same-day [OpenViking](/en/blog/63-openviking/) piece is about treating memory locations as paths.
 
 ## Separate the slogan from the kernel
 

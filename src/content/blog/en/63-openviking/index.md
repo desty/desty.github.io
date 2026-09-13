@@ -11,11 +11,11 @@ tags:
 draft: false
 ---
 
-Give an agent last week's conversation and one of two things usually happens. The session log is pasted into the prompt, or chunks go into a vector store and a handful of near neighbours come back. The first fills the window. The second has no path for which project or which user the memory belongs to.
+Give an agent last week's conversation and one of two things usually happens. The session log is pasted into the prompt, or chunks go into a vector store and a handful of near neighbours come back. The first fills the window. The second can use namespaces or metadata filters to restrict results by project and user, but it does not by itself give the agent a path-based walk from summaries to source files.
 
 [OpenViking](https://github.com/volcengine/OpenViking) puts that context on a `viking://` virtual filesystem. An agent uses `ls`, `tree`, `read`, and `write`, checks a directory summary for relevance, then opens the original file. It is open source from ByteDance's Volcano Engine Viking team. The main project is AGPLv3.
 
-This article is a reading of the retriever, filesystem service, and session extraction code at commit `0f77ab5` on 12 September 2026. It is not a measurement from a running server. LoCoMo and tau2-bench figures are vendor results from the project README and the [benchmark write-up](https://blog.openviking.ai/post/openviking-benchmark-results/).
+This article is a reading of the retriever, filesystem service, and session extraction code at commit [`0f77ab5`](https://github.com/volcengine/OpenViking/tree/0f77ab5) on 12 September 2026. It is not a measurement from a running server. LoCoMo and tau2-bench figures are vendor results from the project README and the [benchmark write-up](https://blog.openviking.ai/post/openviking-benchmark-results/).
 
 [Context engineering](/en/blog/30-context-engineering/) argued that a larger window still leaves the problem of what to load. OpenViking is an implementation that moves that choice onto paths and layers. It is a different layer from a company-wide brain ([Cerebras](/en/blog/37-company-brain/)) or vector search beside operational data ([TencentDB](/en/blog/50-tencentdb-agent-memory/), [DynamoDB](/en/blog/55-dynamodb-vector-search/)). The question here is **which directory, at which depth**, the agent reads.
 

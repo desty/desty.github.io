@@ -11,11 +11,11 @@ tags:
 draft: false
 ---
 
-에이전트에게 지난 대화를 맡기면 흔히 두 가지 중 하나가 된다. 세션 로그를 프롬프트에 그대로 붙이거나, 벡터 DB에 넣고 비슷한 조각을 몇 개 꺼낸다. 전자는 토큰이 금방 차고, 후자는 어느 프로젝트·어느 사용자 기억인지 경로가 없다.
+에이전트에게 지난 대화를 맡기면 흔히 두 가지 중 하나가 된다. 세션 로그를 프롬프트에 그대로 붙이거나, 벡터 DB에 넣고 비슷한 조각을 몇 개 꺼낸다. 전자는 토큰이 금방 찬다. 후자도 namespace나 메타데이터 필터로 사용자·프로젝트 범위를 제한할 수 있지만, 에이전트가 그 경로를 따라 요약에서 원문으로 내려가는 탐색 절차까지 제공하지는 않는다.
 
 [OpenViking](https://github.com/volcengine/OpenViking)은 이 컨텍스트를 `viking://` 가상 파일 시스템으로 둔다. 에이전트는 `ls`, `tree`, `read`, `write`로 디렉터리를 보고, 디렉터리 요약으로 관련 여부만 확인한 뒤 원문을 연다. 바이트댄스 볼케이노 엔진 Viking 팀이 만든 오픈소스고, 본 프로젝트 라이선스는 AGPLv3다.
 
-이 글은 2026년 9월 12일 `0f77ab5` 커밋을 기준으로 저장소의 검색기·파일 서비스·세션 추출 코드를 읽은 분석이다. 서버를 띄워 재현한 측정은 아니다. LoCoMo·tau2-bench 숫자는 프로젝트 README와 [벤치마크 글](https://blog.openviking.ai/post/openviking-benchmark-results/)에 적힌 공급자 평가다.
+이 글은 2026년 9월 12일 [`0f77ab5`](https://github.com/volcengine/OpenViking/tree/0f77ab5) 커밋을 기준으로 저장소의 검색기·파일 서비스·세션 추출 코드를 읽은 분석이다. 서버를 띄워 재현한 측정은 아니다. LoCoMo·tau2-bench 숫자는 프로젝트 README와 [벤치마크 글](https://blog.openviking.ai/post/openviking-benchmark-results/)에 적힌 공급자 평가다.
 
 [컨텍스트 엔지니어링](/blog/30-context-engineering/)에서 창이 커져도 넣을 것을 고르는 일이 남는다고 썼다. OpenViking은 그 고르기를 경로와 계층으로 옮긴 구현이다. 회사 전체를 한 브레인으로 묶는 [Cerebras 사례](/blog/37-company-brain/)나 운영 데이터 옆 벡터 검색([TencentDB](/blog/50-tencentdb-agent-memory/), [DynamoDB](/blog/55-dynamodb-vector-search/))과는 층이 다르다. 여기서 보는 것은 에이전트가 어느 디렉터리의 어느 깊이를 읽을지다.
 

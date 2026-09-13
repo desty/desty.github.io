@@ -1,5 +1,5 @@
 ---
-title: "DeepSeek Harness 코드 분석: 에이전트 루프까지 플러그인으로 갈아끼우기"
+title: "DeepSeek Harness 코드 분석: 에이전트 루프를 플러그인 경계로 나눈 구조"
 summary: "DeepSeek Harness는 모델·도구·세션뿐 아니라 에이전트가 한 바퀴 도는 루프도 플러그인이다. Cordis가 서비스를 ctx 키로 붙이고, 기본 드라이버는 ctx.agentLoop다. 2026년 9월 10일 커밋을 기준으로 무엇이 커널이고 무엇을 설정으로 바꾸는지 나눈다."
 date: "2026-09-13T10:20:00+09:00"
 tags:
@@ -15,7 +15,7 @@ draft: false
 
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)(`dsh`)는 그 부품을 플러그인으로 나눈 오픈소스 실행기다. 슬로건은 “Everything is a Plugin”이다. 모델 어댑터, 도구, 세션, 샌드박스, 스케줄, UI뿐 아니라 **기본 에이전트 루프도** `dsh-agent-loop` 패키지다. MIT 라이선스고, 문서는 developer preview라 호환이 깨지는 변경이 있다고 못 박는다.
 
-이 글은 2026년 9월 10일 `c291e79`(0.1.5 동기화) 기준으로 `docs/architecture.md`와 `packages/core`를 읽은 분석이다. `npx @deepseek-ai/dsh web`으로 돌려 본 사용 기록은 아니다. [하네스 엔지니어링](/blog/35-harness-engineering/)에서 말한 “모델 바깥을 설계한다”를, 루프 자체를 교체 단위로 만든 구현에서 확인한다. 같은 날 [OpenViking](/blog/63-openviking/)은 기억 위치를 경로로 다루는 쪽이다.
+이 글은 2026년 9월 10일 [`c291e79`](https://github.com/deepseek-ai/deepseek-harness/tree/c291e79)(0.1.5 동기화) 기준으로 [`docs/architecture.md`](https://github.com/deepseek-ai/deepseek-harness/blob/c291e79/docs/architecture.md)와 `packages/core`를 읽은 분석이다. `npx @deepseek-ai/dsh web`으로 돌려 본 사용 기록은 아니다. [하네스 엔지니어링](/blog/35-harness-engineering/)에서 말한 “모델 바깥을 설계한다”를, 루프 자체를 교체 단위로 만든 구현에서 확인한다. 같은 날 [OpenViking](/blog/63-openviking/)은 기억 위치를 경로로 다루는 쪽이다.
 
 ## 슬로건과 커널을 나누어 본다
 
