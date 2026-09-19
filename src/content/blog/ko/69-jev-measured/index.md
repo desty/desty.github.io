@@ -13,7 +13,7 @@ draft: false
 
 에이전트나 워크플로 안에는 글을 쓸 필요가 없는 LLM 호출이 섞여 있다. 이 문의가 환불 건인지 고르고, 이 도구 호출이 위험한지 판정하고, 검색 결과 30개 중 관련 있는 것을 추리고, 이 답변을 사람에게 보내도 되는지 검사하는 일이다. 결과는 열거형 하나거나 0과 1 사이 숫자 하나인데, 그걸 얻으려고 문장을 생성하는 모델을 부른다. 그래서 몇 초를 기다리고, JSON 파싱이 가끔 깨지고, 무엇보다 모델이 얼마나 확신하는지 알 수 없다. 로그에 남는 건 `"refund"`라는 문자열뿐이고 그게 0.98짜리 판단인지 0.51짜리 판단인지 구분되지 않는다.
 
-TypeSafe AI가 2026년 9월 15일 공개한 [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)는 그 호출만 떼어내겠다는 모델이다. 누가 왜 만들었고 지금 어떤 반응인지는 [1편에](/blog/67-jev-system-one/), 같은 방식을 오픈 모델로 직접 만들어 본 결과는 [2편에](/blog/68-jev-style-engine/) 적었다. 가장 많이 돌아다닌 데모는 Doom이다. [The Register가 전한 수치로는](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/) 같은 판단을 GPT-5.6 Terra가 8.566초에, Jev가 0.114초에 끝냈다.
+TypeSafe AI가 2026년 9월 15일 공개한 [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)는 그 호출만 떼어내겠다는 모델이다. 누가 왜 만들었고 지금 어떤 반응인지는 [1편에](/blog/67-jev-system-one/), 같은 방식을 오픈 모델로 직접 만들어 본 결과는 [2편에](/blog/68-jev-style-engine/), 실제로 무언가를 만들어 붙여 본 결과는 [4편에](/blog/70-jev-four-builds/) 적었다. 가장 많이 돌아다닌 데모는 Doom이다. [The Register가 전한 수치로는](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/) 같은 판단을 GPT-5.6 Terra가 8.566초에, Jev가 0.114초에 끝냈다.
 
 이 글은 그 모델을 API 키를 받아 직접 돌려본 기록이다. 아래 수치는 2026년 9월 19일에 `jev-1.13.0`을 HTTP API로 호출해 얻은 것이고, 별다른 말이 없으면 연결을 유지한 상태의 측정이다. 머신 한 대에서 잰 값이라 절대치보다 항목 사이의 차이를 보는 게 맞다. 다른 모델과 나란히 돌린 벤치마크는 아니다. 실험에 쓴 정답은 코드로 계산하거나 두 번 검수했다. 처음에 손으로 붙인 라벨 하나가 틀려 있었고, 틀린 쪽은 Jev가 아니라 나였다.
 

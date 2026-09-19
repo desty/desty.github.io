@@ -14,7 +14,7 @@ A model released on 15 September 2026 filled developer timelines within four day
 
 And yet this model cannot write a sentence. It doesn't chat and it doesn't code. You hand it a situation, a question, and the allowed answers, and it returns which one it picked along with a probability for each.
 
-This is the first piece in a series on Jev. It covers who built it and why, what people made in four days, which of the circulating claims hold up, and how to try it today. [Part 2](/en/blog/68-jev-style-engine/) builds the same mechanism on open models, and [part 3](/en/blog/69-jev-measured/) reports what I measured with an API key.
+This is the first piece in a series on Jev. It covers who built it and why, what people made in four days, which of the circulating claims hold up, and how to try it today. [Part 2](/en/blog/68-jev-style-engine/) builds the same mechanism on open models, [part 3](/en/blog/69-jev-measured/) reports what I measured with an API key, and [part 4](/en/blog/70-jev-four-builds/) rebuilds four of the use cases below.
 
 ## The question its maker asked
 
@@ -39,7 +39,7 @@ That is the context for the name TypeSafe gave its training method, RLCD — Rei
 
 You send Jev state and a set of questions rather than a prompt. There are three question types: Choice picks one from a fixed list, Score places something on ordered levels, and Noul gives the probability that a statement is true. Ask one support message whether it is about billing, what its tone is, and how urgent it is, and all three answers come back with probabilities in one call.
 
-The options don't live inside the model. Your program builds the candidates at call time: the legal moves in this chess position, the clickable elements on this screen, the teams registered in this helpdesk. Jev assigns probabilities to the list it was given and picks one, and an answer outside that list structurally cannot occur. When the job changes, you change the input, not the model.
+The options don't live inside the model. Your program builds the candidates at call time: the legal moves in this chess position, the clickable elements on this screen, the teams registered in this helpdesk. Jev assigns probabilities to the list it was given and picks one, and an answer outside that list structurally cannot occur. One Choice holds at most 255 candidates; past that you split the pick [hierarchically](https://docs.typesafe.ai/cookbooks/hierarchical_classification). When the job changes, you change the input, not the model.
 
 Input costs $0.042 per million tokens and output is free. Input is text only; images are not supported yet. The company says it is 20x to 200x faster and 40x to 400x cheaper than LLMs on comparable work, figures that come from its own evaluation. There are outside reports too: per TechCrunch, Vercel saw results 5 to 18 times faster than OpenAI's Luna, and Bryo AI found Jev 10 to 20 times cheaper than Gemini for email classification.
 
@@ -56,7 +56,7 @@ I checked these repositories on GitHub myself. Star counts are as of 19 Septembe
 | [droidrun/mobile-jev](https://github.com/droidrun/mobile-jev) | 168 | Mobile agent operating a real Android device |
 | [gargpratyush/jev-router](https://github.com/gargpratyush/jev-router) | 159 | Routes each Claude Code turn to a cheap or a strong model |
 
-They share one structure. Code always produces the candidates: the browser agent extracts actionable elements from the DOM, the computer-use build pulls text off the screen with OCR, the router holds the list of available models. Jev picks one, and code executes the pick. An LLM used to sit in that slot, and you waited seconds to choose a single click. At a tenth of a second and a small fraction of a cent per judgment, calling for a judgment at every step becomes a reasonable design. The model is named after Jevons Paradox for that reason: make judgment cheap and people will use far more of it.
+They share one structure. Code always produces the candidates: the browser agent extracts actionable elements from the DOM, the computer-use build pulls text off the screen with OCR, the router holds the list of available models. Jev picks one, and code executes the pick. An LLM used to sit in that slot, and you waited seconds to choose a single click. At a tenth of a second and a small fraction of a cent per judgment, calling for a judgment at every step becomes a reasonable design. The model is named after Jevons Paradox for that reason: make judgment cheap and people will use far more of it. [Part 4](/en/blog/70-jev-four-builds/) follows this structure to build a safety hook, context compression, and two more.
 
 ## Is it true that it was open-sourced?
 
