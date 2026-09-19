@@ -1,0 +1,30 @@
+{
+  "name": "jev-context",
+  "version": "0.1.0",
+  "description": "Decision-based context pruning for coding agents",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck:hooks": "tsc -p tsconfig.hooks.json",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "bench": "npm run build && node dist/bench/replay.js",
+    "bench:astro": "npm run build && node dist/bench/astro-replay.js",
+    "bench:astro:jev": "npm run build && node dist/bench/astro-replay.js --jev",
+    "bench:session": "npm run build && node dist/bench/claude-session-replay.js",
+    "bench:agent": "node bench/agent-ab.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "description": "Experimental context telemetry; does not replace Codex native compaction.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash|apply_patch|Read|Grep|Glob|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${PLUGIN_ROOT}/scripts/record-tool.mjs",
+            "timeout": 5,
+            "statusMessage": "Recording context telemetry"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "^compact$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${PLUGIN_ROOT}/scripts/restore-memory.mjs",
+            "timeout": 10,
+            "additionalContextLimit": 2500,
+            "statusMessage": "Restoring compact task memory"
+          }
+        ]
+      }
+    ]
+  }
+}

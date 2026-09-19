@@ -1,0 +1,165 @@
+{
+  "benchmark": "real completed Claude Code transcript replay",
+  "transcript": "297c442d-310d-485f-b285-fd5769795cd8.jsonl",
+  "transcriptBytes": 5146134,
+  "parsedMessages": 477,
+  "toolCalls": 188,
+  "toolResultChars": 415517,
+  "modelContentChars": 452250,
+  "toolResultShare": 0.9187772249861802,
+  "observedSessionCostUSD": 44.784254699999984,
+  "method": {
+    "checkpoints": [
+      0.5,
+      0.7,
+      0.85
+    ],
+    "threshold": 0.3,
+    "oracle": "A recoverable call is future-reused when a path or URL in its input occurs after the checkpoint.",
+    "exclusions": "Mutating and human-interaction tools are protected and excluded from accuracy scoring.",
+    "limitation": "Replay measures pruning and future-reference recall, not counterfactual task success or billed savings."
+  },
+  "runs": [
+    {
+      "checkpoint": 0.5,
+      "callsSeen": 94,
+      "evaluatedRecoverableCalls": 81,
+      "futureReusedCalls": 40,
+      "futureReusedRetained": 30,
+      "futureReuseRecall": 0.75,
+      "notFutureReusedCalls": 41,
+      "notFutureReusedDropped": 10,
+      "irrelevantRemovalRate": 0.24390243902439024,
+      "thresholdSweep": [
+        {
+          "threshold": 0.05,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.1,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.2,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.3,
+          "futureReuseRecall": 0.75,
+          "irrelevantRemovalRate": 0.24390243902439024
+        },
+        {
+          "threshold": 0.4,
+          "futureReuseRecall": 0.4,
+          "irrelevantRemovalRate": 0.8292682926829268
+        },
+        {
+          "threshold": 0.5,
+          "futureReuseRecall": 0.3,
+          "irrelevantRemovalRate": 0.9512195121951219
+        }
+      ],
+      "charsBefore": 334628,
+      "charsAfter": 248669,
+      "reductionRatio": 0.2568792808730889,
+      "jevWallMs": 1095
+    },
+    {
+      "checkpoint": 0.7,
+      "callsSeen": 132,
+      "evaluatedRecoverableCalls": 113,
+      "futureReusedCalls": 59,
+      "futureReusedRetained": 47,
+      "futureReuseRecall": 0.7966101694915254,
+      "notFutureReusedCalls": 54,
+      "notFutureReusedDropped": 8,
+      "irrelevantRemovalRate": 0.14814814814814814,
+      "thresholdSweep": [
+        {
+          "threshold": 0.05,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.1,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.2,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.3,
+          "futureReuseRecall": 0.7966101694915254,
+          "irrelevantRemovalRate": 0.14814814814814814
+        },
+        {
+          "threshold": 0.4,
+          "futureReuseRecall": 0.4576271186440678,
+          "irrelevantRemovalRate": 0.6296296296296297
+        },
+        {
+          "threshold": 0.5,
+          "futureReuseRecall": 0.23728813559322035,
+          "irrelevantRemovalRate": 0.9814814814814815
+        }
+      ],
+      "charsBefore": 474641,
+      "charsAfter": 395772,
+      "reductionRatio": 0.16616558620093924,
+      "jevWallMs": 545
+    },
+    {
+      "checkpoint": 0.85,
+      "callsSeen": 160,
+      "evaluatedRecoverableCalls": 135,
+      "futureReusedCalls": 71,
+      "futureReusedRetained": 54,
+      "futureReuseRecall": 0.7605633802816901,
+      "notFutureReusedCalls": 64,
+      "notFutureReusedDropped": 14,
+      "irrelevantRemovalRate": 0.21875,
+      "thresholdSweep": [
+        {
+          "threshold": 0.05,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.1,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0
+        },
+        {
+          "threshold": 0.2,
+          "futureReuseRecall": 1,
+          "irrelevantRemovalRate": 0.015625
+        },
+        {
+          "threshold": 0.3,
+          "futureReuseRecall": 0.7605633802816901,
+          "irrelevantRemovalRate": 0.21875
+        },
+        {
+          "threshold": 0.4,
+          "futureReuseRecall": 0.36619718309859156,
+          "irrelevantRemovalRate": 0.640625
+        },
+        {
+          "threshold": 0.5,
+          "futureReuseRecall": 0.16901408450704225,
+          "irrelevantRemovalRate": 0.875
+        }
+      ],
+      "charsBefore": 740177,
+      "charsAfter": 539924,
+      "reductionRatio": 0.2705474501369267,
+      "jevWallMs": 801
+    }
+  ]
+}

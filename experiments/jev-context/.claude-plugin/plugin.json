@@ -1,0 +1,47 @@
+{
+  "name": "jev-context",
+  "version": "0.1.0",
+  "description": "Jev-guided verbatim context pruning for Claude Code sessions.",
+  "author": {
+    "name": "Desty"
+  },
+  "license": "MIT",
+  "userConfig": {
+    "apiKey": {
+      "type": "string",
+      "title": "TypeSafe API key",
+      "description": "Leave unset to use TYPESAFE_API_KEY.",
+      "sensitive": true
+    },
+    "keepThreshold": {
+      "type": "number",
+      "title": "Keep threshold",
+      "description": "Minimum probability for a call or result to remain.",
+      "default": 0.3
+    },
+    "preserveRecentMessages": {
+      "type": "number",
+      "title": "Recent messages to preserve",
+      "description": "Newest messages pinned from pruning.",
+      "default": 6
+    },
+    "compactAtPercent": {
+      "type": "number",
+      "title": "Compaction percentage",
+      "description": "Context percentage that requests compaction.",
+      "default": 60
+    },
+    "minReductionRatio": {
+      "type": "number",
+      "title": "Minimum reduction ratio",
+      "description": "Fall back to native summary below this ratio.",
+      "default": 0.25
+    },
+    "truncateHeadChars": {
+      "type": "number",
+      "title": "Truncated result head",
+      "description": "Characters retained when only the call matters.",
+      "default": 300
+    }
+  }
+}

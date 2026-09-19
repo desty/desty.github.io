@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Jev threshold trade-off on the Astro trace</title>
+  <desc id="desc">At threshold 0.3, relevant-call recall is 100 percent and irrelevant-call removal is 96.7 percent. At 0.5, recall falls to 86.7 percent.</desc>
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243044; }
+    .title { font-size: 26px; font-weight: 700; }
+    .label { font-size: 16px; }
+    .tick { font-size: 14px; fill: #64748b; }
+    .grid { stroke: #dbe3ee; stroke-width: 1; }
+    .axis { stroke: #64748b; stroke-width: 1.5; }
+    .recall { fill: none; stroke: #2563eb; stroke-width: 4; }
+    .removal { fill: none; stroke: #ea580c; stroke-width: 4; }
+    .point-recall { fill: #2563eb; }
+    .point-removal { fill: #ea580c; }
+    .guide { stroke: #16a34a; stroke-width: 2; stroke-dasharray: 7 7; }
+  </style>
+  <rect width="1000" height="560" rx="18" fill="#f8fafc"/>
+  <text x="80" y="55" class="title">Threshold trade-off on 240 Astro file reads</text>
+
+  <line x1="100" y1="440" x2="920" y2="440" class="axis"/>
+  <line x1="100" y1="100" x2="100" y2="440" class="axis"/>
+  <line x1="100" y1="440" x2="920" y2="440" class="grid"/>
+  <line x1="100" y1="355" x2="920" y2="355" class="grid"/>
+  <line x1="100" y1="270" x2="920" y2="270" class="grid"/>
+  <line x1="100" y1="185" x2="920" y2="185" class="grid"/>
+  <line x1="100" y1="100" x2="920" y2="100" class="grid"/>
+
+  <text x="72" y="445" class="tick">0%</text>
+  <text x="62" y="360" class="tick">25%</text>
+  <text x="62" y="275" class="tick">50%</text>
+  <text x="62" y="190" class="tick">75%</text>
+  <text x="52" y="105" class="tick">100%</text>
+
+  <text x="185" y="470" class="tick">0.2</text>
+  <text x="395" y="470" class="tick">0.3</text>
+  <text x="605" y="470" class="tick">0.4</text>
+  <text x="815" y="470" class="tick">0.5</text>
+  <text x="445" y="510" class="label">keep threshold</text>
+
+  <line x1="410" y1="100" x2="410" y2="440" class="guide"/>
+  <text x="425" y="135" class="label" fill="#15803d">selected: 0.3</text>
+
+  <polyline points="200,100 410,100 620,111 830,145" class="recall"/>
+  <circle cx="200" cy="100" r="7" class="point-recall"/>
+  <circle cx="410" cy="100" r="7" class="point-recall"/>
+  <circle cx="620" cy="111" r="7" class="point-recall"/>
+  <circle cx="830" cy="145" r="7" class="point-recall"/>
+
+  <polyline points="200,366 410,111 620,102 830,102" class="removal"/>
+  <circle cx="200" cy="366" r="7" class="point-removal"/>
+  <circle cx="410" cy="111" r="7" class="point-removal"/>
+  <circle cx="620" cy="102" r="7" class="point-removal"/>
+  <circle cx="830" cy="102" r="7" class="point-removal"/>
+
+  <line x1="610" y1="45" x2="650" y2="45" class="recall"/>
+  <text x="662" y="51" class="label">relevant-call recall</text>
+  <line x1="610" y1="75" x2="650" y2="75" class="removal"/>
+  <text x="662" y="81" class="label">irrelevant-call removal</text>
+</svg>
