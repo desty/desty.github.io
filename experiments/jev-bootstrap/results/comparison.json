@@ -1,0 +1,470 @@
+{
+  "model": "jev-1.13.0",
+  "datasetSize": 75,
+  "manualReviews": 16,
+  "thresholdSweep": [
+    {
+      "threshold": 0.2,
+      "accuracy": 0.84,
+      "balancedAccuracy": 0.8389046941678521,
+      "precision": 0.7954545454545454,
+      "recall": 0.9210526315789473,
+      "f1": 0.8536585365853658,
+      "confusion": {
+        "tp": 35,
+        "tn": 28,
+        "fp": 9,
+        "fn": 3
+      },
+      "errors": [
+        {
+          "id": "12-dx-for-ax",
+          "actual": false,
+          "probability": 0.27
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "27-domain-specific-models",
+          "actual": false,
+          "probability": 0.37
+        },
+        {
+          "id": "31-gpt-5-6-sol-terra-luna",
+          "actual": false,
+          "probability": 0.22
+        },
+        {
+          "id": "37-company-brain",
+          "actual": false,
+          "probability": 0.39
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "46-is-graphrag-needed",
+          "actual": false,
+          "probability": 0.29
+        },
+        {
+          "id": "48-cache-hit-rate",
+          "actual": false,
+          "probability": 0.63
+        },
+        {
+          "id": "57-gemini-grok-migration",
+          "actual": false,
+          "probability": 0.2
+        },
+        {
+          "id": "62-gpt-6-astra",
+          "actual": false,
+          "probability": 0.41
+        },
+        {
+          "id": "68-jev-style-engine",
+          "actual": false,
+          "probability": 0.35
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "accuracy": 0.88,
+      "balancedAccuracy": 0.8798008534850641,
+      "precision": 0.8717948717948718,
+      "recall": 0.8947368421052632,
+      "f1": 0.8831168831168831,
+      "confusion": {
+        "tp": 34,
+        "tn": 32,
+        "fp": 5,
+        "fn": 4
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "27-domain-specific-models",
+          "actual": false,
+          "probability": 0.37
+        },
+        {
+          "id": "37-company-brain",
+          "actual": false,
+          "probability": 0.39
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "48-cache-hit-rate",
+          "actual": false,
+          "probability": 0.63
+        },
+        {
+          "id": "62-gpt-6-astra",
+          "actual": false,
+          "probability": 0.41
+        },
+        {
+          "id": "68-jev-style-engine",
+          "actual": false,
+          "probability": 0.35
+        }
+      ]
+    },
+    {
+      "threshold": 0.4,
+      "accuracy": 0.9066666666666666,
+      "balancedAccuracy": 0.9071834992887624,
+      "precision": 0.9428571428571428,
+      "recall": 0.868421052631579,
+      "f1": 0.904109589041096,
+      "confusion": {
+        "tp": 33,
+        "tn": 35,
+        "fp": 2,
+        "fn": 5
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "48-cache-hit-rate",
+          "actual": false,
+          "probability": 0.63
+        },
+        {
+          "id": "60-eli5-visual-explainer",
+          "actual": true,
+          "probability": 0.31
+        },
+        {
+          "id": "62-gpt-6-astra",
+          "actual": false,
+          "probability": 0.41
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "accuracy": 0.9066666666666666,
+      "balancedAccuracy": 0.9075391180654339,
+      "precision": 0.9696969696969697,
+      "recall": 0.8421052631578947,
+      "f1": 0.9014084507042254,
+      "confusion": {
+        "tp": 32,
+        "tn": 36,
+        "fp": 1,
+        "fn": 6
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "18-headroom",
+          "actual": true,
+          "probability": 0.41
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "48-cache-hit-rate",
+          "actual": false,
+          "probability": 0.63
+        },
+        {
+          "id": "60-eli5-visual-explainer",
+          "actual": true,
+          "probability": 0.31
+        }
+      ]
+    },
+    {
+      "threshold": 0.6,
+      "accuracy": 0.8666666666666667,
+      "balancedAccuracy": 0.8680654338549076,
+      "precision": 0.9666666666666667,
+      "recall": 0.7631578947368421,
+      "f1": 0.8529411764705883,
+      "confusion": {
+        "tp": 29,
+        "tn": 36,
+        "fp": 1,
+        "fn": 9
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "18-headroom",
+          "actual": true,
+          "probability": 0.41
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "30-context-engineering",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "39-ide-to-ade",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "40-claude-opus-5",
+          "actual": true,
+          "probability": 0.51
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "48-cache-hit-rate",
+          "actual": false,
+          "probability": 0.63
+        },
+        {
+          "id": "60-eli5-visual-explainer",
+          "actual": true,
+          "probability": 0.31
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "accuracy": 0.8533333333333334,
+      "balancedAccuracy": 0.8552631578947368,
+      "precision": 1,
+      "recall": 0.7105263157894737,
+      "f1": 0.8307692307692308,
+      "confusion": {
+        "tp": 27,
+        "tn": 37,
+        "fp": 0,
+        "fn": 11
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "18-headroom",
+          "actual": true,
+          "probability": 0.41
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "30-context-engineering",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "39-ide-to-ade",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "40-claude-opus-5",
+          "actual": true,
+          "probability": 0.51
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "60-eli5-visual-explainer",
+          "actual": true,
+          "probability": 0.31
+        },
+        {
+          "id": "69-jev-measured",
+          "actual": true,
+          "probability": 0.62
+        },
+        {
+          "id": "72-jev-domain-adaptation",
+          "actual": true,
+          "probability": 0.65
+        }
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "accuracy": 0.8133333333333334,
+      "balancedAccuracy": 0.8157894736842105,
+      "precision": 1,
+      "recall": 0.631578947368421,
+      "f1": 0.7741935483870968,
+      "confusion": {
+        "tp": 24,
+        "tn": 37,
+        "fp": 0,
+        "fn": 14
+      },
+      "errors": [
+        {
+          "id": "17-maps-and-skills",
+          "actual": true,
+          "probability": 0.27
+        },
+        {
+          "id": "18-headroom",
+          "actual": true,
+          "probability": 0.41
+        },
+        {
+          "id": "19-search-for-agents",
+          "actual": true,
+          "probability": 0.12
+        },
+        {
+          "id": "22-recursive-self-improvement",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "30-context-engineering",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "32-ai-eval",
+          "actual": true,
+          "probability": 0.77
+        },
+        {
+          "id": "39-ide-to-ade",
+          "actual": true,
+          "probability": 0.59
+        },
+        {
+          "id": "40-claude-opus-5",
+          "actual": true,
+          "probability": 0.51
+        },
+        {
+          "id": "44-surviving-model-churn",
+          "actual": true,
+          "probability": 0.71
+        },
+        {
+          "id": "45-ontology-comeback",
+          "actual": true,
+          "probability": 0.18
+        },
+        {
+          "id": "59-vercel-fx-native-agent",
+          "actual": true,
+          "probability": 0.78
+        },
+        {
+          "id": "60-eli5-visual-explainer",
+          "actual": true,
+          "probability": 0.31
+        },
+        {
+          "id": "69-jev-measured",
+          "actual": true,
+          "probability": 0.62
+        },
+        {
+          "id": "72-jev-domain-adaptation",
+          "actual": true,
+          "probability": 0.65
+        }
+      ]
+    }
+  ],
+  "note": "Probabilities come from one live Jev run. Metrics were recomputed after manual adjudication without calling the model again."
+}

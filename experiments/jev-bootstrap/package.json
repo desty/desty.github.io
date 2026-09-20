@@ -1,0 +1,15 @@
+{
+  "name": "jev-bootstrap",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dataset": "node src/build-dataset.mjs",
+    "local": "node src/local-baseline.mjs",
+    "jev": "node src/label-with-jev.mjs",
+    "compare": "node src/compare.mjs",
+    "all": "npm run dataset && npm run local"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}

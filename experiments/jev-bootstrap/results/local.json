@@ -1,0 +1,275 @@
+{
+  "task": "Predict whether a Korean blog title and summary carries the human-authored agent-engineering tag.",
+  "datasetSize": 75,
+  "positives": 38,
+  "negatives": 37,
+  "method": "Character 2-5 gram multinomial Naive Bayes with Laplace smoothing.",
+  "caveats": [
+    "The tag is an editorial label, not an objective fact.",
+    "Older posts may apply the taxonomy inconsistently.",
+    "Training and test examples come from one author and one site."
+  ],
+  "leaveOneOut": {
+    "accuracy": 0.7066666666666667,
+    "balancedAccuracy": 0.7066145092460883,
+    "precision": 0.7105263157894737,
+    "recall": 0.7105263157894737,
+    "f1": 0.7105263157894737,
+    "confusion": {
+      "tp": 27,
+      "tn": 26,
+      "fp": 11,
+      "fn": 11
+    }
+  },
+  "learningCurve": [
+    {
+      "requestedTrainingSize": 8,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.5644776119402982,
+        "p10": 0.4925373134328358,
+        "p90": 0.6716417910447762
+      },
+      "balancedAccuracy": {
+        "mean": 0.5665597147950088,
+        "p10": 0.5,
+        "p90": 0.6742424242424243
+      },
+      "f1": {
+        "mean": 0.4112624626343245,
+        "p10": 0.05714285714285715,
+        "p90": 0.686868686868687
+      }
+    },
+    {
+      "requestedTrainingSize": 16,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.6262711864406771,
+        "p10": 0.5423728813559322,
+        "p90": 0.711864406779661
+      },
+      "balancedAccuracy": {
+        "mean": 0.6283850574712644,
+        "p10": 0.5488505747126436,
+        "p90": 0.7132183908045977
+      },
+      "f1": {
+        "mean": 0.5418510693527444,
+        "p10": 0.2857142857142857,
+        "p90": 0.7096774193548386
+      }
+    },
+    {
+      "requestedTrainingSize": 24,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.6733333333333333,
+        "p10": 0.6078431372549019,
+        "p90": 0.7254901960784313
+      },
+      "balancedAccuracy": {
+        "mean": 0.6748846153846153,
+        "p10": 0.6076923076923078,
+        "p90": 0.7307692307692308
+      },
+      "f1": {
+        "mean": 0.6394975862452777,
+        "p10": 0.5142857142857142,
+        "p90": 0.7555555555555555
+      }
+    },
+    {
+      "requestedTrainingSize": 32,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.69,
+        "p10": 0.627906976744186,
+        "p90": 0.7441860465116279
+      },
+      "balancedAccuracy": {
+        "mean": 0.6908766233766234,
+        "p10": 0.6233766233766234,
+        "p90": 0.75
+      },
+      "f1": {
+        "mean": 0.6787947452896438,
+        "p10": 0.5789473684210527,
+        "p90": 0.7692307692307693
+      }
+    },
+    {
+      "requestedTrainingSize": 40,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.6954285714285713,
+        "p10": 0.6,
+        "p90": 0.7714285714285715
+      },
+      "balancedAccuracy": {
+        "mean": 0.6962908496732022,
+        "p10": 0.6013071895424837,
+        "p90": 0.7761437908496732
+      },
+      "f1": {
+        "mean": 0.6889356953069813,
+        "p10": 0.606060606060606,
+        "p90": 0.7777777777777778
+      }
+    },
+    {
+      "requestedTrainingSize": 48,
+      "repeats": 100,
+      "accuracy": {
+        "mean": 0.6970370370370367,
+        "p10": 0.5925925925925926,
+        "p90": 0.7777777777777778
+      },
+      "balancedAccuracy": {
+        "mean": 0.6978846153846157,
+        "p10": 0.6043956043956045,
+        "p90": 0.7802197802197802
+      },
+      "f1": {
+        "mean": 0.6945943442364708,
+        "p10": 0.5925925925925927,
+        "p90": 0.7999999999999999
+      }
+    }
+  ],
+  "errors": [
+    {
+      "id": "01-hello-world",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9999999999800653
+    },
+    {
+      "id": "10-realtime-voice-ai-infra",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.999950301087546
+    },
+    {
+      "id": "12-dx-for-ax",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9999999989145889
+    },
+    {
+      "id": "17-maps-and-skills",
+      "actual": true,
+      "predicted": false,
+      "probability": 5.817554162923618e-19
+    },
+    {
+      "id": "17-prompting-after-opus48-gpt55",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9999961411122836
+    },
+    {
+      "id": "19-search-for-agents",
+      "actual": true,
+      "predicted": false,
+      "probability": 3.47707302829419e-14
+    },
+    {
+      "id": "21-claude-fable-5",
+      "actual": false,
+      "predicted": true,
+      "probability": 1
+    },
+    {
+      "id": "22-recursive-self-improvement",
+      "actual": true,
+      "predicted": false,
+      "probability": 1.043208395415403e-15
+    },
+    {
+      "id": "23-phone-ai-agent",
+      "actual": true,
+      "predicted": false,
+      "probability": 1.7649435610172937e-27
+    },
+    {
+      "id": "28-open-knowledge-format",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9900378100643354
+    },
+    {
+      "id": "32-ai-eval",
+      "actual": true,
+      "predicted": false,
+      "probability": 2.0971373237877735e-43
+    },
+    {
+      "id": "34-sufficient-context",
+      "actual": true,
+      "predicted": false,
+      "probability": 3.809705407320629e-29
+    },
+    {
+      "id": "37-company-brain",
+      "actual": false,
+      "predicted": true,
+      "probability": 1
+    },
+    {
+      "id": "40-claude-opus-5",
+      "actual": true,
+      "predicted": false,
+      "probability": 1.5010247887028408e-39
+    },
+    {
+      "id": "46-is-graphrag-needed",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9995082502954397
+    },
+    {
+      "id": "48-cache-hit-rate",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.999999999642663
+    },
+    {
+      "id": "56-grok-bot-shared-computer",
+      "actual": true,
+      "predicted": false,
+      "probability": 7.986812150871636e-12
+    },
+    {
+      "id": "61-webmcp-challenge",
+      "actual": true,
+      "predicted": false,
+      "probability": 0.0005633137691394414
+    },
+    {
+      "id": "62-gpt-6-astra",
+      "actual": false,
+      "predicted": true,
+      "probability": 1
+    },
+    {
+      "id": "68-jev-style-engine",
+      "actual": false,
+      "predicted": true,
+      "probability": 0.9999999993516648
+    },
+    {
+      "id": "69-jev-measured",
+      "actual": true,
+      "predicted": false,
+      "probability": 1.4779812679119723e-14
+    },
+    {
+      "id": "72-jev-domain-adaptation",
+      "actual": true,
+      "predicted": false,
+      "probability": 1.2365525676203426e-39
+    }
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "model": "jev-1.13.0",
+  "threshold": 0.5,
+  "datasetSize": 75,
+  "accuracy": 0.6933333333333334,
+  "confusion": {
+    "tp": 25,
+    "tn": 27,
+    "fp": 8,
+    "fn": 15
+  },
+  "predictions": [
+    {
+      "id": "01-hello-world",
+      "actual": false,
+      "probability": 0.06,
+      "predicted": false
+    },
+    {
+      "id": "02-turboquant-kv-cache",
+      "actual": false,
+      "probability": 0.13,
+      "predicted": false
+    },
+    {
+      "id": "03-ai-agent-ux",
+      "actual": false,
+      "probability": 0.06,
+      "predicted": false
+    },
+    {
+      "id": "04-ai-content-ecosystem",
+      "actual": false,
+      "probability": 0.05,
+      "predicted": false
+    },
+    {
+      "id": "05-geo-seo",
+      "actual": false,
+      "probability": 0.03,
+      "predicted": false
+    },
+    {
+      "id": "06-ai-native",
+      "actual": false,
+      "probability": 0.05,
+      "predicted": false
+    },
+    {
+      "id": "07-developer-attitude",
+      "actual": false,
+      "probability": 0.02,
+      "predicted": false
+    },
+    {
+      "id": "08-interview-guide",
+      "actual": false,
+      "probability": 0.02,
+      "predicted": false
+    },
+    {
+      "id": "09-ai-dlc",
+      "actual": false,
+      "probability": 0.12,
+      "predicted": false
+    },
+    {
+      "id": "10-realtime-voice-ai-infra",
+      "actual": false,
+      "probability": 0.08,
+      "predicted": false
+    },
+    {
+      "id": "11-cognitive-debt-and-agentic-coding",
+      "actual": false,
+      "probability": 0.09,
+      "predicted": false
+    },
+    {
+      "id": "12-dx-for-ax",
+      "actual": false,
+      "probability": 0.27,
+      "predicted": false
+    },
+    {
+      "id": "13-ai-ready-data",
+      "actual": false,
+      "probability": 0.1,
+      "predicted": false
+    },
+    {
+      "id": "14-agent-engineering",
+      "actual": true,
+      "probability": 0.83,
+      "predicted": true
+    },
+    {
+      "id": "15-hermes-vs-openclaw",
+      "actual": true,
+      "probability": 0.95,
+      "predicted": true
+    },
+    {
+      "id": "16-vibe-bounty",
+      "actual": false,
+      "probability": 0.07,
+      "predicted": false
+    },
+    {
+      "id": "17-maps-and-skills",
+      "actual": true,
+      "probability": 0.27,
+      "predicted": false
+    },
+    {
+      "id": "17-prompting-after-opus48-gpt55",
+      "actual": false,
+      "probability": 0.1,
+      "predicted": false
+    },
+    {
+      "id": "18-headroom",
+      "actual": true,
+      "probability": 0.41,
+      "predicted": false
+    },
+    {
+      "id": "19-search-for-agents",
+      "actual": true,
+      "probability": 0.12,
+      "predicted": false
+    },
+    {
+      "id": "20-turbovec",
+      "actual": true,
+      "probability": 0.11,
+      "predicted": false
+    },
+    {
+      "id": "21-claude-fable-5",
+      "actual": true,
+      "probability": 0.12,
+      "predicted": false
+    },
+    {
+      "id": "22-recursive-self-improvement",
+      "actual": true,
+      "probability": 0.18,
+      "predicted": false
+    },
+    {
+      "id": "23-phone-ai-agent",
+      "actual": true,
+      "probability": 0.92,
+      "predicted": true
+    },
+    {
+      "id": "24-contract-first",
+      "actual": true,
+      "probability": 0.08,
+      "predicted": false
+    },
+    {
+      "id": "25-loop-engineering",
+      "actual": true,
+      "probability": 0.84,
+      "predicted": true
+    },
+    {
+      "id": "26-domain-expertise",
+      "actual": false,
+      "probability": 0.11,
+      "predicted": false
+    },
+    {
+      "id": "27-domain-specific-models",
+      "actual": false,
+      "probability": 0.37,
+      "predicted": false
+    },
+    {
+      "id": "28-forward-deployed-engineer",
+      "actual": false,
+      "probability": 0.09,
+      "predicted": false
+    },
+    {
+      "id": "28-open-knowledge-format",
+      "actual": false,
+      "probability": 0.14,
+      "predicted": false
+    },
+    {
+      "id": "29-mcp-tool-design",
+      "actual": false,
+      "probability": 0.8,
+      "predicted": true
+    },
+    {
+      "id": "30-context-engineering",
+      "actual": false,
+      "probability": 0.59,
+      "predicted": true
+    },
+    {
+      "id": "31-gpt-5-6-sol-terra-luna",
+      "actual": true,
+      "probability": 0.22,
+      "predicted": false
+    },
+    {
+      "id": "31-reviewing-ai-code",
+      "actual": false,
+      "probability": 0.08,
+      "predicted": false
+    },
+    {
+      "id": "32-ai-eval",
+      "actual": false,
+      "probability": 0.77,
+      "predicted": true
+    },
+    {
+      "id": "33-kimi-k3",
+      "actual": true,
+      "probability": 0.06,
+      "predicted": false
+    },
+    {
+      "id": "34-sufficient-context",
+      "actual": false,
+      "probability": 0.88,
+      "predicted": true
+    },
+    {
+      "id": "35-harness-engineering",
+      "actual": true,
+      "probability": 0.96,
+      "predicted": true
+    },
+    {
+      "id": "36-model-migration",
+      "actual": true,
+      "probability": 0.86,
+      "predicted": true
+    },
+    {
+      "id": "37-company-brain",
+      "actual": false,
+      "probability": 0.39,
+      "predicted": false
+    },
+    {
+      "id": "38-tofu-white-box-harness",
+      "actual": true,
+      "probability": 0.96,
+      "predicted": true
+    },
+    {
+      "id": "39-ide-to-ade",
+      "actual": true,
+      "probability": 0.59,
+      "predicted": true
+    },
+    {
+      "id": "40-claude-opus-5",
+      "actual": true,
+      "probability": 0.51,
+      "predicted": true
+    },
+    {
+      "id": "41-pgcontext",
+      "actual": false,
+      "probability": 0.19,
+      "predicted": false
+    },
+    {
+      "id": "42-korean-embeddings",
+      "actual": false,
+      "probability": 0.05,
+      "predicted": false
+    },
+    {
+      "id": "43-graph-engineering",
+      "actual": true,
+      "probability": 0.94,
+      "predicted": true
+    },
+    {
+      "id": "44-surviving-model-churn",
+      "actual": true,
+      "probability": 0.71,
+      "predicted": true
+    },
+    {
+      "id": "45-ontology-comeback",
+      "actual": true,
+      "probability": 0.18,
+      "predicted": false
+    },
+    {
+      "id": "46-is-graphrag-needed",
+      "actual": false,
+      "probability": 0.29,
+      "predicted": false
+    },
+    {
+      "id": "47-chonkie-chunking",
+      "actual": false,
+      "probability": 0.1,
+      "predicted": false
+    },
+    {
+      "id": "48-cache-hit-rate",
+      "actual": false,
+      "probability": 0.63,
+      "predicted": true
+    },
+    {
+      "id": "49-cross-agent-review",
+      "actual": false,
+      "probability": 0.9,
+      "predicted": true
+    },
+    {
+      "id": "50-tencentdb-agent-memory",
+      "actual": false,
+      "probability": 0.94,
+      "predicted": true
+    },
+    {
+      "id": "51-loopx-state-kernel",
+      "actual": true,
+      "probability": 0.96,
+      "predicted": true
+    },
+    {
+      "id": "52-archify-skill-product",
+      "actual": true,
+      "probability": 0.91,
+      "predicted": true
+    },
+    {
+      "id": "53-taalas-model-in-silicon",
+      "actual": false,
+      "probability": 0.04,
+      "predicted": false
+    },
+    {
+      "id": "54-prime-agent-self-improving-harness",
+      "actual": true,
+      "probability": 0.96,
+      "predicted": true
+    },
+    {
+      "id": "55-dynamodb-vector-search",
+      "actual": false,
+      "probability": 0.12,
+      "predicted": false
+    },
+    {
+      "id": "56-grok-bot-shared-computer",
+      "actual": true,
+      "probability": 0.82,
+      "predicted": true
+    },
+    {
+      "id": "57-gemini-grok-migration",
+      "actual": true,
+      "probability": 0.2,
+      "predicted": false
+    },
+    {
+      "id": "58-opensandbox-agent-runtime",
+      "actual": true,
+      "probability": 0.86,
+      "predicted": true
+    },
+    {
+      "id": "59-vercel-fx-native-agent",
+      "actual": true,
+      "probability": 0.78,
+      "predicted": true
+    },
+    {
+      "id": "60-eli5-visual-explainer",
+      "actual": true,
+      "probability": 0.31,
+      "predicted": false
+    },
+    {
+      "id": "61-webmcp-challenge",
+      "actual": true,
+      "probability": 0.83,
+      "predicted": true
+    },
+    {
+      "id": "62-gpt-6-astra",
+      "actual": true,
+      "probability": 0.41,
+      "predicted": false
+    },
+    {
+      "id": "63-openviking",
+      "actual": false,
+      "probability": 0.96,
+      "predicted": true
+    },
+    {
+      "id": "64-deepseek-harness",
+      "actual": true,
+      "probability": 0.97,
+      "predicted": true
+    },
+    {
+      "id": "65-claude-plugin-eval",
+      "actual": true,
+      "probability": 0.95,
+      "predicted": true
+    },
+    {
+      "id": "66-agents-md-claude-code",
+      "actual": true,
+      "probability": 0.91,
+      "predicted": true
+    },
+    {
+      "id": "67-jev-system-one",
+      "actual": true,
+      "probability": 0.13,
+      "predicted": false
+    },
+    {
+      "id": "68-jev-style-engine",
+      "actual": true,
+      "probability": 0.35,
+      "predicted": false
+    },
+    {
+      "id": "69-jev-measured",
+      "actual": true,
+      "probability": 0.62,
+      "predicted": true
+    },
+    {
+      "id": "70-jev-four-builds",
+      "actual": true,
+      "probability": 0.93,
+      "predicted": true
+    },
+    {
+      "id": "71-jev-coding-cost",
+      "actual": true,
+      "probability": 0.94,
+      "predicted": true
+    },
+    {
+      "id": "72-jev-domain-adaptation",
+      "actual": true,
+      "probability": 0.65,
+      "predicted": true
+    }
+  ],
+  "note": "Ground truth is the repository's existing human-authored agent-engineering tag."
+}

@@ -1,0 +1,18 @@
+{
+  "29-mcp-tool-design": { "label": true, "reason": "MCP tool boundaries and tool selection are agent-system engineering." },
+  "30-context-engineering": { "label": true, "reason": "The post is primarily about managing context for agent and LLM workflows." },
+  "32-ai-eval": { "label": true, "reason": "The post evaluates and improves AI systems rather than reviewing a standalone model." },
+  "34-sufficient-context": { "label": true, "reason": "The post covers a runtime check that controls whether an AI workflow has enough evidence." },
+  "49-cross-agent-review": { "label": true, "reason": "Cross-agent review is an agent workflow and evaluation pattern." },
+  "50-tencentdb-agent-memory": { "label": true, "reason": "Agent memory architecture is explicitly inside the task definition." },
+  "63-openviking": { "label": true, "reason": "The post analyzes context and memory retrieval for agents." },
+  "20-turbovec": { "label": false, "reason": "The main subject is vector compression and RAG infrastructure, not an agent system." },
+  "21-claude-fable-5": { "label": false, "reason": "The main subject is a model release and migration guidance." },
+  "24-contract-first": { "label": false, "reason": "The main subject is software team contracts and development practice." },
+  "31-gpt-5-6-sol-terra-luna": { "label": false, "reason": "The main subject is a model-family release." },
+  "33-kimi-k3": { "label": false, "reason": "The main subject is an open model release." },
+  "57-gemini-grok-migration": { "label": false, "reason": "The main subject is model comparison and migration." },
+  "62-gpt-6-astra": { "label": false, "reason": "The main subject is a model release and usage guide." },
+  "67-jev-system-one": { "label": false, "reason": "The main subject is the Jev model launch, not an agent-system implementation." },
+  "68-jev-style-engine": { "label": false, "reason": "The main subject is implementing and measuring a decision model." }
+}
