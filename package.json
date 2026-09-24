@@ -33,6 +33,9 @@
   },
   "overrides": {
     "esbuild": "^0.28.1",
-    "yaml": "^2.9.0"
+    "yaml": "^2.9.0",
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.3"
+    }
   }
 }
