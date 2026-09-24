@@ -12,7 +12,6 @@ export const GET: APIRoute = async () => {
   const guides = filterByLang(await getCollection("guides"), "ko").sort(byDate)
   const projects = filterByLang(await getCollection("projects"), "ko").sort(byDate)
   const study = filterByLang(await getCollection("study"), "ko").sort(byDate)
-  const prompts = filterByLang(await getCollection("prompts"), "ko").sort(byDate)
 
   const site = import.meta.env.SITE
 
@@ -41,7 +40,6 @@ export const GET: APIRoute = async () => {
     ...section("Guides", "guides", guides),
     ...section("Projects", "projects", projects),
     ...section("Study", "study", study),
-    ...section("Prompts", "prompts", prompts),
     `## Optional`,
     ``,
     `- [Full content](${site}/llms-full.txt)`,

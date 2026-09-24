@@ -7,12 +7,6 @@ export const SITE: Site = {
   AUTHOR: "desty",
 }
 
-// Work Page
-export const WORK: Page = {
-  TITLE: "Work",
-  DESCRIPTION: "경력 사항입니다.",
-}
-
 // Blog Page
 export const BLOG: Page = {
   TITLE: "Blog",
@@ -35,12 +29,6 @@ export const GUIDES: Page = {
 export const STUDY: Page = {
   TITLE: "Study",
   DESCRIPTION: "직접 공부하고 정리한 스터디 노트입니다.",
-}
-
-// Prompts Page
-export const PROMPTS: Page = {
-  TITLE: "Prompts",
-  DESCRIPTION: "바로 쓸 수 있는 AI 프롬프트 모음입니다.",
 }
 
 // Search Page
@@ -66,10 +54,6 @@ export const LINKS: Links = [
   {
     TEXT: "Study",
     HREF: "/study",
-  },
-  {
-    TEXT: "Prompts",
-    HREF: "/prompts",
   },
 ]
 

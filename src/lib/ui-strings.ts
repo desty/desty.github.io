@@ -5,7 +5,6 @@ const ui: Record<string, Record<Lang, string>> = {
   "hero.greeting": { ko: "안녕하세요,", en: "Hello," },
   "hero.subtitle": { ko: "개발자 desty의 블로그 & 포트폴리오", en: "Developer desty's blog & portfolio" },
   "hero.blog": { ko: "블로그 보기", en: "Read Blog" },
-  "hero.work": { ko: "경력 보기", en: "View Work" },
 
   // About
   "about.intro1": { ko: "<b><i>개발자</i></b>입니다. 만들고 부수는 걸 좋아합니다.", en: "I'm a <b><i>developer</i></b>. I love building and breaking things." },
@@ -28,7 +27,6 @@ const ui: Record<string, Record<Lang, string>> = {
   "article.backBlog": { ko: "글 목록으로", en: "Back to posts" },
   "article.backGuides": { ko: "가이드 목록으로", en: "Back to guides" },
   "article.backStudy": { ko: "스터디 목록으로", en: "Back to study" },
-  "article.backPrompts": { ko: "프롬프트 목록으로", en: "Back to prompts" },
   "article.backProjects": { ko: "프로젝트 목록으로", en: "Back to projects" },
   "article.viewGuide": { ko: "가이드 보기", en: "View Guide" },
   "article.viewStudy": { ko: "스터디 보기", en: "View Study" },
@@ -39,8 +37,6 @@ const ui: Record<string, Record<Lang, string>> = {
 
   // Page descriptions
   "site.description": { ko: "개발자 desty의 블로그 & 포트폴리오.", en: "Developer desty's blog & portfolio." },
-  "page.work.title": { ko: "Work", en: "Work" },
-  "page.work.desc": { ko: "경력 사항입니다.", en: "Work experience." },
   "page.blog.title": { ko: "Blog", en: "Blog" },
   "page.blog.desc": { ko: "개발과 기술에 대한 글을 씁니다.", en: "Writing about development and technology." },
   "page.projects.title": { ko: "Projects", en: "Projects" },
@@ -49,8 +45,6 @@ const ui: Record<string, Record<Lang, string>> = {
   "page.guides.desc": { ko: "직접 작성한 기술 가이드입니다.", en: "Technical guides I've written." },
   "page.study.title": { ko: "Study", en: "Study" },
   "page.study.desc": { ko: "직접 공부하고 정리한 스터디 노트입니다.", en: "Study notes I've worked through." },
-  "page.prompts.title": { ko: "Prompts", en: "Prompts" },
-  "page.prompts.desc": { ko: "바로 쓸 수 있는 AI 프롬프트 모음입니다.", en: "Ready-to-use AI prompt collection." },
   "page.search.title": { ko: "Search", en: "Search" },
   "page.search.desc": { ko: "키워드로 글과 프로젝트를 검색합니다.", en: "Search posts and projects by keyword." },
 

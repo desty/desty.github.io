@@ -1,16 +1,6 @@
 import { defineCollection, z } from "astro:content"
 import { glob } from "astro/loaders"
 
-const work = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/work" }),
-  schema: z.object({
-    company: z.string(),
-    role: z.string(),
-    dateStart: z.coerce.date(),
-    dateEnd: z.union([z.coerce.date(), z.string()]),
-  }),
-})
-
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/blog" }),
   schema: z.object({
@@ -61,17 +51,6 @@ const study = defineCollection({
   }),
 })
 
-const prompts = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/prompts" }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    date: z.coerce.date(),
-    tags: z.array(z.string()),
-    draft: z.boolean().optional(),
-  }),
-})
-
 const legal = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/legal" }),
   schema: z.object({
@@ -80,4 +59,4 @@ const legal = defineCollection({
   }),
 })
 
-export const collections = { work, blog, projects, guides, study, prompts, legal }
+export const collections = { blog, projects, guides, study, legal }

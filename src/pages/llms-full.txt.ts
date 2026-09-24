@@ -16,7 +16,6 @@ export const GET: APIRoute = async () => {
   const guides = filterByLang(await getCollection("guides"), "ko").sort(byDate)
   const projects = filterByLang(await getCollection("projects"), "ko").sort(byDate)
   const study = filterByLang(await getCollection("study"), "ko").sort(byDate)
-  const prompts = filterByLang(await getCollection("prompts"), "ko").sort(byDate)
 
   const sections: string[] = [
     `# ${SITE.TITLE}`,
@@ -50,7 +49,6 @@ export const GET: APIRoute = async () => {
   pushSection("Guides", guides)
   pushSection("Projects", projects)
   pushSection("Study", study)
-  pushSection("Prompts", prompts)
 
   return new Response(sections.join("\n"), {
     headers: {
