@@ -61,7 +61,7 @@ True
 
 The reproduction went into the PR description as is, along with a test that the fallback leaves `handlers` unchanged for `font/woff`, `multipart/form-data`, and an empty string. It fails on main and passes with the fix. I added the release note haystack requires, signed the CLA, and wrote in the description: "This PR was fully generated with an AI assistant. I have reviewed the changes and run the relevant tests." During review the branch conflicted with main, reviewer sjrl asked me to resolve it, and the next day I moved the test to clear the conflict. Merged October 15.
 
-haystack's [CONTRIBUTING.md](https://github.com/deepset-ai/haystack/blob/main/CONTRIBUTING.md) has one more rule for first-time contributors: until your first PR is approved, it must be your only open PR, and additional PRs are closed automatically. This merge lifted that limit.
+haystack's [CONTRIBUTING.md](https://github.com/deepset-ai/haystack/blob/main/CONTRIBUTING.md) has one more rule: community contributors can have only one open PR at a time in the repository, and additional PRs are closed automatically. It first applied only to first-time contributors and was widened to all community contributors on September 29, while my PR was waiting for review.
 
 ## What the ten closed PRs taught me
 
@@ -78,7 +78,7 @@ pydantic-ai #7307 met two bots on August 8. The Macroscope review bot gave it an
 
 headroom #3819 lost on the code. I fixed [issue #3814](https://github.com/headroomlabs-ai/headroom/issues/3814), where compressing a pytest log dropped the middle `FAILED` lines of the `short test summary info` section, in both the Rust core and the Python implementation, and the existing tests and parity fixtures all passed. The next day another contributor opened [#3828](https://github.com/headroomlabs-ai/headroom/pull/3828) for the same issue. It implemented both options from the issue (keep the failure lines and name any that are dropped) and tested CRLF line endings and malformed headers. Collaborator JerrettDavis left two defects on my PR: a line that merely contains the phrase, like `=== diagnostic: short test summary info unavailable`, would open the summary section, and when the global line cap binds, middle lines are still dropped without names. He merged #3828 the same day. The lesson: for code with varied input, like compressors and parsers, test odd inputs and cap boundaries from the start, not only the happy path.
 
-The marimo PRs taught me a lot too. marimo expects you to agree on the approach with a maintainer in the issue, then open the PR as a draft and sign the CLA. My first PR (#9762) was closed without comment the day I opened it, and #9806, which resubmitted the same fix, was closed three months later with a request to discuss the approach in an issue first.
+The marimo PRs taught me a lot too. marimo asks contributors to get maintainer approval before opening PRs with substantial changes, and CI fails until you sign the CLA. My first PR (#9762) was closed without comment the day I opened it, and #9806, which resubmitted the same fix, was closed three months later with a request to discuss the approach in an issue first.
 
 ## If you want to start contributing with an agent
 
@@ -91,8 +91,8 @@ Even the rules I ran into myself vary this much:
 | Repository | Rule I ran into |
 |---|---|
 | langchain, pydantic-ai | Only the issue's assignee may open a PR; otherwise a bot closes it right away |
-| marimo | Agree on the approach in the issue first, open the PR as a draft, sign the CLA |
-| haystack | Add a short disclaimer to fully AI-generated PRs; only one open PR until your first is approved |
+| marimo | Get maintainer approval in the issue before substantial changes; sign the CLA |
+| haystack | Add a short disclaimer to fully AI-generated PRs; community contributors can have only one open PR at a time |
 | opik | Fill in the `AI-WATERMARK` block with the tools, models, and scope used; sign the CLA |
 | penpot | DCO sign-off and `:bug:`-style commit messages |
 
@@ -121,4 +121,4 @@ Five PRs are open. lancedb #4314, llama_index #22611, and opentype.js #875 are w
 
 ## Summary
 
-Of the 18 PRs I opened in six months, 3 were merged. The number is small, but for someone whose contributions used to be translations, it meant fixing an unfamiliar Python metric, an SCSS layout, and a `defaultdict` side effect and getting maintainer approval. Reading the codebase, reproducing the bug, matching the project's tooling, and writing tests became work I could share with an agent. What remained for me was reading the repository's rules first, checking an issue's proposal against the existing design, and answering reviews to the end. Next up: the five review comments on redis-vl-python, and a new issue in haystack now that the first-PR limit is lifted.
+Of the 18 PRs I opened in six months, 3 were merged. The number is small, but for someone whose contributions used to be translations, it meant fixing an unfamiliar Python metric, an SCSS layout, and a `defaultdict` side effect and getting maintainer approval. Reading the codebase, reproducing the bug, matching the project's tooling, and writing tests became work I could share with an agent. What remained for me was reading the repository's rules first, checking an issue's proposal against the existing design, and answering reviews to the end. Next up: the five review comments on redis-vl-python, and a new issue in haystack, now that my merged PR frees the one open slot.

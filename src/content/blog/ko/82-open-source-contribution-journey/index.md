@@ -61,7 +61,7 @@ True
 
 재현 결과를 PR 본문에 그대로 넣고, `font/woff`, `multipart/form-data`, 빈 문자열에서 폴백이 `handlers`를 바꾸지 않는지 확인하는 테스트를 추가했다. 테스트는 main에서 실패하고 수정 후 통과한다. haystack이 요구하는 release note를 넣고 CLA에 서명했고, PR 본문에는 "이 PR은 전부 AI 어시스턴트로 생성했고, 변경 내용을 검토하고 관련 테스트를 돌렸다"는 문장을 적었다. 리뷰 중에 main과 충돌이 나서 리뷰어 sjrl이 해결을 요청했고, 다음 날 테스트 위치를 옮겨 충돌을 풀었다. 10월 15일에 머지됐다.
 
-haystack의 [CONTRIBUTING.md](https://github.com/deepset-ai/haystack/blob/main/CONTRIBUTING.md)에는 첫 기여자에게 적용되는 규칙이 하나 더 있다. 첫 PR이 승인되기 전에는 그 PR 하나만 열어 둘 수 있고, 추가로 연 PR은 자동으로 닫힌다. 이번 머지로 이 제한이 풀렸다.
+haystack의 [CONTRIBUTING.md](https://github.com/deepset-ai/haystack/blob/main/CONTRIBUTING.md)에는 규칙이 하나 더 있다. 커뮤니티 기여자는 이 레포에 PR을 한 번에 하나만 열어 둘 수 있고, 추가로 연 PR은 자동으로 닫힌다. 처음에는 첫 기여자에게만 적용됐는데, 내 PR이 리뷰를 기다리던 9월 29일에 모든 커뮤니티 기여자로 범위가 넓어졌다.
 
 ## 닫힌 PR 10개가 알려 준 것
 
@@ -78,7 +78,7 @@ pydantic-ai #7307은 8월 8일 하루 동안 두 봇을 만났다. Macroscope �
 
 headroom #3819는 코드에서 졌다. pytest 로그를 압축할 때 `short test summary info` 부분의 중간 `FAILED` 줄이 사라지는 [이슈 #3814](https://github.com/headroomlabs-ai/headroom/issues/3814)를 Rust 코어와 Python 구현 양쪽에서 고쳤고, 기존 테스트와 parity 픽스처는 모두 통과했다. 다음 날 다른 기여자가 같은 이슈로 [#3828](https://github.com/headroomlabs-ai/headroom/pull/3828)을 올렸다. 이 PR은 이슈에 적힌 두 방안(실패 줄 보존, 잘린 줄 이름 표시)을 모두 구현했고, CRLF 줄바꿈과 비정상 헤더까지 테스트했다. 협업자(collaborator) JerrettDavis는 내 PR에 두 가지 결함을 남겼다. `=== diagnostic: short test summary info unavailable`처럼 문구만 포함한 줄에서도 요약 부분이 시작된다는 것, 그리고 전체 줄 수 상한이 걸리면 중간 줄이 여전히 이름 없이 버려진다는 것이다. 그리고 그날 #3828을 머지했다. 압축기나 파서처럼 입력이 다양한 코드는 정상 경로만이 아니라 엉뚱한 입력과 상한 경계까지 처음부터 테스트해야 한다는 교훈이 남았다.
 
-marimo에서 연달아 닫힌 PR들도 배운 점이 컸다. marimo는 이슈에서 메인테이너와 접근법을 합의한 뒤 PR을 draft로 열고 CLA에 서명하는 순서를 요구한다. 첫 PR(#9762)은 연 날 설명 없이 닫혔고, 같은 수정을 다시 올린 #9806은 석 달 뒤 "이슈에서 접근법부터 논의하라"는 답과 함께 닫혔다.
+marimo에서 연달아 닫힌 PR들도 배운 점이 컸다. marimo는 큰 변경을 PR로 올리기 전에 메인테이너의 승인을 받으라고 요구하고, CLA에 서명하기 전에는 CI가 통과하지 않는다. 첫 PR(#9762)은 연 날 설명 없이 닫혔고, 같은 수정을 다시 올린 #9806은 석 달 뒤 "이슈에서 접근법부터 논의하라"는 답과 함께 닫혔다.
 
 ## 에이전트와 첫 기여를 시작한다면
 
@@ -91,8 +91,8 @@ marimo에서 연달아 닫힌 PR들도 배운 점이 컸다. marimo는 이슈에
 | 레포 | 겪은 규칙 |
 |---|---|
 | langchain, pydantic-ai | 이슈에 할당된 사람만 PR을 열 수 있고, 아니면 봇이 바로 닫는다 |
-| marimo | 이슈에서 접근법을 먼저 합의하고, PR은 draft로 연다. CLA가 필요하다 |
-| haystack | 전부 AI로 만든 PR에는 짧은 disclaimer를 넣는다. 첫 PR이 승인되기 전에는 PR을 하나만 열 수 있다 |
+| marimo | 큰 변경은 이슈에서 메인테이너의 승인을 먼저 받는다. CLA가 필요하다 |
+| haystack | 전부 AI로 만든 PR에는 짧은 disclaimer를 넣는다. 커뮤니티 기여자는 PR을 한 번에 하나만 열 수 있다 |
 | opik | PR 본문의 `AI-WATERMARK` 블록에 사용한 도구·모델·범위를 적는다. CLA가 필요하다 |
 | penpot | 커밋에 DCO 서명과 `:bug:` 형식의 메시지가 필요하다 |
 
@@ -121,4 +121,4 @@ gh api repos/<owner>/<repo>/issues/<num>/timeline \
 
 ## 정리
 
-반년 동안 올린 PR 18개 중 3개가 머지됐다. 숫자만 보면 작지만, 번역 PR이 기여의 전부였던 나에게는 처음 보는 Python 지표 코드와 SCSS 레이아웃과 `defaultdict` 부작용을 고쳐 메인테이너의 승인을 받은 경험이었다. 코드베이스를 읽고, 재현하고, 레포 도구를 맞추고, 테스트를 쓰는 일은 에이전트와 나눠서 할 수 있게 됐다. 남은 일은 레포 규칙을 먼저 읽는 것, 이슈의 제안을 기존 설계에 비춰 보는 것, 그리고 리뷰에 끝까지 답하는 것이었다. 다음은 redis-vl-python의 리뷰 5건에 답하고, 첫 PR 제한이 풀린 haystack에서 다음 이슈를 고를 차례다.
+반년 동안 올린 PR 18개 중 3개가 머지됐다. 숫자만 보면 작지만, 번역 PR이 기여의 전부였던 나에게는 처음 보는 Python 지표 코드와 SCSS 레이아웃과 `defaultdict` 부작용을 고쳐 메인테이너의 승인을 받은 경험이었다. 코드베이스를 읽고, 재현하고, 레포 도구를 맞추고, 테스트를 쓰는 일은 에이전트와 나눠서 할 수 있게 됐다. 남은 일은 레포 규칙을 먼저 읽는 것, 이슈의 제안을 기존 설계에 비춰 보는 것, 그리고 리뷰에 끝까지 답하는 것이었다. 다음은 redis-vl-python의 리뷰 5건에 답하고, PR이 머지돼 다시 PR을 열 수 있게 된 haystack에서 다음 이슈를 고를 차례다.
