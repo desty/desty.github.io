@@ -1,0 +1,80 @@
+/* Theme tokens. Light is the default; dark applies when the OS prefers dark
+   (unless the user picked light) or when the user explicitly picked dark. */
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --text: #1d1f23;
+  --header-bg: #1d4ed8;
+  --header-text: #ffffff;
+  --card-bg: #ffffff;
+  --card-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  --border: #eeeeee;
+  --input-bg: #ffffff;
+  --input-border: #9ca3af;
+  --invalid-border: #dc2626;
+  --invalid-bg: #fef2f2;
+  --help-bg: #e5e7eb;
+  --toggle-bg: rgb(255 255 255 / 0.15);
+  --toggle-active-bg: #ffffff;
+  --toggle-active-text: #1d4ed8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --text: #e5e7eb;
+    --header-bg: #1e3a8a;
+    --header-text: #f3f4f6;
+    --card-bg: #1a1d23;
+    --card-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+    --border: #2d3139;
+    --input-bg: #111318;
+    --input-border: #4b5563;
+    --invalid-border: #f87171;
+    --invalid-bg: #2a1215;
+    --help-bg: #374151;
+    --toggle-bg: rgb(255 255 255 / 0.12);
+    --toggle-active-bg: #e5e7eb;
+    --toggle-active-text: #1e3a8a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --text: #e5e7eb;
+  --header-bg: #1e3a8a;
+  --header-text: #f3f4f6;
+  --card-bg: #1a1d23;
+  --card-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+  --border: #2d3139;
+  --input-bg: #111318;
+  --input-border: #4b5563;
+  --invalid-border: #f87171;
+  --invalid-bg: #2a1215;
+  --help-bg: #374151;
+  --toggle-bg: rgb(255 255 255 / 0.12);
+  --toggle-active-bg: #e5e7eb;
+  --toggle-active-text: #1e3a8a;
+}
+
+body { font-family: system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+.top { background: var(--header-bg); color: var(--header-text); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.top h1 { margin: 0; }
+main { max-width: 640px; margin: 2rem auto; display: grid; gap: 1.5rem; }
+.card { background: var(--card-bg); border-radius: 8px; padding: 1.25rem; box-shadow: var(--card-shadow); }
+form label { display: block; margin-top: 0.75rem; font-weight: 600; }
+form input { width: 100%; padding: 0.5rem; box-sizing: border-box; background: var(--input-bg); color: var(--text); border: 1px solid var(--input-border); border-radius: 4px; }
+input:invalid { border: 2px solid var(--invalid-border); background: var(--invalid-bg); }
+.help-icon { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: var(--help-bg); font-size: 0.8em; cursor: help; }
+#task-list { list-style: none; margin: 0; }
+#task-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+button { cursor: pointer; }
+
+/* Theme toggle (segmented control in the header) */
+.theme-toggle { display: inline-flex; border: 0; margin: 0; padding: 2px; border-radius: 999px; background: var(--toggle-bg); }
+.theme-toggle legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.theme-toggle button { font: inherit; font-size: 0.875rem; padding: 0.3rem 0.8rem; border: 0; border-radius: 999px; background: transparent; color: var(--header-text); }
+.theme-toggle button[aria-pressed="true"] { background: var(--toggle-active-bg); color: var(--toggle-active-text); font-weight: 600; }
+.theme-toggle button:focus-visible { outline: 2px solid var(--header-text); outline-offset: 2px; }

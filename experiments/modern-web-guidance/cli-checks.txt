@@ -1,0 +1,22 @@
+# CLI checks, modern-web-guidance 1.0.0, 2026-11-14 11:47 KST, DISABLE_TELEMETRY=1
+
+$ npx -y modern-web-guidance@latest search "confirm dialog"
+[{"id":"dialog","description":"Build a modal or non-modal dialog component that is accessible, manages focus appropriately, and can be dismissed the way users expect on each platform."},
+{"id":"html","description":"Action-oriented guidelines for modern HTML architecture, semantics, native interactive APIs (Dialog, Popover, Details), focus management, and resource prioritization. Use this guide when structuring web documents, implementing native overlays, or optimizing resource loading order."},
+{"id":"accessibility","description":"Actionable coding guidelines for building accessible web applications, covering semantic HTML, focus management, forms, media, and testing. Use this skill when auditing or implementing accessibility features, keyboard navigation, or ARIA."},
+{"id":"declarative-dialog-popover-control","description":"Toggle the visibility of a dialog or popover from a button without writing JavaScript."},
+{"id":"light-dismiss-a-dialog","description":"Create a modal dialog that can be closed via light dismiss (i.e. clicking or tapping outside of the dialog)"},
+{"id":"menu","description":"Build a menu component that displays a list of options or actions, with support for nested submenus."},
+{"id":"platform-controls-dismiss-dialog","description":"Create a modal dialog that can be closed via standard platform-specific user actions, such as pressing the `Esc` key on desktop platforms, or a \"back\" or \"dismiss\" gesture on mobile platforms"},
+{"id":"prevent-page-scroll-under-modal-dialog","description":"Prevent the underlying page from scrolling while a modal dialog is open."},
+{"id":"ime-safe-enter-submit","description":"Implement Enter-to-submit in textareas and single-line inputs (chat, search, inline rename) safely for IME (Input Method Editor) users to prevent submitting incomplete text."},
+{"id":"persistent-top-layer-ui","description":"Keep a modal dialog, fullscreen element, or native popover visibly open and functionally active when its underlying DOM node is moved or reparented in the DOM."}]
+
+$ npx -y modern-web-guidance@latest retrieve summarizer   # no .mwgrc
+(exit 1)
+
+$ echo {"baseline":"newly"} > .mwgrc; npx -y modern-web-guidance@latest retrieve dialog  # first 4 lines of saved guide
+head: : No such file or directory
+
+$ npx -y modern-web-guidance@latest search "툴팁 위치"  # non-ASCII query
+[]

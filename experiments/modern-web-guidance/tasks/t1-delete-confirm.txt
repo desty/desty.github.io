@@ -1,0 +1,1 @@
+In this project, clicking "Delete" removes a task immediately. Ask the user to confirm first: show a confirmation box centered on the screen with "Cancel" and "Delete" buttons, where Cancel is the safe default. Only remove the task when the user confirms. Edit the existing files.

@@ -1,0 +1,22 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7f9; color: #1d1f23; }
+.top { background: #1d4ed8; color: white; padding: 1rem 2rem; }
+main { max-width: 640px; margin: 2rem auto; display: grid; gap: 1.5rem; }
+.card { background: white; border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px rgb(0 0 0 / 0.1); }
+form label { display: block; margin-top: 0.75rem; font-weight: 600; }
+form input { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+input:invalid { border: 2px solid #dc2626; background: #fef2f2; }
+.help-icon { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: #e5e7eb; font-size: 0.8em; cursor: help; }
+#task-list { list-style: none; margin: 0; }
+#task-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+button { cursor: pointer; }
+
+#confirm-delete { position: fixed; inset: 0; margin: auto; width: min(90vw, 400px); padding: 0; border: none; border-radius: 8px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.25); }
+#confirm-delete::backdrop { background: rgb(0 0 0 / 0.45); }
+#confirm-delete form { padding: 1.25rem 1.5rem; }
+#confirm-delete h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+#confirm-delete p { margin: 0 0 1.25rem; overflow-wrap: anywhere; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
+.dialog-actions button { padding: 0.5rem 1rem; border-radius: 6px; font: inherit; }
+.dialog-actions .secondary { background: white; border: 1px solid #d1d5db; color: #1d1f23; }
+.dialog-actions .danger { background: #dc2626; border: 1px solid #dc2626; color: white; }
+.dialog-actions button:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Tasks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Team Tasks</h1>
+  </header>
+
+  <main>
+    <form id="add-form" class="card" novalidate>
+      <h2>Add a task</h2>
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" required minlength="3">
+
+      <label for="owner-email">Owner email</label>
+      <input id="owner-email" name="owner" type="email" required>
+
+      <div class="label-row">
+        <label for="due">Due date</label>
+        <button type="button" class="help-icon" interestfor="due-help" popovertarget="due-help" popovertargetaction="show" aria-label="About due dates">?</button>
+        <div id="due-help" class="tooltip" popover="hint">Tasks are due at 6 pm in your local time.</div>
+      </div>
+      <input id="due" name="due" type="date" required>
+
+      <button type="submit">Add task</button>
+    </form>
+
+    <ul id="task-list" class="card">
+      <li data-id="1"><span>Write release notes</span> <button class="delete" data-id="1">Delete</button></li>
+      <li data-id="2"><span>Review onboarding PR</span> <button class="delete" data-id="2">Delete</button></li>
+      <li data-id="3"><span>Update status page</span> <button class="delete" data-id="3">Delete</button></li>
+    </ul>
+  </main>
+
+  <script src="app.js"></script>
+  <script type="module">
+    // Load polyfills only where native support is missing (runs after app.js wires ARIA).
+    if (!Object.hasOwn(HTMLElement.prototype, "popover")) {
+      await import("https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js");
+    }
+    if (!("interestForElement" in HTMLButtonElement.prototype)) {
+      await import("https://unpkg.com/interestfor@latest");
+    }
+    if (!CSS.supports("anchor-name: --a")) {
+      import("https://unpkg.com/@oddbird/css-anchor-positioning");
+    }
+  </script>
+</body>
+</html>

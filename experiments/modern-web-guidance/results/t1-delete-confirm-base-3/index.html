@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Tasks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Team Tasks</h1>
+  </header>
+
+  <main>
+    <form id="add-form" class="card" novalidate>
+      <h2>Add a task</h2>
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" required minlength="3">
+
+      <label for="owner-email">Owner email</label>
+      <input id="owner-email" name="owner" type="email" required>
+
+      <label for="due">Due date <span class="help-icon" tabindex="0">?</span></label>
+      <input id="due" name="due" type="date" required>
+
+      <button type="submit">Add task</button>
+    </form>
+
+    <ul id="task-list" class="card">
+      <li data-id="1"><span>Write release notes</span> <button class="delete" data-id="1">Delete</button></li>
+      <li data-id="2"><span>Review onboarding PR</span> <button class="delete" data-id="2">Delete</button></li>
+      <li data-id="3"><span>Update status page</span> <button class="delete" data-id="3">Delete</button></li>
+    </ul>
+  </main>
+
+  <dialog id="confirm-delete" aria-labelledby="confirm-delete-title" aria-describedby="confirm-delete-message">
+    <form method="dialog">
+      <h2 id="confirm-delete-title">Delete task?</h2>
+      <p id="confirm-delete-message">Delete “<span id="confirm-delete-task"></span>”? This can’t be undone.</p>
+      <div class="dialog-actions">
+        <button type="submit" value="cancel" class="secondary" autofocus>Cancel</button>
+        <button type="submit" value="confirm" class="danger">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+In this project, add a dark theme. By default it should follow the operating system setting, and there should be a toggle button in the header that lets the user switch between light, dark, and system, remembering the choice across visits. Edit the existing files.

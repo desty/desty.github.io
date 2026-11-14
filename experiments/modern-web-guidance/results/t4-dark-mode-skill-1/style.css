@@ -1,0 +1,80 @@
+/* ---------- Theme ----------
+   Default follows the OS. The header toggle sets <meta name="color-scheme"> to
+   "light", "dark", or "light dark" (system); the :has() rules map that to the
+   color-scheme property, which drives light-dark() and native UI (inputs, scrollbars). */
+:root {
+  color-scheme: light dark;
+
+  &:has(> head > meta[name="color-scheme"][content="dark"]) { color-scheme: dark; }
+  &:has(> head > meta[name="color-scheme"][content="light"]) { color-scheme: light; }
+
+  --bg-light: #f6f7f9;           --bg-dark: #121418;
+  --text-light: #1d1f23;         --text-dark: #e6e8eb;
+  --surface-light: #ffffff;      --surface-dark: #1c1f24;
+  --border-light: #eeeeee;       --border-dark: #2e323a;
+  --header-light: #1d4ed8;       --header-dark: #1e3a8a;
+  --chip-light: #e5e7eb;         --chip-dark: #374151;
+  --invalid-light: #dc2626;      --invalid-dark: #f87171;
+  --invalid-bg-light: #fef2f2;   --invalid-bg-dark: #3b1d1d;
+  --shadow-light: rgb(0 0 0 / 0.1); --shadow-dark: rgb(0 0 0 / 0.5);
+
+  --bg: light-dark(var(--bg-light), var(--bg-dark));
+  --text: light-dark(var(--text-light), var(--text-dark));
+  --surface: light-dark(var(--surface-light), var(--surface-dark));
+  --border: light-dark(var(--border-light), var(--border-dark));
+  --header: light-dark(var(--header-light), var(--header-dark));
+  --chip: light-dark(var(--chip-light), var(--chip-dark));
+  --invalid: light-dark(var(--invalid-light), var(--invalid-dark));
+  --invalid-bg: light-dark(var(--invalid-bg-light), var(--invalid-bg-dark));
+  --shadow: light-dark(var(--shadow-light), var(--shadow-dark));
+}
+
+/* Fallback for browsers without light-dark(): pick tokens via media query + override. */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --bg: var(--bg-light); --text: var(--text-light); --surface: var(--surface-light);
+    --border: var(--border-light); --header: var(--header-light); --chip: var(--chip-light);
+    --invalid: var(--invalid-light); --invalid-bg: var(--invalid-bg-light); --shadow: var(--shadow-light);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not(:has(> head > meta[name="color-scheme"][content="light"])) {
+      --bg: var(--bg-dark); --text: var(--text-dark); --surface: var(--surface-dark);
+      --border: var(--border-dark); --header: var(--header-dark); --chip: var(--chip-dark);
+      --invalid: var(--invalid-dark); --invalid-bg: var(--invalid-bg-dark); --shadow: var(--shadow-dark);
+    }
+  }
+  :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+    --bg: var(--bg-dark); --text: var(--text-dark); --surface: var(--surface-dark);
+    --border: var(--border-dark); --header: var(--header-dark); --chip: var(--chip-dark);
+    --invalid: var(--invalid-dark); --invalid-bg: var(--invalid-bg-dark); --shadow: var(--shadow-dark);
+  }
+}
+
+/* ---------- Layout ---------- */
+body { font-family: system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+.top { background: var(--header); color: white; padding: 1rem 2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+.top h1 { margin: 0; }
+main { max-width: 640px; margin: 2rem auto; display: grid; gap: 1.5rem; }
+.card { background: var(--surface); border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px var(--shadow); }
+form label { display: block; margin-top: 0.75rem; font-weight: 600; }
+form input { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+input:invalid { border: 2px solid var(--invalid); background: var(--invalid-bg); }
+.help-icon { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: var(--chip); font-size: 0.8em; cursor: help; }
+#task-list { list-style: none; margin: 0; }
+#task-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+button { cursor: pointer; }
+
+/* ---------- Theme switch (segmented radio group) ---------- */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.theme-switch { display: flex; margin: 0; padding: 2px; border: 1px solid rgb(255 255 255 / 0.5); border-radius: 999px; }
+.theme-switch label { position: relative; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.875rem; cursor: pointer; }
+.theme-switch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.theme-switch label:has(:checked) { background: white; color: #1d4ed8; font-weight: 600; }
+.theme-switch label:has(:focus-visible) { outline: 2px solid white; outline-offset: 2px; }
+
+/* "System (light)" / "System (dark)": show the OS preference, no JS needed. */
+.system-current-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  .system-current-light { display: none; }
+  .system-current-dark { display: inline; }
+}

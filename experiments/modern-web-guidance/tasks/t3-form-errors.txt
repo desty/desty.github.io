@@ -1,0 +1,1 @@
+In this project, the "Add a task" form shows red error styling on every empty field as soon as the page loads, which looks broken. Only show a field's error after the user has interacted with that field (or tried to submit), and show a short message under the field explaining what is wrong. Edit the existing files.

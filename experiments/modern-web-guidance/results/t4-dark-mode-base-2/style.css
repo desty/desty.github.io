@@ -1,0 +1,35 @@
+/* Theme: follows the OS by default; [data-theme] on <html> forces light or dark. */
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f6f7f9, #0f1115);
+  --text: light-dark(#1d1f23, #e6e8eb);
+  --header-bg: light-dark(#1d4ed8, #1e3a8a);
+  --header-text: #ffffff;
+  --card-bg: light-dark(#ffffff, #1a1d23);
+  --card-shadow: light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
+  --border: light-dark(#eeeeee, #2c3038);
+  --invalid-border: light-dark(#dc2626, #f87171);
+  --invalid-bg: light-dark(#fef2f2, #3b1414);
+  --help-bg: light-dark(#e5e7eb, #374151);
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+body { font-family: system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+.top { background: var(--header-bg); color: var(--header-text); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.top h1 { margin: 0; }
+.theme-toggle {
+  font: inherit; font-size: 0.9rem; padding: 0.4rem 0.8rem; border-radius: 6px;
+  background: rgb(255 255 255 / 0.15); color: var(--header-text); border: 1px solid rgb(255 255 255 / 0.4);
+}
+.theme-toggle:hover { background: rgb(255 255 255 / 0.25); }
+.theme-toggle:focus-visible { outline: 2px solid var(--header-text); outline-offset: 2px; }
+main { max-width: 640px; margin: 2rem auto; display: grid; gap: 1.5rem; }
+.card { background: var(--card-bg); border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px var(--card-shadow); }
+form label { display: block; margin-top: 0.75rem; font-weight: 600; }
+form input { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+input:invalid { border: 2px solid var(--invalid-border); background: var(--invalid-bg); }
+.help-icon { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: var(--help-bg); font-size: 0.8em; cursor: help; }
+#task-list { list-style: none; margin: 0; }
+#task-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+button { cursor: pointer; }

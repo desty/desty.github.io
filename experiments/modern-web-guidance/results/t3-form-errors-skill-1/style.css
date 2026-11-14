@@ -1,0 +1,20 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7f9; color: #1d1f23; }
+.top { background: #1d4ed8; color: white; padding: 1rem 2rem; }
+main { max-width: 640px; margin: 2rem auto; display: grid; gap: 1.5rem; }
+.card { background: white; border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px rgb(0 0 0 / 0.1); }
+form label { display: block; margin-top: 0.75rem; font-weight: 600; }
+form input { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+/* Show errors only after the user has interacted with a field (:user-invalid)
+   or tried to submit the form (.submitted, set in app.js because of novalidate). */
+form input:is(:user-invalid, .submitted :invalid) { border: 2px solid #dc2626; background: #fef2f2; }
+.error-msg { display: none; color: #b91c1c; font-size: 0.875rem; margin-top: 0.25rem; }
+form input:is(:user-invalid, .submitted :invalid) + .error-msg { display: block; }
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important; clip-path: inset(50%) !important; overflow: hidden !important;
+  width: 1px !important; height: 1px !important; margin: -1px !important;
+  padding: 0 !important; border: 0 !important; white-space: nowrap !important;
+}
+.help-icon { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: #e5e7eb; font-size: 0.8em; cursor: help; }
+#task-list { list-style: none; margin: 0; }
+#task-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+button { cursor: pointer; }
